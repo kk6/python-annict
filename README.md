@@ -10,11 +10,12 @@ First, to get the authentication code.
 ```python
 >>> from annict.auth import AnnictOAuthHandler
 >>> handler = AnnictOAuthHandler(client_id='Your client ID', client_secret='Your client secret')
->>> handler.authorize(scope='read write')
-True
+>>> url = handler.get_authorize_url(scope='read write')
+>>> print(url)
 ```
 
-Here in the browser, which opens the page the authentication code is displayed. After you copy the authentication code, and passes it to authenticate method as an argument.
+
+When you open this URL in your browser, authentication code is displayed. After you copy the authentication code, and passes it to authenticate method as an argument.
 
 ```python
 >>> session = handler.authenticate(code='Authentication code')
