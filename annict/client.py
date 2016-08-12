@@ -24,7 +24,6 @@ class Client(object):
         url = furl(self.base_url)
         url.path.add(self.api_version).add(path)
         m = methodcaller(http_method, url.url, **d)
-        print(url.url, d)
         response = m(requests)
 
         if not response.content:
