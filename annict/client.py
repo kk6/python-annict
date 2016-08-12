@@ -12,28 +12,28 @@ class Client(object):
         self.base_url = base_url
         self.api_version = api_version
 
-    def _request(self, http_method, path, kwargs=None):
-        kwargs['access_token'] = self.access_token
+    def _request(self, http_method, path, params=None):
+        params['access_token'] = self.access_token
 
-        d = {}
+        kwargs = {}
         if http_method == 'post' or http_method == 'patch':
-            d['data'] = kwargs
+            kwargs['data'] = params
         elif http_method == 'get':
-            d['params'] = kwargs
+            kwargs['params'] = params
 
         url = furl(self.base_url)
         url.path.add(self.api_version).add(path)
-        m = methodcaller(http_method, url.url, **d)
+        m = methodcaller(http_method, url.url, **kwargs)
         return m(requests)
 
-    def get(self, path, kwargs):
-        return self._request('get', path, kwargs)
+    def get(self, path, params):
+        return self._request('get', path, params)
 
-    def post(self, path, kwargs):
-        return self._request('post', path, kwargs)
+    def post(self, path, params):
+        return self._request('post', path, params)
 
-    def patch(self, path, kwargs):
-        return self._request('patch', path, kwargs)
+    def patch(self, path, params):
+        return self._request('patch', path, params)
 
     def delete(self, path):
         return self._request('delete', path)

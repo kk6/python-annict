@@ -4,17 +4,17 @@ from .utils import stringify
 
 class ServiceBase(object):
     path = ''
-    allowed_options = []
+    allowed_params = []
 
     def __init__(self, client):
         self.client = client
 
-    def _build_options(self, kwargs):
-        options = {}
+    def _build_parameters(self, kwargs):
+        params = {}
         for k, v in kwargs.items():
-            if k in self.allowed_options:
-                options[k] = stringify(v)
-        return options
+            if k in self.allowed_params:
+                params[k] = stringify(v)
+        return params
 
 
 class WorksService(ServiceBase):
@@ -22,13 +22,13 @@ class WorksService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/works
     """
     path = 'works'
-    allowed_options = ['fields', 'filter_ids', 'filter_season', 'filter_title',
-                       'page', 'per_page',
-                       'sort_id' 'sort_season', 'sort_watchers_count']
+    allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title',
+                      'page', 'per_page',
+                      'sort_id' 'sort_season', 'sort_watchers_count']
 
     def get(self, **kwargs):
-        options = self._build_options(kwargs)
-        return self.client.get(self.path, options)
+        params = self._build_parameters(kwargs)
+        return self.client.get(self.path, params)
 
 
 class EpisodesService(ServiceBase):
@@ -36,12 +36,12 @@ class EpisodesService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/episodes
     """
     path = 'episodes'
-    allowed_options = ['fields', 'filter_ids', 'filter_work_ids', 'page', 'per_page',
-                       'sort_id', 'sort_sort_number']
+    allowed_params = ['fields', 'filter_ids', 'filter_work_ids', 'page', 'per_page',
+                      'sort_id', 'sort_sort_number']
 
     def get(self, **kwargs):
-        options = self._build_options(kwargs)
-        return self.client.get(self.path, options)
+        params = self._build_parameters(kwargs)
+        return self.client.get(self.path, params)
 
 
 class RecordsService(ServiceBase):
@@ -49,12 +49,12 @@ class RecordsService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/records
     """
     path = 'records'
-    allowed_options = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
-                       'sort_id', 'sort_like_count']
+    allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
+                      'sort_id', 'sort_like_count']
 
     def get(self, **kwargs):
-        options = self._build_options(kwargs)
-        return self.client.get(self.path, options)
+        params = self._build_parameters(kwargs)
+        return self.client.get(self.path, params)
 
 
 class MeStatusesService(ServiceBase):
@@ -72,17 +72,17 @@ class MeRecordsService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/me-records
     """
     path = 'me/records'
-    allowed_options = ['comment', 'rating', 'share_twitter', 'share_facebook']
+    allowed_params = ['comment', 'rating', 'share_twitter', 'share_facebook']
 
     def create(self, episode_id, **kwargs):
-        options = self._build_options(kwargs)
-        options['episode_id'] = episode_id
-        return self.client.post(self.path, options)
+        params = self._build_parameters(kwargs)
+        params['episode_id'] = episode_id
+        return self.client.post(self.path, params)
 
     def update(self, record_id, **kwargs):
-        options = self._build_options(kwargs)
+        params = self._build_parameters(kwargs)
         path = '/'.join([self.path, record_id])
-        return self.client.patch(path, options)
+        return self.client.patch(path, params)
 
     def delete(self, record_id):
         path = '/'.join([self.path, record_id])
@@ -94,12 +94,12 @@ class MeWorksService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/me-works
     """
     path = 'me/works'
-    allowed_options = ['fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
-                       'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
+    allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
+                      'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
 
     def get(self, **kwargs):
-        options = self._build_options(kwargs)
-        return self.client.get(self.path, options)
+        params = self._build_parameters(kwargs)
+        return self.client.get(self.path, params)
 
 
 class MeProgramsService(ServiceBase):
@@ -107,13 +107,13 @@ class MeProgramsService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/me-programs
     """
     path = 'me/programs'
-    allowed_options = ['fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids',
-                       'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
-                       'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
+    allowed_params = ['fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids',
+                      'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
+                      'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
 
     def get(self, **kwargs):
-        options = self._build_options(kwargs)
-        return self.client.get(self.path, options)
+        params = self._build_parameters(kwargs)
+        return self.client.get(self.path, params)
 
 
 class MeService(object):
