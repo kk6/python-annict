@@ -2,6 +2,14 @@
 from .utils import stringify
 
 
+def add_common_get_method(cls):
+    class DecoratedClass(cls):
+        def get(self, **kwargs):
+            params = self.build_parameters(kwargs)
+            return self.client.get(self.path, params)
+    return DecoratedClass
+
+
 class ServiceBase(object):
     path = ''
     allowed_params = []
@@ -9,7 +17,7 @@ class ServiceBase(object):
     def __init__(self, client):
         self.client = client
 
-    def _build_parameters(self, kwargs):
+    def build_parameters(self, kwargs):
         params = {}
         for k, v in kwargs.items():
             if k in self.allowed_params:
@@ -17,6 +25,7 @@ class ServiceBase(object):
         return params
 
 
+@add_common_get_method
 class WorksService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/works
@@ -26,11 +35,8 @@ class WorksService(ServiceBase):
                       'page', 'per_page',
                       'sort_id' 'sort_season', 'sort_watchers_count']
 
-    def get(self, **kwargs):
-        params = self._build_parameters(kwargs)
-        return self.client.get(self.path, params)
 
-
+@add_common_get_method
 class EpisodesService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/episodes
@@ -39,11 +45,8 @@ class EpisodesService(ServiceBase):
     allowed_params = ['fields', 'filter_ids', 'filter_work_ids', 'page', 'per_page',
                       'sort_id', 'sort_sort_number']
 
-    def get(self, **kwargs):
-        params = self._build_parameters(kwargs)
-        return self.client.get(self.path, params)
 
-
+@add_common_get_method
 class RecordsService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/records
@@ -51,10 +54,6 @@ class RecordsService(ServiceBase):
     path = 'records'
     allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
                       'sort_id', 'sort_like_count']
-
-    def get(self, **kwargs):
-        params = self._build_parameters(kwargs)
-        return self.client.get(self.path, params)
 
 
 class MeStatusesService(ServiceBase):
@@ -75,12 +74,12 @@ class MeRecordsService(ServiceBase):
     allowed_params = ['comment', 'rating', 'share_twitter', 'share_facebook']
 
     def create(self, episode_id, **kwargs):
-        params = self._build_parameters(kwargs)
+        params = self.build_parameters(kwargs)
         params['episode_id'] = episode_id
         return self.client.post(self.path, params)
 
     def update(self, record_id, **kwargs):
-        params = self._build_parameters(kwargs)
+        params = self.build_parameters(kwargs)
         path = '/'.join([self.path, record_id])
         return self.client.patch(path, params)
 
@@ -89,6 +88,7 @@ class MeRecordsService(ServiceBase):
         return self.client.delete(path)
 
 
+@add_common_get_method
 class MeWorksService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/me-works
@@ -97,11 +97,8 @@ class MeWorksService(ServiceBase):
     allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
                       'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
 
-    def get(self, **kwargs):
-        params = self._build_parameters(kwargs)
-        return self.client.get(self.path, params)
 
-
+@add_common_get_method
 class MeProgramsService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/me-programs
@@ -110,10 +107,6 @@ class MeProgramsService(ServiceBase):
     allowed_params = ['fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids',
                       'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
                       'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
-
-    def get(self, **kwargs):
-        params = self._build_parameters(kwargs)
-        return self.client.get(self.path, params)
 
 
 class MeService(object):
