@@ -9,7 +9,7 @@ class Client(object):
         self.base_url = base_url
         self.api_version = api_version
 
-    def _request(self, method, path, **kwargs):
+    def _request(self, method, path, kwargs=None):
         url = '/'.join([self.base_url, self.api_version, path])
         kwargs['access_token'] = self.access_token
 
@@ -30,14 +30,14 @@ class Client(object):
 
         return response.json()
 
-    def get(self, path, **kwargs):
-        return self._request('GET', path, **kwargs)
+    def get(self, path, kwargs):
+        return self._request('GET', path, kwargs)
 
-    def post(self, path, **kwargs):
-        return self._request('POST', path, **kwargs)
+    def post(self, path, kwargs):
+        return self._request('POST', path, kwargs)
 
-    def patch(self, path, **kwargs):
-        return self._request('PATCH', path, **kwargs)
+    def patch(self, path, kwargs):
+        return self._request('PATCH', path, kwargs)
 
-    def delete(self, path, **kwargs):
-        return self._request('DELETE', path, **kwargs)
+    def delete(self, path):
+        return self._request('DELETE', path)
