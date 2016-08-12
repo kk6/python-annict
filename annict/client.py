@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from operator import methodcaller
+
 import requests
 
 
@@ -13,17 +15,13 @@ class Client(object):
         url = '/'.join([self.base_url, self.api_version, path])
         kwargs['access_token'] = self.access_token
 
-        method = method.lower()
-        if method == 'get':
-            response = requests.get(url, params=kwargs)
-        elif method == 'post':
-            response = requests.post(url, data=kwargs)
-        elif method == 'patch':
-            response = requests.patch(url, data=kwargs)
-        elif method == 'delete':
-            response = requests.delete(url)
-        else:
-            raise ValueError('Unknown HTTP method.')
+        d = {}
+        if method == 'post' or method == 'patch':
+            d['data'] = kwargs
+        elif method == 'get':
+            d['params'] = kwargs
+        f = methodcaller(method, url, **d)
+        response = f(requests)
 
         if not response.content:
             return None
@@ -31,13 +29,13 @@ class Client(object):
         return response.json()
 
     def get(self, path, kwargs):
-        return self._request('GET', path, kwargs)
+        return self._request('get', path, kwargs)
 
     def post(self, path, kwargs):
-        return self._request('POST', path, kwargs)
+        return self._request('post', path, kwargs)
 
     def patch(self, path, kwargs):
-        return self._request('PATCH', path, kwargs)
+        return self._request('patch', path, kwargs)
 
     def delete(self, path):
-        return self._request('DELETE', path)
+        return self._request('delete', path)
