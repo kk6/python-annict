@@ -17,6 +17,9 @@ class ServiceBase(object):
 
 
 class WorksService(ServiceBase):
+    """
+    :reference: https://annict.wikihub.io/wiki/api/works
+    """
     path = 'works'
     allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title',
                       'page', 'per_page',
@@ -28,6 +31,9 @@ class WorksService(ServiceBase):
 
 
 class EpisodesService(ServiceBase):
+    """
+    :reference: https://annict.wikihub.io/wiki/api/episodes
+    """
     path = 'episodes'
     allowed_options = ['fields', 'filter_ids', 'filter_work_ids', 'page', 'per_page',
                        'sort_id', 'sort_sort_number']
@@ -38,6 +44,9 @@ class EpisodesService(ServiceBase):
 
 
 class RecordsService(ServiceBase):
+    """
+    :reference: https://annict.wikihub.io/wiki/api/records
+    """
     path = 'records'
     allowed_options = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
                        'sort_id', 'sort_like_count']
@@ -48,6 +57,9 @@ class RecordsService(ServiceBase):
 
 
 class MeStatusesService(ServiceBase):
+    """
+    :reference: https://annict.wikihub.io/wiki/api/me-statuses
+    """
     path = 'me/statuses'
 
     def post(self, work_id, kind):
@@ -55,6 +67,9 @@ class MeStatusesService(ServiceBase):
 
 
 class MeRecordsService(ServiceBase):
+    """
+    :reference: https://annict.wikihub.io/wiki/api/me-records
+    """
     path = 'me/records'
     allowed_options = ['comment', 'rating', 'share_twitter', 'share_facebook']
 
@@ -74,6 +89,9 @@ class MeRecordsService(ServiceBase):
 
 
 class MeWorksService(ServiceBase):
+    """
+    :reference: https://annict.wikihub.io/wiki/api/me-works
+    """
     path = 'me/works'
     allowed_options = ['fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
                        'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
@@ -84,6 +102,9 @@ class MeWorksService(ServiceBase):
 
 
 class MeProgramsService(ServiceBase):
+    """
+    :reference: https://annict.wikihub.io/wiki/api/me-programs
+    """
     path = 'me/programs'
     allowed_options = ['fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids',
                        'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
