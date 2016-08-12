@@ -21,9 +21,9 @@ class WorksService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/works
     """
     path = 'works'
-    allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title',
-                      'page', 'per_page',
-                      'sort_id' 'sort_season', 'sort_watchers_count']
+    allowed_options = ['fields', 'filter_ids', 'filter_season', 'filter_title',
+                       'page', 'per_page',
+                       'sort_id' 'sort_season', 'sort_watchers_count']
 
     def get(self, **kwargs):
         options = self._build_options(kwargs)
@@ -62,7 +62,7 @@ class MeStatusesService(ServiceBase):
     """
     path = 'me/statuses'
 
-    def post(self, work_id, kind):
+    def create(self, work_id, kind):
         return self.client.post(self.path, {'work_id': work_id, 'kind': kind})
 
 
