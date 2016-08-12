@@ -11,20 +11,21 @@ class Client(object):
         self.access_token = access_token
         self.base_url = base_url
         self.api_version = api_version
-        self._furl = furl(base_url)
-        self._furl.path.add(api_version)
 
-    def _request(self, method, path, kwargs=None):
-        self._furl.path.add(path)
+    def _request(self, http_method, path, kwargs=None):
         kwargs['access_token'] = self.access_token
 
         d = {}
-        if method == 'post' or method == 'patch':
+        if http_method == 'post' or http_method == 'patch':
             d['data'] = kwargs
-        elif method == 'get':
+        elif http_method == 'get':
             d['params'] = kwargs
-        f = methodcaller(method, self._furl.url, **d)
-        response = f(requests)
+
+        url = furl(self.base_url)
+        url.path.add(self.api_version).add(path)
+        m = methodcaller(http_method, url.url, **d)
+        print(url.url, d)
+        response = m(requests)
 
         if not response.content:
             return None

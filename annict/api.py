@@ -10,9 +10,9 @@ from .services import (
 
 class API(object):
 
-    def __init__(self, client):
-        self.client = client
-        self.works = WorksService(client)
-        self.episodes = EpisodesService(client)
-        self.records = RecordsService(client)
-        self.me = MeService(client)
+    def __init__(self, token):
+        self.client = Client(token)
+        self.works = WorksService(self.client)
+        self.episodes = EpisodesService(self.client)
+        self.records = RecordsService(self.client)
+        self.me = MeService(self.client)
