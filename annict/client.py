@@ -2,6 +2,7 @@
 from operator import methodcaller
 
 import requests
+from furl import furl
 
 
 class Client(object):
@@ -10,9 +11,11 @@ class Client(object):
         self.access_token = access_token
         self.base_url = base_url
         self.api_version = api_version
+        self._furl = furl(base_url)
+        self._furl.path.add(api_version)
 
     def _request(self, method, path, kwargs=None):
-        url = '/'.join([self.base_url, self.api_version, path])
+        self._furl.path.add(path)
         kwargs['access_token'] = self.access_token
 
         d = {}
@@ -20,7 +23,7 @@ class Client(object):
             d['data'] = kwargs
         elif method == 'get':
             d['params'] = kwargs
-        f = methodcaller(method, url, **d)
+        f = methodcaller(method, self._furl.url, **d)
         response = f(requests)
 
         if not response.content:
