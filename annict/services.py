@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from .utils import stringify
 
 
 class ServiceBase(object):
@@ -12,7 +13,7 @@ class ServiceBase(object):
         options = {}
         for k, v in kwargs.items():
             if k in self.allowed_options:
-                options[k] = v
+                options[k] = stringify(v)
         return options
 
 
