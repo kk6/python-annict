@@ -61,9 +61,6 @@ class User(Model):
                 setattr(user, k, v)
         return user
 
-    def __repr__(self):
-        return '<User:{}:{}(@{})>'.format(self.id, self.name, self.username)
-
 
 class Work(Model):
 
@@ -98,9 +95,6 @@ class Work(Model):
             return self._children
         return [self._children[n - 1] for n in numbers]
 
-    def __repr__(self):
-        return '<Work:{}:{}>'.format(self.id, self.title)
-
 
 class Episode(Model):
 
@@ -126,13 +120,6 @@ class Episode(Model):
 
     def create_record(self, **kwargs):
         return self._api.me.records.create(self.id, **kwargs)
-
-    def __repr__(self):
-        if self.title is None:
-            title = 'サブタイトル未定'
-        else:
-            title = self.title
-        return '<Episode:{}:{}:{}>'.format(self.id, self.number_text, title)
 
 
 class Record(Model):
@@ -162,12 +149,6 @@ class Record(Model):
 
     def delete(self):
         return self._api.me.records.delete(self.id)
-
-    def __repr__(self):
-        return '<Record:{}:@{}:{}:{}:{}>'.format(
-            self.id, self.user.username, self.work.title,
-            self.episode.number_text, self.episode.title,
-        )
 
 
 class Program(Model):
