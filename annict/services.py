@@ -42,7 +42,7 @@ class EpisodesService(ServiceBase):
     :reference: https://annict.wikihub.io/wiki/api/episodes
     """
     path = 'episodes'
-    allowed_params = ['fields', 'filter_ids', 'filter_work_ids', 'page', 'per_page',
+    allowed_params = ['fields', 'filter_ids', 'filter_work_id', 'page', 'per_page',
                       'sort_id', 'sort_sort_number']
 
 
