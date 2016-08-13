@@ -24,7 +24,13 @@ class Client(object):
         url = furl(self.base_url)
         url.path.add(self.api_version).add(path)
         m = methodcaller(http_method, url.url, **kwargs)
-        return m(requests)
+        resp = m(requests)
+        if resp.status_code == 200:
+            return resp.json()
+        elif resp.status_code == 204:
+            return True
+        else:
+            return resp
 
     def get(self, path, params):
         return self._request('get', path, params)
