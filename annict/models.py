@@ -170,9 +170,30 @@ class Record(Model):
         )
 
 
+class Program(Model):
+
+    @classmethod
+    def parse(cls, api, json):
+        program = cls(api)
+        program._json = json
+        for k, v in json.items():
+            if k == 'started_at':
+                setattr(program, k, arrow.get(v).datetime)
+            elif k == 'work':
+                work = Work.parse(api, v)
+                setattr(program, k, work)
+            elif k == 'episode':
+                episode = Episode.parse(api, v)
+                setattr(program, k, episode)
+            else:
+                setattr(program, k, v)
+        return program
+
+
 MODEL_MAPPING = {
     'user': User,
     'work': Work,
     'episode': Episode,
     'record': Record,
+    'program': Program,
 }
