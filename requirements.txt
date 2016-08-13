@@ -2,4 +2,5 @@ rauth
 requests
 requests-cache
 furl
+arrow
 pytest
