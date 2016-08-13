@@ -1,11 +1,11 @@
 # python-annict
 Annict API wrapper for python
 
-## Usage
+## 使い方
 
-### Authentication
+### 認証
 
-First, to get the authentication code.
+認証コード取得用のURLを生成
 
 ```python
 >>> from annict.auth import OAuthHandler
@@ -14,8 +14,7 @@ First, to get the authentication code.
 >>> print(url)
 ```
 
-
-When you open this URL in your browser, authentication code is displayed. After you copy the authentication code, and passes it to authenticate method as an argument.
+URLをブラウザで開いて認証コードを表示します。それを `handler.authenticate()` の引数に渡してアクセストークンを取得します。
 
 ```python
 >>> handler.authenticate(code='Authentication code')
@@ -23,6 +22,7 @@ When you open this URL in your browser, authentication code is displayed. After 
 ```
 
 ### API
+
 
 ```python
 >>> from annict.api import Api
