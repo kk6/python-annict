@@ -6,8 +6,8 @@ def add_common_get_method(cls):
     class DecoratedClass(cls):
         def get(self, **kwargs):
             params = self.build_parameters(kwargs)
-            r = self.client.get(self.path, params)
-            return self.parser.parse(r.json(), self.payload_type)
+            json = self.client.get(self.path, params)
+            return self.parser.parse(json, self.payload_type)
     return DecoratedClass
 
 
@@ -78,20 +78,23 @@ class MeRecordsService(ServiceBase):
     """
     path = 'me/records'
     allowed_params = ['comment', 'rating', 'share_twitter', 'share_facebook']
+    payload_type = 'record'
 
     def create(self, episode_id, **kwargs):
         params = self.build_parameters(kwargs)
         params['episode_id'] = episode_id
-        return self.client.post(self.path, params)
+        json = self.client.post(self.path, params)
+        return self.parser.parse(json, self.payload_type)
 
     def update(self, record_id, **kwargs):
         params = self.build_parameters(kwargs)
-        path = '/'.join([self.path, record_id])
-        return self.client.patch(path, params)
+        path = '/'.join([self.path, str(record_id)])
+        json = self.client.patch(path, params)
+        return self.parser.parse(json, self.payload_type)
 
-    def delete(self, record_id):
-        path = '/'.join([self.path, record_id])
-        return self.client.delete(path)
+    def delete(self, record_id, **kwargs):
+        path = '/'.join([self.path, str(record_id)])
+        return self.client.delete(path, kwargs)
 
 
 @add_common_get_method

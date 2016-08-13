@@ -124,6 +124,9 @@ class Episode(Model):
                 setattr(episode, k, v)
         return episode
 
+    def create_record(self, **kwargs):
+        return self._api.me.records.create(self.id, **kwargs)
+
     def __repr__(self):
         if self.title is None:
             title = 'サブタイトル未定'
@@ -153,6 +156,12 @@ class Record(Model):
             else:
                 setattr(record, k, v)
         return record
+
+    def update(self, **kwargs):
+        return self._api.me.records.update(self.id, **kwargs)
+
+    def delete(self):
+        return self._api.me.records.delete(self.id)
 
     def __repr__(self):
         return '<Record:{}:@{}:{}:{}:{}>'.format(

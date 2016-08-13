@@ -6,12 +6,12 @@ from .services import (
     RecordsService,
     MeService,
 )
-from .parsers import ModelPerser
+from .parsers import ModelParser
 
 
 class API(object):
 
-    def __init__(self, token, parser=ModelPerser):
+    def __init__(self, token, parser=ModelParser):
         self.client = Client(token)
         self.works = WorksService(self.client, parser(self))
         self.episodes = EpisodesService(self.client, parser(self))
