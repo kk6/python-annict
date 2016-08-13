@@ -6,16 +6,19 @@ def add_common_get_method(cls):
     class DecoratedClass(cls):
         def get(self, **kwargs):
             params = self.build_parameters(kwargs)
-            return self.client.get(self.path, params)
+            r = self.client.get(self.path, params)
+            return self.parser.parse(r.json(), self.payload_type)
     return DecoratedClass
 
 
 class ServiceBase(object):
     path = ''
     allowed_params = []
+    payload_type = ''
 
-    def __init__(self, client):
+    def __init__(self, client, parser):
         self.client = client
+        self.parser = parser
 
     def build_parameters(self, kwargs):
         params = {}
@@ -34,6 +37,7 @@ class WorksService(ServiceBase):
     allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title',
                       'page', 'per_page',
                       'sort_id' 'sort_season', 'sort_watchers_count']
+    payload_type = 'work'
 
 
 @add_common_get_method
@@ -44,6 +48,7 @@ class EpisodesService(ServiceBase):
     path = 'episodes'
     allowed_params = ['fields', 'filter_ids', 'filter_work_id', 'page', 'per_page',
                       'sort_id', 'sort_sort_number']
+    payload_type = 'episode'
 
 
 @add_common_get_method
@@ -54,6 +59,7 @@ class RecordsService(ServiceBase):
     path = 'records'
     allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
                       'sort_id', 'sort_like_count']
+    payload_type = 'record'
 
 
 class MeStatusesService(ServiceBase):
@@ -96,6 +102,7 @@ class MeWorksService(ServiceBase):
     path = 'me/works'
     allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
                       'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
+    payload_type = 'work'
 
 
 @add_common_get_method
@@ -107,12 +114,13 @@ class MeProgramsService(ServiceBase):
     allowed_params = ['fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids',
                       'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
                       'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
+    payload_type = 'program'
 
 
 class MeService(object):
 
-    def __init__(self, client):
-        self.statuses = MeStatusesService(client)
-        self.records = MeRecordsService(client)
-        self.works = MeWorksService(client)
-        self.programs = MeProgramsService(client)
+    def __init__(self, client, parser):
+        self.statuses = MeStatusesService(client, parser)
+        self.records = MeRecordsService(client, parser)
+        self.works = MeWorksService(client, parser)
+        self.programs = MeProgramsService(client, parser)

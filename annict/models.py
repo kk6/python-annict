@@ -25,8 +25,6 @@ class ResultSet(list):
 
 class Model(object):
 
-    payload_type = ''
-
     def __init__(self, api=None):
         self._api = api
         self._children = []
@@ -37,13 +35,14 @@ class Model(object):
         raise NotImplementedError
 
     @classmethod
-    def parse_list(cls, api, json):
+    def parse_list(cls, api, json, payload_type):
         results = ResultSet(
             total_count=json['total_count'],
             prev_page=json['prev_page'],
             next_page=json['next_page'],
         )
-        for obj in json[cls.payload_type]:
+        results._json = json
+        for obj in json['{}s'.format(payload_type)]:
             if obj:
                 results.append(cls.parse(api, obj))
         return results
@@ -51,11 +50,10 @@ class Model(object):
 
 class User(Model):
 
-    payload_type = 'users'
-
     @classmethod
     def parse(cls, api, json):
         user = cls(api)
+        user._json = json
         for k, v in json.items():
             if k == 'created_at':
                 setattr(user, k, arrow.get(v).datetime)
@@ -68,8 +66,6 @@ class User(Model):
 
 
 class Work(Model):
-
-    payload_type = 'works'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -90,10 +86,7 @@ class Work(Model):
         return work
 
     def request_episode_list(self):
-        r = self._api.episodes.get(filter_work_id=self.id, sort_sort_number='asc')
-        json = r.json()
-        self._children = Episode.parse_list(self._api, json)
-        return self._children
+        self._children = self._api.episodes.get(filter_work_id=self.id, sort_sort_number='asc')
 
     @cached_children('episode')
     def get_episode(self, number):
@@ -110,8 +103,6 @@ class Work(Model):
 
 
 class Episode(Model):
-
-    payload_type = 'episodes'
 
     @classmethod
     def parse(cls, api, json):
@@ -143,8 +134,6 @@ class Episode(Model):
 
 class Record(Model):
 
-    payload_type = 'records'
-
     @classmethod
     def parse(cls, api, json):
         record = cls(api)
@@ -170,3 +159,11 @@ class Record(Model):
             self.id, self.user.username, self.work.title,
             self.episode.number_text, self.episode.title,
         )
+
+
+MODEL_MAPPING = {
+    'user': User,
+    'work': Work,
+    'episode': Episode,
+    'record': Record,
+}
