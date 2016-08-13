@@ -27,6 +27,6 @@ When you open this URL in your browser, authentication code is displayed. After 
 ```python
 >>> from annict.api import Api
 >>> annict = Api('Your access token')
->>> r = annict.works(filter_title="Re:ゼロから始める異世界生活")
->>> print(r)
+>>> results = annict.works(filter_title="Re:ゼロから始める異世界生活")
+>>> print(results[0])
 ```
