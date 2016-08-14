@@ -4,3 +4,4 @@ requests-cache
 furl
 arrow
 pytest
+responses
