@@ -3,8 +3,8 @@ from .models import MODEL_MAPPING
 
 
 class ModelParser(object):
-    def __init__(self, api):
-        self.model_mapping = MODEL_MAPPING
+    def __init__(self, api, model_mapping=MODEL_MAPPING):
+        self.model_mapping = model_mapping
         self._api = api
 
     def parse(self, json, payload_type):
