@@ -2,15 +2,6 @@
 from .utils import stringify
 
 
-def add_common_get_method(cls):
-    class DecoratedClass(cls):
-        def get(self, **kwargs):
-            params = self.build_parameters(kwargs)
-            json = self.client.get(self.path, params)
-            return self.parser.parse(json, self.payload_type)
-    return DecoratedClass
-
-
 class ServiceBase(object):
     path = ''
     allowed_params = []
@@ -28,7 +19,6 @@ class ServiceBase(object):
         return params
 
 
-@add_common_get_method
 class WorksService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/works
@@ -39,8 +29,12 @@ class WorksService(ServiceBase):
                       'sort_id' 'sort_season', 'sort_watchers_count']
     payload_type = 'work'
 
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
 
-@add_common_get_method
+
 class EpisodesService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/episodes
@@ -50,8 +44,12 @@ class EpisodesService(ServiceBase):
                       'sort_id', 'sort_sort_number']
     payload_type = 'episode'
 
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
 
-@add_common_get_method
+
 class RecordsService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/records
@@ -60,6 +58,11 @@ class RecordsService(ServiceBase):
     allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
                       'sort_id', 'sort_like_count']
     payload_type = 'record'
+
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
 
 
 class MeStatusesService(ServiceBase):
@@ -97,7 +100,6 @@ class MeRecordsService(ServiceBase):
         return self.client.delete(path, kwargs)
 
 
-@add_common_get_method
 class MeWorksService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/me-works
@@ -107,8 +109,12 @@ class MeWorksService(ServiceBase):
                       'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
     payload_type = 'work'
 
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
 
-@add_common_get_method
+
 class MeProgramsService(ServiceBase):
     """
     :reference: https://annict.wikihub.io/wiki/api/me-programs
@@ -119,6 +125,11 @@ class MeProgramsService(ServiceBase):
                       'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
     payload_type = 'program'
 
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
+
 
 class MeService(object):
 
@@ -127,3 +138,4 @@ class MeService(object):
         self.records = MeRecordsService(client, parser)
         self.works = MeWorksService(client, parser)
         self.programs = MeProgramsService(client, parser)
+
