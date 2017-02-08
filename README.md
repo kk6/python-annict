@@ -1,6 +1,10 @@
 # python-annict
 Annict API wrapper for python
 
+python-annict は Python3.6 以上をサポートしています。
+
+## インストール
+
 ## 使い方
 
 ### 認証

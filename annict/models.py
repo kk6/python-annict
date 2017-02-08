@@ -50,6 +50,9 @@ class Model(object):
 
 class User(Model):
 
+    def __repr__(self):
+        return f'<User:{self.id}:{self.name}:@{self.username}>'
+
     @classmethod
     def parse(cls, api, json):
         user = cls(api)
@@ -66,6 +69,9 @@ class Work(Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return f'<Work:{self.id}:{self.title}>'
 
     @classmethod
     def parse(cls, api, json):
@@ -98,6 +104,9 @@ class Work(Model):
 
 class Episode(Model):
 
+    def __repr__(self):
+        return f'<Episode:{self.id}:{self.number_text}:{self.title}:{self.work.title}>'
+
     @classmethod
     def parse(cls, api, json):
         episode = cls(api)
@@ -123,6 +132,9 @@ class Episode(Model):
 
 
 class Record(Model):
+
+    def __repr__(self):
+        return f'<Record:{self.id}>'
 
     @classmethod
     def parse(cls, api, json):
@@ -152,6 +164,9 @@ class Record(Model):
 
 
 class Program(Model):
+
+    def __repr__(self):
+        return f'<Program:{self.id}>'
 
     @classmethod
     def parse(cls, api, json):
