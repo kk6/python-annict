@@ -10,13 +10,12 @@ class AnnictError(Exception):
 class Client(object):
 
     def __init__(self, access_token, base_url='https://api.annict.com', api_version='v1'):
-        self.access_token = access_token
         self.base_url = base_url
         self.api_version = api_version
+        self.session = requests.Session()
+        self.session.params['access_token'] = access_token
 
     def _request(self, method, path, params=None):
-        params['access_token'] = self.access_token
-
         kwargs = {}
         if method == 'post' or method == 'patch':
             kwargs['data'] = params
@@ -25,7 +24,7 @@ class Client(object):
 
         url = furl(self.base_url)
         url.path.add(self.api_version).add(path)
-        resp = requests.request(method, url.url, **kwargs)
+        resp = self.session.request(method, url.url, **kwargs)
 
         if resp.status_code == 200:
             return resp.json()

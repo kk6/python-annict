@@ -28,5 +28,5 @@ def test_status_code_204():
 
     assert resp is True
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'https://api.annict.com/v1/me/statuses'
+    assert responses.calls[0].request.url == 'https://api.annict.com/v1/me/statuses?access_token=tokenxxx'
 
