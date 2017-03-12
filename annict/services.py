@@ -131,11 +131,20 @@ class MeProgramsService(ServiceBase):
         return self.parser.parse(json, self.payload_type)
 
 
-class MeService(object):
+class MeService(ServiceBase):
+
+    path = 'me'
+    allowed_params = ['fields']
+    payload_type = 'user'
 
     def __init__(self, client, parser):
+        super().__init__(client, parser)
         self.statuses = MeStatusesService(client, parser)
         self.records = MeRecordsService(client, parser)
         self.works = MeWorksService(client, parser)
         self.programs = MeProgramsService(client, parser)
 
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
