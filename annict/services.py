@@ -21,7 +21,7 @@ class ServiceBase(object):
 
 class WorksService(ServiceBase):
     """
-    :reference: https://annict.wikihub.io/wiki/api/works
+    :reference: https://docs.annict.com/ja/api/v1/works.html
     """
     path = 'works'
     allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title',
@@ -37,7 +37,7 @@ class WorksService(ServiceBase):
 
 class EpisodesService(ServiceBase):
     """
-    :reference: https://annict.wikihub.io/wiki/api/episodes
+    :reference: https://docs.annict.com/ja/api/v1/episodes.html
     """
     path = 'episodes'
     allowed_params = ['fields', 'filter_ids', 'filter_work_id', 'page', 'per_page',
@@ -52,7 +52,7 @@ class EpisodesService(ServiceBase):
 
 class RecordsService(ServiceBase):
     """
-    :reference: https://annict.wikihub.io/wiki/api/records
+    :reference: https://docs.annict.com/ja/api/v1/records.html
     """
     path = 'records'
     allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
@@ -67,7 +67,7 @@ class RecordsService(ServiceBase):
 
 class MeStatusesService(ServiceBase):
     """
-    :reference: https://annict.wikihub.io/wiki/api/me-statuses
+    :reference: https://docs.annict.com/ja/api/v1/me-statuses.html
     """
     path = 'me/statuses'
 
@@ -77,7 +77,7 @@ class MeStatusesService(ServiceBase):
 
 class MeRecordsService(ServiceBase):
     """
-    :reference: https://annict.wikihub.io/wiki/api/me-records
+    :reference: https://docs.annict.com/ja/api/v1/me-records.html
     """
     path = 'me/records'
     allowed_params = ['comment', 'rating', 'share_twitter', 'share_facebook']
@@ -102,7 +102,7 @@ class MeRecordsService(ServiceBase):
 
 class MeWorksService(ServiceBase):
     """
-    :reference: https://annict.wikihub.io/wiki/api/me-works
+    :reference: https://docs.annict.com/ja/api/v1/me-works.html
     """
     path = 'me/works'
     allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
@@ -117,7 +117,7 @@ class MeWorksService(ServiceBase):
 
 class MeProgramsService(ServiceBase):
     """
-    :reference: https://annict.wikihub.io/wiki/api/me-programs
+    :reference: https://docs.annict.com/ja/api/v1/me-programs.html
     """
     path = 'me/programs'
     allowed_params = ['fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids',
@@ -132,7 +132,9 @@ class MeProgramsService(ServiceBase):
 
 
 class MeService(ServiceBase):
-
+    """
+    :reference: https://docs.annict.com/ja/api/v1/me.html
+    """
     path = 'me'
     allowed_params = ['fields']
     payload_type = 'user'
