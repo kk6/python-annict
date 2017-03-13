@@ -4,6 +4,9 @@ from .services import (
     WorksService,
     EpisodesService,
     RecordsService,
+    UsersService,
+    FollowingService,
+    FollowersService,
     MeService,
 )
 from .parsers import ModelParser
@@ -16,4 +19,7 @@ class API(object):
         self.works = WorksService(self.client, parser(self))
         self.episodes = EpisodesService(self.client, parser(self))
         self.records = RecordsService(self.client, parser(self))
+        self.users = UsersService(self.client, parser(self))
+        self.following = FollowingService(self.client, parser(self))
+        self.followers = FollowersService(self.client, parser(self))
         self.me = MeService(self.client, parser(self))

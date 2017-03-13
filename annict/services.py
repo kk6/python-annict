@@ -65,6 +65,51 @@ class RecordsService(ServiceBase):
         return self.parser.parse(json, self.payload_type)
 
 
+class UsersService(ServiceBase):
+    """
+    :reference: https://docs.annict.com/ja/api/v1/users.html
+    """
+    path = 'users'
+    allowed_params = ['fields', 'filter_ids', 'filter_usernames', 'page', 'per_page',
+                      'sort_id']
+    payload_type = 'user'
+
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
+
+
+class FollowingService(ServiceBase):
+    """
+    :reference: https://docs.annict.com/ja/api/v1/following.html
+    """
+    path = 'following'
+    allowed_params = ['fields', 'filter_user_id', 'filter_username', 'page', 'per_page',
+                      'sort_id']
+    payload_type = 'user'
+
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
+
+
+class FollowersService(ServiceBase):
+    """
+    :reference: https://docs.annict.com/ja/api/v1/followers.html
+    """
+    path = 'followers'
+    allowed_params = ['fields', 'filter_user_id', 'filter_username', 'page', 'per_page',
+                      'sort_id']
+    payload_type = 'user'
+
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
+
+
 class MeStatusesService(ServiceBase):
     """
     :reference: https://docs.annict.com/ja/api/v1/me-statuses.html
