@@ -186,10 +186,35 @@ class Program(Model):
         return program
 
 
+class Activity(Model):
+
+    def __repr__(self):
+        return f'<Activity:{self.action}: by @{self.username}>'
+
+    @classmethod
+    def parse(cls, api, json):
+        activity = cls(api)
+        activity._json = json
+        for k, v in json.items():
+            if k == 'created_at':
+                setattr(activity, k, arrow.get(v).datetime)
+            elif k == 'user':
+                user = User.parse(api, v)
+                setattr(activity, k, user)
+            elif k == 'work':
+                work = Work.parse(api, v)
+                setattr(activity, k, work)
+            elif k == 'episode':
+                episode = Episode.parse(api, v)
+                setattr(activity, k, episode)
+        return activity
+
+
 MODEL_MAPPING = {
     'user': User,
     'work': Work,
     'episode': Episode,
     'record': Record,
     'program': Program,
+    'activity': Activity,
 }
