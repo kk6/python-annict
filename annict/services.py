@@ -55,8 +55,8 @@ class RecordsService(ServiceBase):
     :reference: https://docs.annict.com/ja/api/v1/records.html
     """
     path = 'records'
-    allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'page', 'per_page',
-                      'sort_id', 'sort_like_count']
+    allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'filter_has_record_comment',
+                      'page', 'per_page', 'sort_id', 'sort_like_count']
     payload_type = 'record'
 
     def get(self, **kwargs):
@@ -103,6 +103,27 @@ class FollowersService(ServiceBase):
     allowed_params = ['fields', 'filter_user_id', 'filter_username', 'page', 'per_page',
                       'sort_id']
     payload_type = 'user'
+
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
+
+
+class MeService(ServiceBase):
+    """
+    :reference: https://docs.annict.com/ja/api/v1/me.html
+    """
+    path = 'me'
+    allowed_params = ['fields']
+    payload_type = 'user'
+
+    def __init__(self, client, parser):
+        super().__init__(client, parser)
+        self.statuses = MeStatusesService(client, parser)
+        self.records = MeRecordsService(client, parser)
+        self.works = MeWorksService(client, parser)
+        self.programs = MeProgramsService(client, parser)
 
     def get(self, **kwargs):
         params = self.build_parameters(kwargs)
@@ -169,27 +190,6 @@ class MeProgramsService(ServiceBase):
                       'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
                       'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
     payload_type = 'program'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class MeService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/me.html
-    """
-    path = 'me'
-    allowed_params = ['fields']
-    payload_type = 'user'
-
-    def __init__(self, client, parser):
-        super().__init__(client, parser)
-        self.statuses = MeStatusesService(client, parser)
-        self.records = MeRecordsService(client, parser)
-        self.works = MeWorksService(client, parser)
-        self.programs = MeProgramsService(client, parser)
 
     def get(self, **kwargs):
         params = self.build_parameters(kwargs)
