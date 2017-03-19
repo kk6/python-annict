@@ -379,3 +379,47 @@ class TestRepr:
 
         program = Program.parse(None, json)
         assert program.__repr__() == '<Program:35387>'
+
+    def test_activity_for_create_status_action(self):
+        json = {
+           "action": "create_status",
+           "created_at": "2017-03-12T12:48:07.408Z",
+           "id": 1535967,
+           "status": {
+               "kind": "watching"
+           },
+           "user": {
+               "avatar_url": "https://api-assets.annict.com/paperclip/profiles/1160/tombo_avatars/master/d607b56162ae63bf33c460c9c88330a08303a206.jpg",
+               "background_image_url": "https://api-assets.annict.com/paperclip/profiles/1160/tombo_background_images/master/6a563f8dfb602790a92e7acd78b83cfa025bd73e.jpg",
+               "created_at": "2015-10-16T17:16:42.743Z",
+               "description": "絵を描きます /佐世保鎮守府/ 猫飼い / 普段はwebプログラマーやってます #python #django / Pixiv: http://www.pixiv.net/member.php?id=139100 見てるアニメ: https://annict.com/@kk6",
+               "id": 1229,
+               "name": "あしやひろ",
+               "records_count": 1470,
+               "url": "https://twitter.com/kk6",
+               "username": "kk6"
+           },
+           "work": {
+               "episodes_count": 11,
+               "id": 4998,
+               "media": "tv",
+               "media_text": "TV",
+               "official_site_url": "http://gabdro.com/",
+               "released_on": "",
+               "released_on_about": "",
+               "season_name": "2017-winter",
+               "season_name_text": "2017年冬",
+               "title": "ガヴリールドロップアウト",
+               "title_kana": "がゔりーるどろっぷあうと",
+               "twitter_hashtag": "gabdro",
+               "twitter_username": "gabdroanime",
+               "watchers_count": 444,
+               "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B4%E3%83%AA%E3%83%BC%E3%83%AB%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%E3%82%A2%E3%82%A6%E3%83%88"
+           }
+        }
+
+        from annict.models import Activity
+
+        activity = Activity.parse(None, json)
+        assert activity.__repr__() == '<Activity:create_status:@kk6>'
+        assert activity.status == {'kind': 'watching'}

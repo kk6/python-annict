@@ -42,7 +42,11 @@ class Model(object):
             next_page=json['next_page'],
         )
         results._json = json
-        for obj in json['{}s'.format(payload_type)]:
+        if payload_type == 'activity':
+            pluralized_payload_name = 'activities'
+        else:
+            pluralized_payload_name = '{}s'.format(payload_type)
+        for obj in json[pluralized_payload_name]:
             if obj:
                 results.append(cls.parse(api, obj))
         return results
@@ -189,7 +193,7 @@ class Program(Model):
 class Activity(Model):
 
     def __repr__(self):
-        return f'<Activity:{self.action}: by @{self.username}>'
+        return f'<Activity:{self.action}:@{self.user.username}>'
 
     @classmethod
     def parse(cls, api, json):
@@ -207,6 +211,8 @@ class Activity(Model):
             elif k == 'episode':
                 episode = Episode.parse(api, v)
                 setattr(activity, k, episode)
+            else:
+                setattr(activity, k, v)
         return activity
 
 
