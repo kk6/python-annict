@@ -5,7 +5,7 @@ tests_require = ['pytest',]
 
 setup(
     name='annict',
-    version='0.3.1',
+    version='0.4.0',
     license="MIT",
     author="kk6",
     author_email="hiro.ashiya@gmail.com",

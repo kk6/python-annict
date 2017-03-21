@@ -110,6 +110,21 @@ class FollowersService(ServiceBase):
         return self.parser.parse(json, self.payload_type)
 
 
+class ActivitiesService(ServiceBase):
+    """
+    :reference: https://docs.annict.com/ja/api/v1/activities.html
+    """
+    path = 'activities'
+    allowed_params = ['fields', 'filter_user_id', 'filter_username', 'page', 'per_page',
+                      'sort_id']
+    payload_type = 'activity'
+
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
+
+
 class MeService(ServiceBase):
     """
     :reference: https://docs.annict.com/ja/api/v1/me.html
@@ -190,6 +205,21 @@ class MeProgramsService(ServiceBase):
                       'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
                       'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
     payload_type = 'program'
+
+    def get(self, **kwargs):
+        params = self.build_parameters(kwargs)
+        json = self.client.get(self.path, params)
+        return self.parser.parse(json, self.payload_type)
+
+
+class MeFollowingActivitiesService(ServiceBase):
+    """
+    :reference: https://docs.annict.com/ja/api/v1/me-following-activities.html
+    """
+    path = 'me/following_activities'
+    allowed_params = ['fields', 'filter_actions', 'filter_muted', 'page', 'per_page',
+                      'sort_id']
+    payload_type = 'activity'
 
     def get(self, **kwargs):
         params = self.build_parameters(kwargs)
