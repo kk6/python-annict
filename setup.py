@@ -13,8 +13,8 @@ setup(
     packages=find_packages(exclude=['tests*']),
     install_requires=[
         'rauth',
-        'requests',
         'requests-cache',
+        'requests',
         'furl',
         'arrow',
     ],
