@@ -14,7 +14,7 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run Tests
-          command: pytest --flake8 --cov
+          command: pytest tests --cov-report test-reports/coverage --cov annict -vv
       - store_artifacts:
           path: test-reports/coverage
           destination: reports
