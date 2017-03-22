@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python3.6
+    working_directory: /home/ubuntu/python-annict
+    steps:
+      - checkout
+      - run:
+         name: Setup
+         command: python setup.py install
+      - run:
+          name: Install Dependencies
+         command: pip install -r requirements.txt
+      - run:
+          name: Run Tests
+          command: pytest --flake8 --coverage
+      - store_artifacts:
+          path: test-reports/coverage
+          destination: reports
+      - store_test_results:
+          path: "test-reports/"
