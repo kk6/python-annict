@@ -7,6 +7,7 @@ from .services import (
     UsersService,
     FollowingService,
     FollowersService,
+    ActivitiesService,
     MeService,
 )
 from .parsers import ModelParser
@@ -22,4 +23,5 @@ class API(object):
         self.users = UsersService(self.client, parser(self))
         self.following = FollowingService(self.client, parser(self))
         self.followers = FollowersService(self.client, parser(self))
+        self.activities = ActivitiesService(self.client, parser(self))
         self.me = MeService(self.client, parser(self))

@@ -5,7 +5,7 @@ tests_require = ['pytest',]
 
 setup(
     name='annict',
-    version='0.4.0',
+    version='0.4.1',
     license="MIT",
     author="kk6",
     author_email="hiro.ashiya@gmail.com",
@@ -13,8 +13,8 @@ setup(
     packages=find_packages(exclude=['tests*']),
     install_requires=[
         'rauth',
+        'requests>=2.13.0',
         'requests-cache',
-        'requests',
         'furl',
         'arrow',
     ],

@@ -139,6 +139,7 @@ class MeService(ServiceBase):
         self.records = MeRecordsService(client, parser)
         self.works = MeWorksService(client, parser)
         self.programs = MeProgramsService(client, parser)
+        self.following_activities = MeFollowingActivitiesService(client, parser)
 
     def get(self, **kwargs):
         params = self.build_parameters(kwargs)
