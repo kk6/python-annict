@@ -2,9 +2,7 @@
 import requests
 from furl import furl
 
-
-class AnnictError(Exception):
-    pass
+from .exceptions import AnnictError
 
 
 class Client(object):

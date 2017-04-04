@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from .exceptions import AnnictError
 from .utils import stringify
 
 
@@ -11,11 +12,26 @@ class ServiceBase(object):
         self.client = client
         self.parser = parser
 
-    def build_parameters(self, kwargs):
+    def build_parameters(self, args, kwargs):
         params = {}
-        for k, v in kwargs.items():
-            if k in self.allowed_params:
-                params[k] = stringify(v)
+        for i, arg in enumerate(args):
+            if arg is None:
+                continue
+            try:
+                params[self.allowed_params[i]] = stringify(arg)
+            except IndexError:
+                raise AnnictError("Too many parameters supplied.")
+
+        for k, arg in kwargs.items():
+            if arg is None:
+                continue
+            if k in params:
+                raise AnnictError(f"Multiple values for parameter '{k}' supplied.")
+            if k not in self.allowed_params:
+                raise AnnictError(f"Unknown keyword supplied: '{k}'")
+
+            params[k] = stringify(arg)
+
         return params
 
 
@@ -29,8 +45,8 @@ class WorksService(ServiceBase):
                       'sort_id' 'sort_season', 'sort_watchers_count']
     payload_type = 'work'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -44,8 +60,8 @@ class EpisodesService(ServiceBase):
                       'sort_id', 'sort_sort_number']
     payload_type = 'episode'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -59,8 +75,8 @@ class RecordsService(ServiceBase):
                       'page', 'per_page', 'sort_id', 'sort_like_count']
     payload_type = 'record'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -74,8 +90,8 @@ class UsersService(ServiceBase):
                       'sort_id']
     payload_type = 'user'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -89,8 +105,8 @@ class FollowingService(ServiceBase):
                       'sort_id']
     payload_type = 'user'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -104,8 +120,8 @@ class FollowersService(ServiceBase):
                       'sort_id']
     payload_type = 'user'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -119,8 +135,8 @@ class ActivitiesService(ServiceBase):
                       'sort_id']
     payload_type = 'activity'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -141,8 +157,8 @@ class MeService(ServiceBase):
         self.programs = MeProgramsService(client, parser)
         self.following_activities = MeFollowingActivitiesService(client, parser)
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -165,21 +181,21 @@ class MeRecordsService(ServiceBase):
     allowed_params = ['comment', 'rating', 'share_twitter', 'share_facebook']
     payload_type = 'record'
 
-    def create(self, episode_id, **kwargs):
-        params = self.build_parameters(kwargs)
+    def create(self, episode_id, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         params['episode_id'] = episode_id
         json = self.client.post(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
-    def update(self, record_id, **kwargs):
-        params = self.build_parameters(kwargs)
+    def update(self, record_id, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         path = '/'.join([self.path, str(record_id)])
         json = self.client.patch(path, params)
         return self.parser.parse(json, self.payload_type)
 
-    def delete(self, record_id, **kwargs):
+    def delete(self, record_id):
         path = '/'.join([self.path, str(record_id)])
-        return self.client.delete(path, kwargs)
+        return self.client.delete(path)
 
 
 class MeWorksService(ServiceBase):
@@ -191,8 +207,8 @@ class MeWorksService(ServiceBase):
                       'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
     payload_type = 'work'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -207,8 +223,8 @@ class MeProgramsService(ServiceBase):
                       'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
     payload_type = 'program'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
 
@@ -222,7 +238,7 @@ class MeFollowingActivitiesService(ServiceBase):
                       'sort_id']
     payload_type = 'activity'
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
+    def get(self, *args, **kwargs):
+        params = self.build_parameters(args, kwargs)
         json = self.client.get(self.path, params)
         return self.parser.parse(json, self.payload_type)
