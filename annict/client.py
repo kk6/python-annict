@@ -15,7 +15,7 @@ class Client(object):
 
     def _request(self, method, path, params=None):
         kwargs = {}
-        if method == 'post' or method == 'patch':
+        if method in ('post', 'patch'):
             kwargs['data'] = params
         elif method == 'get':
             kwargs['params'] = params
@@ -43,5 +43,5 @@ class Client(object):
     def patch(self, path, params):
         return self._request('patch', path, params)
 
-    def delete(self, path):
-        return self._request('delete', path)
+    def delete(self, path, params):
+        return self._request('delete', path, params)
