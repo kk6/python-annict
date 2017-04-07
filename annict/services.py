@@ -41,5 +41,4 @@ class APIMethod(object):
     def __call__(self, *args, **kwargs):
         self.build_path()
         params = self.build_parameters(args, kwargs)
-        client_method = getattr(self.api.client, self.method.lower())
-        return client_method(self.path, params)
+        return self.api.client.request(self.method, self.path, params)

@@ -13,16 +13,10 @@ class Client(object):
         self.session = requests.Session()
         self.session.params['access_token'] = access_token
 
-    def _request(self, method, path, params=None):
-        kwargs = {}
-        if method in ('post', 'patch'):
-            kwargs['data'] = params
-        elif method == 'get':
-            kwargs['params'] = params
-
+    def request(self, method, path, params=None):
         url = furl(self.base_url)
         url.path.add(self.api_version).add(path)
-        resp = self.session.request(method, url.url, **kwargs)
+        resp = self.session.request(method, url.url, params=params)
 
         if resp.status_code == 200:
             return resp.json()
@@ -33,15 +27,3 @@ class Client(object):
             raise AnnictError(f"{e['type']}:{e['message']}: {e['developer_message']}")
         else:
             return resp
-
-    def get(self, path, params):
-        return self._request('get', path, params)
-
-    def post(self, path, params):
-        return self._request('post', path, params)
-
-    def patch(self, path, params):
-        return self._request('patch', path, params)
-
-    def delete(self, path, params):
-        return self._request('delete', path, params)
