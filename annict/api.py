@@ -4,7 +4,7 @@ from .services import APIMethod
 from .parsers import ModelParser
 
 
-class API2(object):
+class API(object):
 
     def __init__(self, token, client=Client, parser=ModelParser):
         self.client = client(token)
