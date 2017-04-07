@@ -4,10 +4,9 @@ from urllib.parse import urlparse, parse_qs
 import responses
 
 
-def assert_query_equal(call_object, expected):
+def get_query(call_object):
     result = urlparse(call_object.request.url)
-    query = parse_qs(result.query)
-    assert query == expected
+    return parse_qs(result.query)
 
 
 def test_api():
@@ -37,6 +36,7 @@ def test_api():
 
 def test_me_statuses_create(monkeypatch):
     from annict.client import Client
+
     def mockreturn(self, path, params):
         return True
     monkeypatch.setattr(Client, 'post', mockreturn)
@@ -44,7 +44,7 @@ def test_me_statuses_create(monkeypatch):
     from annict.api import API
     api = API('token')
     r = api.me.statuses.create(work_id=1, kind='wanna_watch')
-    assert r == True
+    assert r is True
 
 
 @responses.activate
@@ -118,7 +118,7 @@ def test_works_with_fields(api_factory):
     works = api.works('title')
     assert works[0].title == 'SHIROBAKO'
     assert not hasattr(works[0], 'title_kana')
-    assert_query_equal(responses.calls[0], {'fields': ['title'], 'access_token': ['dummy_token']})
+    assert get_query(responses.calls[0]) == {'fields': ['title'], 'access_token': ['dummy_token']}
 
 
 @responses.activate
@@ -237,8 +237,9 @@ def test_records(api_factory):
                   body=json, status=200,
                   content_type='application/json')
     api = api_factory.create()
-    records = api.records()
+    records = api.records(filter_episode_id=74669)
     assert records[0].comment.startswith("ゆるふわ田舎アニメかと思ったら")
+    assert get_query(responses.calls[0]) == {'filter_episode_id': ['74669'], 'access_token': ['dummy_token']}
 
 
 @responses.activate
@@ -269,8 +270,9 @@ def test_users(api_factory):
     api = api_factory.create()
     users = api.search_users(filter_usernames='shimbaco')
     assert users[0].name == 'Koji Shimba'
-    
-    
+    assert get_query(responses.calls[0]) == {'filter_usernames': ['shimbaco'], 'access_token': ['dummy_token']}
+
+
 @responses.activate
 def test_following(api_factory):
     json = """
@@ -310,8 +312,10 @@ def test_following(api_factory):
     api = api_factory.create()
     following = api.following(filter_username='shimbaco', per_page=2)
     assert following[0].username == 'builtlast'
+    assert get_query(responses.calls[0]) == {'filter_username': ['shimbaco'], 'per_page': ['2'],
+                                             'access_token': ['dummy_token']}
 
-    
+
 @responses.activate
 def test_followers(api_factory):
     json = """
@@ -422,7 +426,7 @@ def test_activities(api_factory):
     activities = api.activities()
     assert activities[0].id == 1504708
 
-    
+
 @responses.activate
 def test_me(api_factory):
     json = """
@@ -674,6 +678,8 @@ def test_my_programs(api_factory):
     api = api_factory.create()
     programs = api.my_programs(sort_started_at='desc', filter_started_at_gt='2016/05/05 02:00')
     assert programs[0].id == 35387
+    assert get_query(responses.calls[0]) == {'sort_started_at': ['desc'], 'filter_started_at_gt': ['2016/05/05 02:00'],
+                                             'access_token': ['dummy_token']}
 
 
 @responses.activate
@@ -744,3 +750,4 @@ def test_following_activities(api_factory):
     api = api_factory.create()
     activities = api.following_activities(sort_id='desc', per_page=1)
     assert activities[0].id == 1504708
+    assert get_query(responses.calls[0]) == {'sort_id': ['desc'], 'per_page': ['1'], 'access_token': ['dummy_token']}
