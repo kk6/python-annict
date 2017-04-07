@@ -93,7 +93,7 @@ class Work(Model):
         return work
 
     def request_episode_list(self):
-        self._children = self._api.episodes.get(filter_work_id=self.id, sort_sort_number='asc')
+        self._children = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
 
     @cached_children('episode')
     def get_episode(self, number):
@@ -131,8 +131,8 @@ class Episode(Model):
                 setattr(episode, k, v)
         return episode
 
-    def create_record(self, **kwargs):
-        return self._api.me.records.create(self.id, **kwargs)
+    def create_record(self, *args, **kwargs):
+        return self._api.create_record(self.id, *args, **kwargs)
 
 
 class Record(Model):
@@ -160,11 +160,11 @@ class Record(Model):
                 setattr(record, k, v)
         return record
 
-    def update(self, **kwargs):
-        return self._api.me.records.update(self.id, **kwargs)
+    def update(self, *args, **kwargs):
+        return self._api.edit_record(self.id, *args, **kwargs)
 
     def delete(self):
-        return self._api.me.records.delete(self.id)
+        return self._api.delete_record(self.id)
 
 
 class Program(Model):
