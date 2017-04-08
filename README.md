@@ -33,7 +33,7 @@ URLをブラウザで開いて認証コードを表示します。それを `han
 ```python
 >>> from annict.api import API
 >>> annict = API('Your access token')
->>> results = annict.works.get(filter_title="Re:ゼロから始める異世界生活")
+>>> results = annict.works(filter_title="Re:ゼロから始める異世界生活")
 >>> print(results[0].title)
 Re:ゼロから始める異世界生活
 ```

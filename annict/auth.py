@@ -25,7 +25,7 @@ class OAuthHandler(object):
 
     def get_authorization_url(self, scope='read'):
         """Returns an authorization url
-        
+
         :param scope: (optional) Specify authority to access resources. Readonly defaults.
         :return: URL of page requesting permission
 
@@ -35,7 +35,7 @@ class OAuthHandler(object):
 
     def authenticate(self, code, decoder=lambda s: json.loads(s.decode('utf8'))):
         """Acquire the access token using the authorization code acquired after approval.
-        
+
         :param code: Authorization code obtained after approval.
         :param decoder: (optional) A function used to parse the Response content. Should return a dictionary.
 
