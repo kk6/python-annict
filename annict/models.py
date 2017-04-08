@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import abc
 from operator import methodcaller
 
 import arrow
@@ -25,7 +26,7 @@ class ResultSet(list):
         self.next_page = next_page
 
 
-class Model(object):
+class Model(metaclass=abc.ABCMeta):
     """Abstract class of each models."""
 
     def __init__(self, api=None):
@@ -33,6 +34,7 @@ class Model(object):
         self._children = []
 
     @classmethod
+    @abc.abstractmethod
     def parse(cls, api, json):
         """Parse a JSON object into a model instance."""
         raise NotImplementedError
