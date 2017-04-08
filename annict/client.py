@@ -14,6 +14,7 @@ class Client(object):
         self.session.params['access_token'] = access_token
 
     def request(self, method, path, params=None):
+        """Sends a request"""
         url = furl(self.base_url)
         url.path.add(self.api_version).add(path)
         resp = self.session.request(method, url.url, params=params)

@@ -2,4 +2,4 @@
 
 
 class AnnictError(Exception):
-    pass
+    """Annict exception"""

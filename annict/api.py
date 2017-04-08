@@ -5,6 +5,7 @@ from .parsers import ModelParser
 
 
 class API(object):
+    """API wrapper for Annict."""
 
     def __init__(self, token, client=Client, parser=ModelParser):
         self.client = client(token)

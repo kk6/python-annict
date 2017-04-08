@@ -16,6 +16,8 @@ def cached_children(name):
 
 
 class ResultSet(list):
+    """A list like object that holds results from an Annict API query."""
+
     def __init__(self, total_count, prev_page=None, next_page=None):
         super().__init__()
         self.total_count = total_count
@@ -24,6 +26,7 @@ class ResultSet(list):
 
 
 class Model(object):
+    """Abstract class of each models."""
 
     def __init__(self, api=None):
         self._api = api
@@ -53,6 +56,7 @@ class Model(object):
 
 
 class User(Model):
+    """User information model"""
 
     def __repr__(self):
         return f'<User:{self.id}:{self.name}:@{self.username}>'
@@ -70,6 +74,7 @@ class User(Model):
 
 
 class Work(Model):
+    """Work information model"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -107,6 +112,7 @@ class Work(Model):
 
 
 class Episode(Model):
+    """Episode information model"""
 
     def __repr__(self):
         return f'<Episode:{self.id}:{self.number_text}:{self.title}:{self.work.title}>'
@@ -136,6 +142,7 @@ class Episode(Model):
 
 
 class Record(Model):
+    """Record information model"""
 
     def __repr__(self):
         return f'<Record:{self.id}>'
@@ -168,6 +175,7 @@ class Record(Model):
 
 
 class Program(Model):
+    """Program information model"""
 
     def __repr__(self):
         return f'<Program:{self.id}>'
@@ -191,6 +199,7 @@ class Program(Model):
 
 
 class Activity(Model):
+    """Activity information model"""
 
     def __repr__(self):
         return f'<Activity:{self.action}:@{self.user.username}>'
