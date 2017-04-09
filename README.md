@@ -27,6 +27,10 @@ URLをブラウザで開いて認証コードを表示します。それを `han
 >>> print(handler.get_access_token())
 ```
 
+なお、Annict上で個人用アクセストークンを発行しそれを使用する場合はこの認証フローは不要です。
+
+参照： [Annict API: 個人用アクセストークンが発行できるようになりました](http://blog.annict.com/post/157138114218/personal-access-token)
+
 ### API
 
 
