@@ -15,8 +15,6 @@ class APIMethod(object):
         self.method = method
         self.allowed_params = required_params + optional_params
         self.target_id = target_id
-        self.session = requests.Session()
-        self.session.params['access_token'] = self.api.token
         self.payload_type = payload_type
         self.payload_list = payload_list
 
@@ -55,7 +53,8 @@ class APIMethod(object):
     def __call__(self, *args, **kwargs):
         url = self.build_url()
         params = self.build_parameters(args, kwargs)
-        resp = self.session.request(self.method, url, params=params)
+        params['access_token'] = self.api.token
+        resp = requests.request(self.method, url, params=params)
 
         resp.raise_for_status()
 
