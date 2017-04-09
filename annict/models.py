@@ -5,17 +5,6 @@ from operator import methodcaller
 import arrow
 
 
-def cached_children(name):
-    def cached(f):
-        def _cached(self, *args, **kwargs):
-            if not self._children:
-                m = methodcaller('request_{}_list'.format(name))
-                m(self)
-            return f(self, *args, **kwargs)
-        return _cached
-    return cached
-
-
 class ResultSet(list):
     """A list like object that holds results from an Annict API query."""
 
@@ -102,11 +91,9 @@ class Work(Model):
     def request_episode_list(self):
         self._children = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
 
-    @cached_children('episode')
     def get_episode(self, number):
         return self._children[number - 1]
 
-    @cached_children('episode')
     def select_episodes(self, *numbers):
         if not numbers:
             return self._children
