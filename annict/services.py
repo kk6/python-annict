@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
+from furl import furl
+import requests
+
 from .exceptions import AnnictError
 from .utils import stringify
 
 
 class APIMethod(object):
 
-    def __init__(self, api, path, method, required_params, optional_params, target_id=None):
+    def __init__(self, api, path, method, required_params, optional_params, target_id=None,
+                 payload_type=None, payload_list=False):
         self.api = api
         self.path = path
         self.method = method
         self.allowed_params = required_params + optional_params
         self.target_id = target_id
+        self.session = requests.Session()
+        self.session.params['access_token'] = self.api.token
+        self.payload_type = payload_type
+        self.payload_list = payload_list
 
     def build_parameters(self, args, kwargs):
         params = {}
@@ -38,7 +46,22 @@ class APIMethod(object):
         if self.target_id:
             self.path = '/'.join([self.path, str(self.target_id)])
 
-    def __call__(self, *args, **kwargs):
+    def build_url(self):
         self.build_path()
+        url = furl(self.api.base_url)
+        url.path.add(self.api.api_version).add(self.path)
+        return url.url
+
+    def __call__(self, *args, **kwargs):
+        url = self.build_url()
         params = self.build_parameters(args, kwargs)
-        return self.api.client.request(self.method, self.path, params)
+        resp = self.session.request(self.method, url, params=params)
+
+        resp.raise_for_status()
+
+        if resp.status_code == 200:
+            return self.api.parser.parse(resp.json(), self.payload_type, self.payload_list)
+        elif resp.status_code == 204:
+            return True
+        else:
+            return resp

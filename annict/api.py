@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from .client import Client
 from .services import APIMethod
 from .parsers import ModelParser
 
@@ -7,8 +6,10 @@ from .parsers import ModelParser
 class API(object):
     """API wrapper for Annict."""
 
-    def __init__(self, token, client=Client, parser=ModelParser):
-        self.client = client(token)
+    def __init__(self, token, base_url='https://api.annict.com', api_version='v1', parser=ModelParser):
+        self.token = token
+        self.base_url = base_url
+        self.api_version = api_version
         self.parser = parser(self)
 
     def works(self, *args, **kwargs):
@@ -27,9 +28,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id' 'sort_season', 'sort_watchers_count',
             ],
+            payload_type='work',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='work', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def episodes(self, *args, **kwargs):
         """Get episodes information
@@ -47,9 +49,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id', 'sort_sort_number'
             ],
+            payload_type='episode',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='episode', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def records(self, *args, **kwargs):
         """Get records to episodes
@@ -67,9 +70,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id', 'sort_like_count'
             ],
+            payload_type='record',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='record', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def search_users(self, *args, **kwargs):
         """Get users information
@@ -87,9 +91,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id'
             ],
+            payload_type='user',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='user', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def following(self, *args, **kwargs):
         """Get following information
@@ -107,9 +112,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id'
             ],
+            payload_type='user',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='user', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def followers(self, *args, **kwargs):
         """Get followers information
@@ -127,9 +133,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id'
             ],
+            payload_type='user',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='user', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def activities(self, *args, **kwargs):
         """Get activities
@@ -147,9 +154,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id'
             ],
+            payload_type='activity',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='activity', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def me(self, *args, **kwargs):
         """Get your profile information
@@ -163,9 +171,9 @@ class API(object):
             method='GET',
             required_params=[],
             optional_params=['fields'],
+            payload_type='user',
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='user')
+        return api_method(*args, **kwargs)
 
     def set_status(self, work_id, kind):
         """Set the status of the work.
@@ -195,9 +203,9 @@ class API(object):
             required_params=['episode_id', ],
             optional_params=['comment', 'rating', 'share_twitter',
                              'share_facebook'],
+            payload_type='record',
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='record')
+        return api_method(*args, **kwargs)
 
     def edit_record(self, id_, *args, **kwargs):
         """Edit the created record.
@@ -213,9 +221,9 @@ class API(object):
             required_params=[],
             optional_params=['comment', 'rating', 'share_twitter',
                              'share_facebook'],
+            payload_type='record',
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='record')
+        return api_method(*args, **kwargs)
 
     def delete_record(self, id_):
         """Delete the created record.
@@ -249,9 +257,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id', 'sort_season', 'sort_watchers_count'
             ],
+            payload_type='work',
+            payload_list=True,
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='work', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def my_programs(self, *args, **kwargs):
         """Get the broadcast schedule.
@@ -271,9 +280,10 @@ class API(object):
                 'page', 'per_page',
                 'sort_id', 'sort_started_at'
             ],
+            payload_type='program',
+            payload_list=True
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='program', payload_list=True)
+        return api_method(*args, **kwargs)
 
     def following_activities(self, *args, **kwargs):
         """Get the activity of the user you are following.
@@ -291,6 +301,7 @@ class API(object):
                 'page', 'per_page',
                 'sort_id'
             ],
+            payload_type='activity',
+            payload_list=True
         )
-        json = api_method(*args, **kwargs)
-        return self.parser.parse(json, payload_type='activity', payload_list=True)
+        return api_method(*args, **kwargs)
