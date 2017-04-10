@@ -1,228 +1,66 @@
 # -*- coding: utf-8 -*-
+from furl import furl
+import requests
+
+from .exceptions import AnnictError
 from .utils import stringify
 
 
-class ServiceBase(object):
-    path = ''
-    allowed_params = []
-    payload_type = ''
+class APIMethod(object):
 
-    def __init__(self, client, parser):
-        self.client = client
-        self.parser = parser
+    def __init__(self, api, path, method, required_params, optional_params, target_id=None,
+                 payload_type=None, payload_list=False):
+        self.api = api
+        self.path = path
+        self.method = method
+        self.allowed_params = required_params + optional_params
+        self.target_id = target_id
+        self.payload_type = payload_type
+        self.payload_list = payload_list
 
-    def build_parameters(self, kwargs):
+    def build_parameters(self, args, kwargs):
         params = {}
-        for k, v in kwargs.items():
-            if k in self.allowed_params:
-                params[k] = stringify(v)
+        for i, arg in enumerate(args):
+            if arg is None:
+                continue
+            try:
+                params[self.allowed_params[i]] = stringify(arg)
+            except IndexError:
+                raise AnnictError("Too many parameters supplied.")
+
+        for k, arg in kwargs.items():
+            if arg is None:
+                continue
+            if k in params:
+                raise AnnictError(f"Multiple values for parameter '{k}' supplied.")
+            if k not in self.allowed_params:
+                raise AnnictError(f"Unknown keyword supplied: '{k}'")
+
+            params[k] = stringify(arg)
+
         return params
 
+    def build_path(self):
+        if self.target_id:
+            self.path = '/'.join([self.path, str(self.target_id)])
 
-class WorksService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/works.html
-    """
-    path = 'works'
-    allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title',
-                      'page', 'per_page',
-                      'sort_id' 'sort_season', 'sort_watchers_count']
-    payload_type = 'work'
+    def build_url(self):
+        self.build_path()
+        url = furl(self.api.base_url)
+        url.path.add(self.api.api_version).add(self.path)
+        return url.url
 
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
+    def __call__(self, *args, **kwargs):
+        url = self.build_url()
+        params = self.build_parameters(args, kwargs)
+        params['access_token'] = self.api.token
+        resp = requests.request(self.method, url, params=params)
 
+        resp.raise_for_status()
 
-class EpisodesService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/episodes.html
-    """
-    path = 'episodes'
-    allowed_params = ['fields', 'filter_ids', 'filter_work_id', 'page', 'per_page',
-                      'sort_id', 'sort_sort_number']
-    payload_type = 'episode'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class RecordsService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/records.html
-    """
-    path = 'records'
-    allowed_params = ['fields', 'filter_ids', 'filter_episode_id', 'filter_has_record_comment',
-                      'page', 'per_page', 'sort_id', 'sort_like_count']
-    payload_type = 'record'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class UsersService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/users.html
-    """
-    path = 'users'
-    allowed_params = ['fields', 'filter_ids', 'filter_usernames', 'page', 'per_page',
-                      'sort_id']
-    payload_type = 'user'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class FollowingService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/following.html
-    """
-    path = 'following'
-    allowed_params = ['fields', 'filter_user_id', 'filter_username', 'page', 'per_page',
-                      'sort_id']
-    payload_type = 'user'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class FollowersService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/followers.html
-    """
-    path = 'followers'
-    allowed_params = ['fields', 'filter_user_id', 'filter_username', 'page', 'per_page',
-                      'sort_id']
-    payload_type = 'user'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class ActivitiesService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/activities.html
-    """
-    path = 'activities'
-    allowed_params = ['fields', 'filter_user_id', 'filter_username', 'page', 'per_page',
-                      'sort_id']
-    payload_type = 'activity'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class MeService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/me.html
-    """
-    path = 'me'
-    allowed_params = ['fields']
-    payload_type = 'user'
-
-    def __init__(self, client, parser):
-        super().__init__(client, parser)
-        self.statuses = MeStatusesService(client, parser)
-        self.records = MeRecordsService(client, parser)
-        self.works = MeWorksService(client, parser)
-        self.programs = MeProgramsService(client, parser)
-        self.following_activities = MeFollowingActivitiesService(client, parser)
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class MeStatusesService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/me-statuses.html
-    """
-    path = 'me/statuses'
-
-    def create(self, work_id, kind):
-        return self.client.post(self.path, {'work_id': work_id, 'kind': kind})
-
-
-class MeRecordsService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/me-records.html
-    """
-    path = 'me/records'
-    allowed_params = ['comment', 'rating', 'share_twitter', 'share_facebook']
-    payload_type = 'record'
-
-    def create(self, episode_id, **kwargs):
-        params = self.build_parameters(kwargs)
-        params['episode_id'] = episode_id
-        json = self.client.post(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-    def update(self, record_id, **kwargs):
-        params = self.build_parameters(kwargs)
-        path = '/'.join([self.path, str(record_id)])
-        json = self.client.patch(path, params)
-        return self.parser.parse(json, self.payload_type)
-
-    def delete(self, record_id, **kwargs):
-        path = '/'.join([self.path, str(record_id)])
-        return self.client.delete(path, kwargs)
-
-
-class MeWorksService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/me-works.html
-    """
-    path = 'me/works'
-    allowed_params = ['fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
-                      'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count']
-    payload_type = 'work'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class MeProgramsService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/me-programs.html
-    """
-    path = 'me/programs'
-    allowed_params = ['fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids',
-                      'filter_started_at_gt', 'filter_started_at_lt', 'filter_unwatched',
-                      'filter_rebroadcast', 'page', 'per_page', 'sort_id', 'sort_started_at']
-    payload_type = 'program'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
-
-
-class MeFollowingActivitiesService(ServiceBase):
-    """
-    :reference: https://docs.annict.com/ja/api/v1/me-following-activities.html
-    """
-    path = 'me/following_activities'
-    allowed_params = ['fields', 'filter_actions', 'filter_muted', 'page', 'per_page',
-                      'sort_id']
-    payload_type = 'activity'
-
-    def get(self, **kwargs):
-        params = self.build_parameters(kwargs)
-        json = self.client.get(self.path, params)
-        return self.parser.parse(json, self.payload_type)
+        if resp.status_code == 200:
+            return self.api.parser.parse(resp.json(), self.payload_type, self.payload_list)
+        elif resp.status_code == 204:
+            return True
+        else:
+            return resp

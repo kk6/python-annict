@@ -27,13 +27,35 @@ URLをブラウザで開いて認証コードを表示します。それを `han
 >>> print(handler.get_access_token())
 ```
 
+なお、Annict上で個人用アクセストークンを発行しそれを使用する場合はこの認証フローは不要です。
+
+参照： [Annict API: 個人用アクセストークンが発行できるようになりました](http://blog.annict.com/post/157138114218/personal-access-token)
+
 ### API
 
 
 ```python
 >>> from annict.api import API
 >>> annict = API('Your access token')
->>> results = annict.works.get(filter_title="Re:ゼロから始める異世界生活")
+>>> results = annict.works(filter_title="Re:ゼロから始める異世界生活")
 >>> print(results[0].title)
 Re:ゼロから始める異世界生活
 ```
+
+### キャッシュ
+
+独自のキャッシュシステムは実装していませんが、[requests_cache](https://github.com/reclosedev/requests-cache) というrequests用キャッシュプラグインとの併用を強くおすすめします。
+
+##### 使用例
+
+```python
+>>> import requests_cache
+>>> # 有効期限300秒でメモリにキャッシュするよう設定
+>>> requests_cache.install_cache(cache_name='annict', backend='memory', expire_after=300)
+>>> # 最初のリクエストはAPIから
+>>> api.me()
+>>> # 300秒以内の同一リクエストはキャッシュから
+>>> api.me()
+```
+
+さらに詳しい使い方は [Requests-cache 公式ドキュメント](https://requests-cache.readthedocs.io/en/latest/) を参照してください。

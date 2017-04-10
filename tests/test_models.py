@@ -19,7 +19,7 @@ def test_user():
         "created_at": "2014-03-02T15:38:40.000Z",
         "email": "me@shimba.co",
         "notifications_count": 0
-        }
+    }
     user = User.parse(None, json)
     assert user.id == 2
     assert user.username == "shimbaco"

@@ -1,21 +1,13 @@
 # -*- coding: utf-8 -*-
+import abc
 from operator import methodcaller
 
 import arrow
 
 
-def cached_children(name):
-    def cached(f):
-        def _cached(self, *args, **kwargs):
-            if not self._children:
-                m = methodcaller('request_{}_list'.format(name))
-                m(self)
-            return f(self, *args, **kwargs)
-        return _cached
-    return cached
-
-
 class ResultSet(list):
+    """A list like object that holds results from an Annict API query."""
+
     def __init__(self, total_count, prev_page=None, next_page=None):
         super().__init__()
         self.total_count = total_count
@@ -23,13 +15,15 @@ class ResultSet(list):
         self.next_page = next_page
 
 
-class Model(object):
+class Model(metaclass=abc.ABCMeta):
+    """Abstract class of each models."""
 
     def __init__(self, api=None):
         self._api = api
         self._children = []
 
     @classmethod
+    @abc.abstractmethod
     def parse(cls, api, json):
         """Parse a JSON object into a model instance."""
         raise NotImplementedError
@@ -53,6 +47,7 @@ class Model(object):
 
 
 class User(Model):
+    """User information model"""
 
     def __repr__(self):
         return f'<User:{self.id}:{self.name}:@{self.username}>'
@@ -70,6 +65,7 @@ class User(Model):
 
 
 class Work(Model):
+    """Work information model"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -93,13 +89,11 @@ class Work(Model):
         return work
 
     def request_episode_list(self):
-        self._children = self._api.episodes.get(filter_work_id=self.id, sort_sort_number='asc')
+        self._children = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
 
-    @cached_children('episode')
     def get_episode(self, number):
         return self._children[number - 1]
 
-    @cached_children('episode')
     def select_episodes(self, *numbers):
         if not numbers:
             return self._children
@@ -107,6 +101,7 @@ class Work(Model):
 
 
 class Episode(Model):
+    """Episode information model"""
 
     def __repr__(self):
         return f'<Episode:{self.id}:{self.number_text}:{self.title}:{self.work.title}>'
@@ -131,11 +126,12 @@ class Episode(Model):
                 setattr(episode, k, v)
         return episode
 
-    def create_record(self, **kwargs):
-        return self._api.me.records.create(self.id, **kwargs)
+    def create_record(self, *args, **kwargs):
+        return self._api.create_record(self.id, *args, **kwargs)
 
 
 class Record(Model):
+    """Record information model"""
 
     def __repr__(self):
         return f'<Record:{self.id}>'
@@ -160,14 +156,15 @@ class Record(Model):
                 setattr(record, k, v)
         return record
 
-    def update(self, **kwargs):
-        return self._api.me.records.update(self.id, **kwargs)
+    def update(self, *args, **kwargs):
+        return self._api.edit_record(self.id, *args, **kwargs)
 
     def delete(self):
-        return self._api.me.records.delete(self.id)
+        return self._api.delete_record(self.id)
 
 
 class Program(Model):
+    """Program information model"""
 
     def __repr__(self):
         return f'<Program:{self.id}>'
@@ -191,6 +188,7 @@ class Program(Model):
 
 
 class Activity(Model):
+    """Activity information model"""
 
     def __repr__(self):
         return f'<Activity:{self.action}:@{self.user.username}>'
