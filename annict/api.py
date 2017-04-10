@@ -26,7 +26,7 @@ class API(object):
             optional_params=[
                 'fields', 'filter_ids', 'filter_season', 'filter_title',
                 'page', 'per_page',
-                'sort_id' 'sort_season', 'sort_watchers_count',
+                'sort_id', 'sort_season', 'sort_watchers_count',
             ],
             payload_type='work',
             payload_list=True,
