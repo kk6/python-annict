@@ -68,7 +68,7 @@ class API(object):
             optional_params=[
                 'fields', 'filter_ids', 'filter_episode_id', 'filter_has_record_comment',
                 'page', 'per_page',
-                'sort_id', 'sort_like_count'
+                'sort_id', 'sort_likes_count'
             ],
             payload_type='record',
             payload_list=True,
