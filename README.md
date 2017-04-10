@@ -1,11 +1,16 @@
 # python-annict
 Annict API wrapper for python
 
-[![CircleCI](https://circleci.com/gh/kk6/python-annict.svg?style=svg)](https://circleci.com/gh/kk6/python-annict)
+[![CircleCI](https://img.shields.io/circleci/project/kk6/python-annict.svg?style=flat-square)](https://circleci.com/gh/kk6/python-annict)
+[![PyPI](https://img.shields.io/pypi/v/annict.svg?style=flat-square)](https://pypi.python.org/pypi/annict)
 
 python-annict は Python3.6 以上をサポートしています。
 
 ## インストール
+
+```bash
+$ pip install annict
+```
 
 ## 使い方
 
