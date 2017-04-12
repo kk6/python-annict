@@ -12,3 +12,5 @@ __title__ = 'python-annict'
 __version__ = '0.5.0'
 __author__ = 'Hiro Ashiya'
 __license__ = 'MIT'
+
+from .api import API
