@@ -1,22 +1,22 @@
 # python-annict
-Annict API wrapper for python
+Annict API wrapper for Python
 
 [![CircleCI](https://img.shields.io/circleci/project/kk6/python-annict.svg?style=flat-square)](https://circleci.com/gh/kk6/python-annict)
 [![PyPI](https://img.shields.io/pypi/v/annict.svg?style=flat-square)](https://pypi.python.org/pypi/annict)
 
-python-annict は Python3.6 以上をサポートしています。
+**python-annict** officially supports Python 3.6.
 
-## インストール
+## Installation
 
 ```bash
 $ pip install annict
 ```
 
-## 使い方
+## Quickstart
 
-### 認証
+### Authentication
 
-認証コード取得用のURLを生成
+Acquire the URL for authentication code.
 
 ```python
 >>> from annict.auth import OAuthHandler
@@ -25,18 +25,19 @@ $ pip install annict
 >>> print(url)
 ```
 
-URLをブラウザで開いて認証コードを表示します。それを `handler.authenticate()` の引数に渡してアクセストークンを取得します。
+Open the browser and access the URL you obtained, the authentication code will be displayed.
+It will be passed to the `handler.authenticate()` 's argument to get the access token.
 
 ```python
 >>> handler.authenticate(code='Authentication code')
 >>> print(handler.get_access_token())
 ```
 
-なお、Annict上で個人用アクセストークンを発行しそれを使用する場合はこの認証フローは不要です。
+Note that this authentication flow is unnecessary when issuing a personal access token on Annict and using it.
 
-参照： [Annict API: 個人用アクセストークンが発行できるようになりました](http://blog.annict.com/post/157138114218/personal-access-token)
+See: [Annict API: 個人用アクセストークンが発行できるようになりました](http://blog.annict.com/post/157138114218/personal-access-token)
 
-### API
+### Hello world
 
 
 ```python
@@ -47,20 +48,27 @@ URLをブラウザで開いて認証コードを表示します。それを `han
 Re:ゼロから始める異世界生活
 ```
 
-### キャッシュ
+### Cache
 
-独自のキャッシュシステムは実装していませんが、[requests_cache](https://github.com/reclosedev/requests-cache) というrequests用キャッシュプラグインとの併用を強くおすすめします。
+For now, we do not have our own cache system. However, caching is also important to reduce the load on AnnictAPI.
 
-##### 使用例
+So I introduce a cache plugin for *requests* library called [requests_cache](https://github.com/reclosedev/requests-cache).
+
+Install with pip.
+
+```bash
+$ pip insall requests_cache
+```
+*requests_cache* is very easy to use.
 
 ```python
 >>> import requests_cache
->>> # 有効期限300秒でメモリにキャッシュするよう設定
 >>> requests_cache.install_cache(cache_name='annict', backend='memory', expire_after=300)
->>> # 最初のリクエストはAPIから
+>>> # At first, from Annict API.
 >>> api.me()
->>> # 300秒以内の同一リクエストはキャッシュから
+>>> # You can get results from cache, if it is within the expiration time.
 >>> api.me()
+
 ```
 
-さらに詳しい使い方は [Requests-cache 公式ドキュメント](https://requests-cache.readthedocs.io/en/latest/) を参照してください。
+For more information: [Requests-cache documentation](https://requests-cache.readthedocs.io/en/latest/) 

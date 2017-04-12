@@ -28,6 +28,7 @@ class OAuthHandler(object):
 
         :param scope: (optional) Specify authority to access resources. Readonly defaults.
         :return: URL of page requesting permission
+        :rtype: str
 
         """
         params = {'scope': scope, 'response_type': 'code', 'redirect_uri': self.redirect_uri}

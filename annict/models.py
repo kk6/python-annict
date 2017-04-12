@@ -92,6 +92,13 @@ class Work(Model):
         self._children = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
 
     def get_episode(self, number):
+        """Get Episode object
+        
+        :param number: Episode number
+        :return: :class:`Episode <Episode>` object
+        :rtype: Episode
+
+        """
         return self._children[number - 1]
 
     def select_episodes(self, *numbers):
@@ -126,8 +133,16 @@ class Episode(Model):
                 setattr(episode, k, v)
         return episode
 
-    def create_record(self, *args, **kwargs):
-        return self._api.create_record(self.id, *args, **kwargs)
+    def create_record(self, comment=None, rating=None, share_twitter=False, share_facebook=False):
+        """Create a record for this episode.
+        
+        :param str comment: (optional) Comment.
+        :param float rating: (optional) Rating.
+        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
+        :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
+        :return: :class:`Record <annict.models.Record>` object.
+        """
+        return self._api.create_record(self.id, comment, rating, share_twitter, share_facebook)
 
 
 class Record(Model):

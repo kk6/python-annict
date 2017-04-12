@@ -420,7 +420,7 @@ def test_set_status(api_factory):
                   body=None, status=204)
     api = api_factory.create()
     result = api.set_status(work_id=438, kind='watching')
-    assert result is True
+    assert result
 
 
 @responses.activate
@@ -546,7 +546,7 @@ def test_delete_record(api_factory):
                   body=None, status=204)
     api = api_factory.create()
     result = api.delete_record(1016)
-    assert result is True
+    assert result
 
 
 @responses.activate
