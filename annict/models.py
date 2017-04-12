@@ -181,8 +181,17 @@ class Record(Model):
                 setattr(record, k, v)
         return record
 
-    def update(self, *args, **kwargs):
-        return self._api.edit_record(self.id, *args, **kwargs)
+    def edit(self, comment=None, rating=None, share_twitter=False, share_facebook=False):
+        """Edit the created record.
+        
+        :param str comment: (optional) Comment.
+        :param float rating: (optional) Rating.
+        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
+        :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
+        :return: :class:`Record <annict.models.Record>` object after edit.
+
+        """
+        return self._api.edit_record(self.id, comment, rating, share_twitter, share_facebook)
 
     def delete(self):
         return self._api.delete_record(self.id)
