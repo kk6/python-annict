@@ -16,15 +16,38 @@ class APIMethod(object):
         self.payload_list = payload_list
 
     def build_path(self, id_=None):
+        """Build an suitable path
+        
+        If `id_` is given, it is embedded into path.
+        
+        :param int id_: Target resource ID
+
+        """
         if id_ is not None:
             self.path = '/'.join([self.path, str(id_)])
 
     def build_url(self):
+        """Build request url
+        
+        :return: request url
+        :rtype: str
+
+        """
         url = furl(self.api.base_url)
         url.path.add(self.api.api_version).add(self.path)
         return url.url
 
     def build_parameters(self, dic):
+        """Build a suitable parameters for request.
+        
+        It filters the given dictionary based on `self.allowed_params` and returns a dictionary with
+        an additional access token.
+
+        :param dict dic: dict of arguments given to annict.API's method.
+        :return: dict for request parameter
+        :rtype: dict
+
+        """
         params = {key: stringify(dic[key]) for key in self.allowed_params if key in dic and dic[key]}
         params['access_token'] = self.api.token
         return params

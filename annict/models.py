@@ -30,6 +30,16 @@ class Model(metaclass=abc.ABCMeta):
 
     @classmethod
     def parse_list(cls, api, json, payload_type):
+        """
+        
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :param str payload_type: Type of payload.
+        :return: list of Model objects.
+        :rtype: ResultSet
+
+        """
         results = ResultSet(
             total_count=json['total_count'],
             prev_page=json['prev_page'],
@@ -54,6 +64,15 @@ class User(Model):
 
     @classmethod
     def parse(cls, api, json):
+        """Parse a JSON object into a model instance.
+        
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :return: :class:`User <User>` object
+        :rtype: User
+
+        """
         user = cls(api)
         user._json = json
         for k, v in json.items():
@@ -75,6 +94,15 @@ class Work(Model):
 
     @classmethod
     def parse(cls, api, json):
+        """Parse a JSON object into a model instance.
+
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :return: :class:`Work <Work>` object
+        :rtype: Work
+
+        """
         work = cls(api)
         work._json = json
         for k, v in json.items():
@@ -125,6 +153,15 @@ class Episode(Model):
 
     @classmethod
     def parse(cls, api, json):
+        """Parse a JSON object into a model instance.
+
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :return: :class:`Episode <Episode>` object
+        :rtype: Episode
+
+        """
         episode = cls(api)
         episode._json = json
         for k, v in json.items():
@@ -163,6 +200,15 @@ class Record(Model):
 
     @classmethod
     def parse(cls, api, json):
+        """Parse a JSON object into a model instance.
+
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :return: :class:`Record <Record>` object
+        :rtype: Record
+
+        """
         record = cls(api)
         record._json = json
         for k, v in json.items():
@@ -194,6 +240,11 @@ class Record(Model):
         return self._api.edit_record(self.id, comment, rating, share_twitter, share_facebook)
 
     def delete(self):
+        """Delete the created record.
+
+        :return: Returns `True` if deletion succeeded.
+
+        """
         return self._api.delete_record(self.id)
 
 
@@ -205,6 +256,15 @@ class Program(Model):
 
     @classmethod
     def parse(cls, api, json):
+        """Parse a JSON object into a model instance.
+
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :return: :class:`Program <Program>` object
+        :rtype: Program
+
+        """
         program = cls(api)
         program._json = json
         for k, v in json.items():
@@ -229,6 +289,15 @@ class Activity(Model):
 
     @classmethod
     def parse(cls, api, json):
+        """Parse a JSON object into a model instance.
+
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :return: :class:`Activity <Activity>` object
+        :rtype: Activity
+
+        """
         activity = cls(api)
         activity._json = json
         for k, v in json.items():
