@@ -25,7 +25,7 @@ class APIMethod(object):
         return url.url
 
     def build_parameters(self, dic):
-        params = {key: stringify(dic[key]) for key in self.allowed_params if dic[key]}
+        params = {key: stringify(dic[key]) for key in self.allowed_params if key in dic and dic[key]}
         params['access_token'] = self.api.token
         return params
 
