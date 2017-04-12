@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
+
+import responses
 from arrow import arrow
 
 tzutc = arrow.dateutil_tz.tzutc
@@ -423,3 +425,16 @@ class TestRepr:
         activity = Activity.parse(None, json)
         assert activity.__repr__() == '<Activity:create_status:@kk6>'
         assert activity.status == {'kind': 'watching'}
+
+
+class TestWorkModel:
+
+    @responses.activate
+    def test_set_status(self, api_factory):
+        from annict.models import Work
+        responses.add(responses.POST, 'https://api.annict.com/v1/me/statuses',
+                      body=None, status=204)
+        api = api_factory.create()
+        work = Work.parse(api, {'id': 1})
+        result = work.set_status('watching')
+        assert result

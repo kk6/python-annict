@@ -88,6 +88,16 @@ class Work(Model):
                 setattr(work, k, v)
         return work
 
+    def set_status(self, kind):
+        """Set the status of the work.
+        
+        :param str kind: Types of status.
+            You can specify `wanna_watch`, `watching`, `watched`, `on_hold`, `stop_watching`, or `no_select`.
+        :return: Returns `True` if deletion succeeded.
+
+        """
+        return self._api.set_status(self.id, kind)
+
     def request_episode_list(self):
         self._children = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
 
