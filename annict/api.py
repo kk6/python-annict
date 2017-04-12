@@ -4,8 +4,16 @@ from .parsers import ModelParser
 
 
 class API(object):
-    """API wrapper for Annict."""
-
+    """API wrapper for Annict.
+    
+    Basic Usage::
+    
+        >>> from annict.api import API
+        >>> api = API('your-access-token')
+        >>> api.me()
+        <User:1229:あしやひろ:@kk6>
+    
+    """
     def __init__(self, token, base_url='https://api.annict.com', api_version='v1', parser=ModelParser):
         self.token = token
         self.base_url = base_url
@@ -19,15 +27,18 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/works.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
         :param filter_ids: (optional) Filter results by IDs.
-        :param filter_season: (optional) Filter results by release time of season.
-        :param filter_title: (optional) Filter results by title.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param sort_season: (optional) Sort the results by their release time of season. You can specify `asc` or `desc`.
-        :param sort_watchers_count: (optional) Sort the results by their watchers count. You can specify `asc` or `desc`.
-        :return: List of `Work` objects.
+        :type filter_ids: list of int
+        :param str filter_season: (optional) Filter results by release time of season.
+        :param str filter_title: (optional) Filter results by title.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :param str sort_season: (optional) Sort the results by their release time of season. You can specify `asc` or `desc`.
+        :param str sort_watchers_count: (optional) Sort the results by their watchers count. You can specify `asc` or `desc`.
+        :return: list of :class:`Work <annict.models.Work>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -50,13 +61,16 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/episodes.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
         :param filter_ids: (optional) Filter results by IDs.
-        :param filter_work_id: (optional) Filter results by Work's ID.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param sort_sort_number: (optional) Sort by number for sorting. You can specify `asc` or `desc`.
-        :return: List of `Episode` objects.
+        :type filter_ids: list of int
+        :param int filter_work_id: (optional) Filter results by Work's ID.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :param str sort_sort_number: (optional) Sort by number for sorting. You can specify `asc` or `desc`.
+        :return: list of :class:`Episode <annict.models.Episode>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -78,16 +92,19 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/records.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
         :param filter_ids: (optional) Filter results by IDs.
-        :param filter_episode_id: (optional) Filter results by Episode's ID.
-        :param filter_has_record_comment: (optional) Filter the results by the presence or absence of comments.
-                                          If you specify `true`, only records with comments will be filtered.
-                                          Specifying `false` Filter records without comments.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param sort_likes_count: (optional) Sort the results by their number of likes. You can specify `asc` or `desc`.
-        :return: List of `Record` objects.
+        :type filter_ids: list of int
+        :param int filter_episode_id: (optional) Filter results by Episode's ID.
+        :param bool filter_has_record_comment: (optional) Filter the results by the presence or absence of comments.
+            If you specify `True`, only records with comments will be filtered.
+            Specifying `False` Filter records without comments.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :param str sort_likes_count: (optional) Sort the results by their number of likes. You can specify `asc` or `desc`.
+        :return: list of :class:`Record <annict.models.Record>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -109,12 +126,16 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/users.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
         :param filter_ids: (optional) Filter results by IDs.
+        :type filter_ids: list of int
         :param filter_usernames: (optional) Filter results by usernames.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :return: List of `User` objects.
+        :type filter_usernames: list of str
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return: list of :class:`User <annict.models.User>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -135,12 +156,14 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/following.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
-        :param filter_user_id: (optional) Filter results by User's ID.
-        :param filter_username: (optional) Filter results by username.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :return: List of `User` objects
+        :type fields: list of str
+        :param int filter_user_id: (optional) Filter results by User's ID.
+        :param str filter_username: (optional) Filter results by username.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return: list of :class:`User <annict.models.User>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -161,12 +184,14 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/followers.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
-        :param filter_user_id: (optional) Filter results by User's ID.
-        :param filter_username: (optional) Filter results by username.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :return: List of `User` objects
+        :type fields: list of str
+        :param int filter_user_id: (optional) Filter results by User's ID.
+        :param str filter_username: (optional) Filter results by username.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return: list of :class:`User <annict.models.User>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -187,12 +212,14 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/activities.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
-        :param filter_user_id: (optional) Filter results by User's ID.
-        :param filter_username: (optional) Filter results by username.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :return: List of `Activity` objects
+        :type fields: list of str
+        :param int filter_user_id: (optional) Filter results by User's ID.
+        :param str filter_username: (optional) Filter results by username.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return: list of :class:`Activity <annict.models.Activity>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -211,7 +238,9 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/me.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
-        :return: `User` object of your user information.
+        :type fields: list of str
+        :return: :class:`User <annict.models.User>` object of your user information.
+
         """
         api_method = APIMethod(
             api=self,
@@ -228,9 +257,9 @@ class API(object):
         """Set the status of the work.
 
         :reference: https://docs.annict.com/ja/api/v1/me-statuses.html
-        :param work_id: Work's ID
-        :param kind: Types of status.
-                     You can specify `wanna_watch`, `watching`, `watched`, `on_hold`, `stop_watching`, or `no_select`.
+        :param int work_id: Work's ID
+        :param str kind: Types of status.
+            You can specify `wanna_watch`, `watching`, `watched`, `on_hold`, `stop_watching`, or `no_select`.
         :return: Returns `True` if deletion succeeded.
 
         """
@@ -243,18 +272,16 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
-    def create_record(self, episode_id, comment=None, rating=None, share_twitter=None, share_facebook=None):
+    def create_record(self, episode_id, comment=None, rating=None, share_twitter=False, share_facebook=False):
         """Create a record to the episode.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
-        :param episode_id: Episode's ID
-        :param comment: (optional) Comment.
-        :param rating: (optional) Rating.
-        :param share_twitter: (optional) Whether to share the record on Twitter.
-                              You can enter true or false. If it is not specified, it will be false (not shared).
-        :param share_facebook: (optional) Whether to share the record on Facebook.
-                               You can enter true or false. If it is not specified, it will be false (not shared).
-        :return: `Record` object.
+        :param int episode_id: Episode's ID
+        :param str comment: (optional) Comment.
+        :param float rating: (optional) Rating.
+        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
+        :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
+        :return: :class:`Record <annict.models.Record>` object.
 
         """
         api_method = APIMethod(
@@ -267,18 +294,16 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
-    def edit_record(self, id_, comment=None, rating=None, share_twitter=None, share_facebook=None):
+    def edit_record(self, id_, comment=None, rating=None, share_twitter=False, share_facebook=False):
         """Edit the created record.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
-        :param id_: Record's ID.
-        :param comment: (optional) Comment.
-        :param rating: (optional) Rating.
-        :param share_twitter: (optional) Whether to share the record on Twitter.
-                              You can enter true or false. If it is not specified, it will be false (not shared).
-        :param share_facebook: (optional) Whether to share the record on Facebook.
-                               You can enter true or false. If it is not specified, it will be false (not shared).
-        :return: Episode object after update.
+        :param int id_: Record's ID.
+        :param str comment: (optional) Comment.
+        :param float rating: (optional) Rating.
+        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
+        :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
+        :return: :class:`Record <annict.models.Record>` object after update.
 
         """
         api_method = APIMethod(
@@ -296,7 +321,7 @@ class API(object):
         """Delete the created record.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
-        :param id_: Recode's ID
+        :param int id_: Recode's ID
         :return: Returns `True` if deletion succeeded.
 
         """
@@ -317,17 +342,22 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/me-works.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
         :param filter_ids: (optional) Filter results by IDs.
-        :param filter_season: (optional) Filter results by release time of season.
-        :param filter_title: (optional) Filter results by title.
-        :param filter_status: (optional) Filter results by status.
-                              You can specify `wanna_watch`, `watching`, `watched`, `on_hold`, `stop_watching`.
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param sort_season: (optional) Sort the results by their release time of season. You can specify `asc` or `desc`.
-        :param sort_watchers_count: (optional) Sort the results by their watchers count. You can specify `asc` or `desc`.
-        :return: List of `Work` objects.
+        :type filter_ids: list of int
+        :param str filter_season: (optional) Filter results by release time of season.
+        :param str filter_title: (optional) Filter results by title.
+        :param str filter_status: (optional) Filter results by status.
+            You can specify `wanna_watch`, `watching`, `watched`, `on_hold`, `stop_watching`.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :param str sort_season: (optional) Sort the results by their release time of season.
+            You can specify `asc` or `desc`.
+        :param str sort_watchers_count: (optional) Sort the results by their watchers count.
+            You can specify `asc` or `desc`.
+        :return: list of :class:`Work <annict.models.Work>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -351,18 +381,27 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/me-programs.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
         :param filter_ids: (optional) Filter results by IDs.
-        :param filter_channel_ids: (optional) 
-        :param filter_work_ids: (optional) 
-        :param filter_started_at_gt: (optional) 
-        :param filter_started_at_lt: (optional) 
-        :param filter_unwatched: (optional) 
-        :param filter_rebroadcast: (optional) 
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param sort_started_at: (optional) 
-        :return: List of `Program` objects.
+        :type filter_ids: list of int
+        :param filter_channel_ids: (optional) Filter results by Channel IDs.
+        :type filter_channel_ids: list of int
+        :param filter_work_ids: (optional) Filter results by Work IDs.
+        :type filter_work_ids: list of int
+        :param datetime filter_started_at_gt: (optional) Filter results results to those with the broadcast start date and
+            time after the specified date and time.
+        :param datetime filter_started_at_lt: (optional) Filter results results to those with the broadcast start date and
+            time before the specified date and time.
+        :param bool filter_unwatched: (optional) Only get unwatched broadcast schedules.
+        :param bool filter_rebroadcast: (optional) Filter the broadcast schedule based on the rebroadcast flag.
+            If you pass `True`, only rebroadcasting,
+            passing `False` will get broadcast schedules other than rebroadcast.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :param str sort_started_at: (optional) 
+        :return: list of :class:`Program <annict.models.Program>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
@@ -385,12 +424,16 @@ class API(object):
 
         :reference: https://docs.annict.com/ja/api/v1/me-following-activities.html
         :param fields: (optional) Narrow down the fields of data contained in the response body.
-        :param filter_actions: (optional) 
-        :param filter_muted: (optional) 
-        :param page: (optional) Specify the number of pages.
-        :param per_page: (optional) Specify how many items to acquire per page.
-        :param sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :return: List of `Activity` objects.
+        :type fields: list of str
+        :param str filter_actions: (optional) Filter results by action
+            (`create_record`|`create_multiple_records`|`create_status`). 
+        :param bool filter_muted: (optional) Specify whether to exclude muted users with the mute function.
+            You can exclude with `True` and not exclude with `False`. The default is `True` (exclude).
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return: list of :class:`Activity <annict.models.Activity>` objects.
+        :rtype: annict.models.ResultSet
 
         """
         api_method = APIMethod(
