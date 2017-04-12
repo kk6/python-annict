@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import abc
-from operator import methodcaller
 
 import arrow
 
@@ -30,8 +29,8 @@ class Model(metaclass=abc.ABCMeta):
 
     @classmethod
     def parse_list(cls, api, json, payload_type):
-        """
-        
+        """Parse JSON objects into list of model instances.
+
         :param api: instance of :class:`API <annict.api.API>` .
         :type api: annict.api.API
         :param dict json: JSON from Annict API.
@@ -65,7 +64,7 @@ class User(Model):
     @classmethod
     def parse(cls, api, json):
         """Parse a JSON object into a model instance.
-        
+
         :param api: instance of :class:`API <annict.api.API>` .
         :type api: annict.api.API
         :param dict json: JSON from Annict API.
@@ -118,7 +117,7 @@ class Work(Model):
 
     def set_status(self, kind):
         """Set the status of the work.
-        
+
         :param str kind: Types of status.
             You can specify `wanna_watch`, `watching`, `watched`, `on_hold`, `stop_watching`, or `no_select`.
         :return: Returns `True` if deletion succeeded.
@@ -131,7 +130,7 @@ class Work(Model):
 
     def get_episode(self, number):
         """Get Episode object
-        
+
         :param number: Episode number
         :return: :class:`Episode <Episode>` object
         :rtype: Episode
@@ -182,11 +181,13 @@ class Episode(Model):
 
     def create_record(self, comment=None, rating=None, share_twitter=False, share_facebook=False):
         """Create a record for this episode.
-        
+
         :param str comment: (optional) Comment.
         :param float rating: (optional) Rating.
-        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
-        :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
+        :param bool share_twitter: (optional) Whether to share the record on Twitter.
+            You can enter `True` or `False`.
+        :param bool share_facebook: (optional) Whether to share the record on Facebook.
+            You can enter `True` or `False`.
         :return: :class:`Record <annict.models.Record>` object.
         """
         return self._api.create_record(self.id, comment, rating, share_twitter, share_facebook)
@@ -229,11 +230,13 @@ class Record(Model):
 
     def edit(self, comment=None, rating=None, share_twitter=False, share_facebook=False):
         """Edit the created record.
-        
+
         :param str comment: (optional) Comment.
         :param float rating: (optional) Rating.
-        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
-        :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
+        :param bool share_twitter: (optional) Whether to share the record on Twitter.
+            You can enter `True` or `False`.
+        :param bool share_facebook: (optional) Whether to share the record on Facebook.
+            You can enter `True` or `False`.
         :return: :class:`Record <annict.models.Record>` object after edit.
 
         """

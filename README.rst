@@ -1,7 +1,7 @@
 python-annict
 =============
 
-Annict API wrapper for Python
+`Annict API <https://docs.annict.com/ja/api/>`__ wrapper for Python
 
 |CircleCI| |PyPI|
 

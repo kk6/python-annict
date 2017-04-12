@@ -6,7 +6,17 @@ from .utils import stringify
 
 
 class APIMethod(object):
+    """A class abstracting each method of AnnictAPI
 
+    :param api: instance of :class:`API <annict.api.API>` .
+    :type api: annict.api.API
+    :param str path: Endpoint path
+    :param str method: HTTP Method
+    :param tuple allowed_params: (optional) List of request parameter names that can be sent.
+    :param str payload_type: Type of payload
+    :param bool payload_list: Specifies whether the payload is a list or not.
+
+    """
     def __init__(self, api, path, method, allowed_params=None, payload_type=None, payload_list=False):
         self.api = api
         self.path = path
@@ -17,9 +27,9 @@ class APIMethod(object):
 
     def build_path(self, id_=None):
         """Build an suitable path
-        
+
         If `id_` is given, it is embedded into path.
-        
+
         :param int id_: Target resource ID
 
         """
@@ -28,7 +38,7 @@ class APIMethod(object):
 
     def build_url(self):
         """Build request url
-        
+
         :return: request url
         :rtype: str
 
@@ -39,7 +49,7 @@ class APIMethod(object):
 
     def build_parameters(self, dic):
         """Build a suitable parameters for request.
-        
+
         It filters the given dictionary based on `self.allowed_params` and returns a dictionary with
         an additional access token.
 

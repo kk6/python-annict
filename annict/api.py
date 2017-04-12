@@ -5,14 +5,14 @@ from .parsers import ModelParser
 
 class API(object):
     """API wrapper for Annict.
-    
+
     Basic Usage::
-    
+
         >>> from annict.api import API
         >>> api = API('your-access-token')
         >>> api.me()
         <User:1229:あしやひろ:@kk6>
-    
+
     """
     def __init__(self, token, base_url='https://api.annict.com', api_version='v1', parser=ModelParser):
         self.token = token
@@ -35,8 +35,10 @@ class API(object):
         :param int page: (optional) Specify the number of pages.
         :param int per_page: (optional) Specify how many items to acquire per page.
         :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param str sort_season: (optional) Sort the results by their release time of season. You can specify `asc` or `desc`.
-        :param str sort_watchers_count: (optional) Sort the results by their watchers count. You can specify `asc` or `desc`.
+        :param str sort_season: (optional) Sort the results by their release time of season.
+            You can specify `asc` or `desc`.
+        :param str sort_watchers_count: (optional) Sort the results by their watchers count.
+            You can specify `asc` or `desc`.
         :return: list of :class:`Work <annict.models.Work>` objects.
         :rtype: annict.models.ResultSet
 
@@ -102,7 +104,8 @@ class API(object):
         :param int page: (optional) Specify the number of pages.
         :param int per_page: (optional) Specify how many items to acquire per page.
         :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param str sort_likes_count: (optional) Sort the results by their number of likes. You can specify `asc` or `desc`.
+        :param str sort_likes_count: (optional) Sort the results by their number of likes.
+            You can specify `asc` or `desc`.
         :return: list of :class:`Record <annict.models.Record>` objects.
         :rtype: annict.models.ResultSet
 
@@ -253,7 +256,6 @@ class API(object):
         return api_method(params)
 
     def set_status(self, work_id, kind):
-
         """Set the status of the work.
 
         :reference: https://docs.annict.com/ja/api/v1/me-statuses.html
@@ -279,7 +281,7 @@ class API(object):
         :param int episode_id: Episode's ID
         :param str comment: (optional) Comment.
         :param float rating: (optional) Rating.
-        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
+        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`.
         :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
         :return: :class:`Record <annict.models.Record>` object.
 
@@ -301,7 +303,7 @@ class API(object):
         :param int id_: Record's ID.
         :param str comment: (optional) Comment.
         :param float rating: (optional) Rating.
-        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`. 
+        :param bool share_twitter: (optional) Whether to share the record on Twitter. You can enter `True` or `False`.
         :param bool share_facebook: (optional) Whether to share the record on Facebook. You can enter `True` or `False`.
         :return: :class:`Record <annict.models.Record>` object after update.
 
@@ -388,10 +390,10 @@ class API(object):
         :type filter_channel_ids: list of int
         :param filter_work_ids: (optional) Filter results by Work IDs.
         :type filter_work_ids: list of int
-        :param datetime filter_started_at_gt: (optional) Filter results results to those with the broadcast start date and
-            time after the specified date and time.
-        :param datetime filter_started_at_lt: (optional) Filter results results to those with the broadcast start date and
-            time before the specified date and time.
+        :param datetime filter_started_at_gt: (optional) Filter results results to those with the broadcast start date
+            and time after the specified date and time.
+        :param datetime filter_started_at_lt: (optional) Filter results results to those with the broadcast start date
+            and time before the specified date and time.
         :param bool filter_unwatched: (optional) Only get unwatched broadcast schedules.
         :param bool filter_rebroadcast: (optional) Filter the broadcast schedule based on the rebroadcast flag.
             If you pass `True`, only rebroadcasting,
@@ -399,7 +401,7 @@ class API(object):
         :param int page: (optional) Specify the number of pages.
         :param int per_page: (optional) Specify how many items to acquire per page.
         :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
-        :param str sort_started_at: (optional) 
+        :param str sort_started_at: (optional) Sort the results by started_at.
         :return: list of :class:`Program <annict.models.Program>` objects.
         :rtype: annict.models.ResultSet
 
@@ -426,7 +428,7 @@ class API(object):
         :param fields: (optional) Narrow down the fields of data contained in the response body.
         :type fields: list of str
         :param str filter_actions: (optional) Filter results by action
-            (`create_record`|`create_multiple_records`|`create_status`). 
+            (create_record|create_multiple_records|create_status).
         :param bool filter_muted: (optional) Specify whether to exclude muted users with the mute function.
             You can exclude with `True` and not exclude with `False`. The default is `True` (exclude).
         :param int page: (optional) Specify the number of pages.
