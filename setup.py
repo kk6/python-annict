@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import re
 from setuptools import setup, find_packages
 
-from annict import __version__
+with open('annict/__init__.py', 'r') as f:
+    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
+                        f.read(), re.MULTILINE).group(1)
 
 with open('README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
@@ -10,7 +13,7 @@ tests_require = ['pytest',]
 
 setup(
     name='annict',
-    version=__version__,
+    version=version,
     description='Annict API for Python',
     long_description=readme,
     license="MIT",
