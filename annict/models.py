@@ -81,6 +81,34 @@ class User(Model):
                 setattr(user, k, v)
         return user
 
+    def following(self, fields=None, page=None, per_page=None, sort_id=None):
+        """Get following information of this user.
+
+        :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return: list of :class:`User <annict.models.User>` objects.
+        :rtype: annict.models.ResultSet
+
+        """
+        return self._api.following(fields=fields, filter_user_id=self.id, page=page, per_page=per_page, sort_id=sort_id)
+
+    def followers(self, fields=None, page=None, per_page=None, sort_id=None):
+        """Get following information of this user.
+
+        :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return: list of :class:`User <annict.models.User>` objects.
+        :rtype: annict.models.ResultSet
+
+        """
+        return self._api.followers(fields=fields, filter_user_id=self.id, page=page, per_page=per_page, sort_id=sort_id)
+
 
 class Work(Model):
     """Work information model"""
