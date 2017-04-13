@@ -2,6 +2,8 @@
 import datetime
 from urllib.parse import urlparse, parse_qs
 
+import pytest
+
 import responses
 from arrow import arrow
 
@@ -442,6 +444,34 @@ class TestWorkModel:
         r = urlparse(responses.calls[0].request.url)
         assert r.path == '/v1/me/statuses'
         assert parse_qs(r.query) == {'work_id': ['1'], 'kind': ['watching'], 'access_token': ['dummy_token']}
+
+    @pytest.mark.parametrize("episodes,numbers,expected", [
+        (['#1', '#2', '#3', '#4', '#5'], (2, 4), ['#2', '#4']),
+        (['#1', '#2', '#3', '#4', '#5'], (-4, -2), ['#1', '#3']),
+        pytest.mark.raises((['#1'], (2,), None), exception=IndexError),
+
+    ])
+    def test_select_episodes(self, api_factory, episodes, numbers, expected):
+        from annict.models import Work
+        api = api_factory.create()
+        work = Work.parse(api, {})
+        work._episodes = episodes
+        result = work.select_episodes(*numbers)
+        assert result == expected
+
+    @pytest.mark.parametrize("episodes,number,expected", [
+        (['#1', '#2', '#3', '#4', '#5'], 2, '#2'),
+        (['#1', '#2', '#3', '#4', '#5'], -2, '#3'),
+        pytest.mark.raises((['#1'], 2, None), exception=IndexError),
+
+    ])
+    def test_get_episode(self, api_factory, episodes, number, expected):
+        from annict.models import Work
+        api = api_factory.create()
+        work = Work.parse(api, {})
+        work._episodes = episodes
+        result = work.get_episode(number)
+        assert result == expected
 
 
 class TestUserModel:

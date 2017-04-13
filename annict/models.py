@@ -115,6 +115,7 @@ class Work(Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._episodes = None
 
     def __repr__(self):
         return f'<Work:{self.id}:{self.title}>'
@@ -153,8 +154,19 @@ class Work(Model):
         """
         return self._api.set_status(self.id, kind)
 
-    def request_episode_list(self):
-        self._children = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
+    def select_episodes(self, *numbers):
+        """Select multiple episodes
+        
+        :param numbers: Episode number.
+        :return: list of :class:`Episode <Episode>`
+        :rtype: list of :class:`Episode <Episode>`
+        
+        """
+        if not self._episodes:
+            self._episodes = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
+        if not numbers:
+            return self._episodes
+        return [self._episodes[n - 1] for n in numbers]
 
     def get_episode(self, number):
         """Get Episode object
@@ -164,12 +176,7 @@ class Work(Model):
         :rtype: Episode
 
         """
-        return self._children[number - 1]
-
-    def select_episodes(self, *numbers):
-        if not numbers:
-            return self._children
-        return [self._children[n - 1] for n in numbers]
+        return self.select_episodes(number)[0]
 
 
 class Episode(Model):

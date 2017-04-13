@@ -9,7 +9,7 @@ with open('annict/__init__.py', 'r') as f:
 with open('README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
-tests_require = ['pytest',]
+tests_require = ['pytest', 'pytest-raises', 'responses']
 
 setup(
     name='annict',
@@ -27,7 +27,7 @@ setup(
         'furl>=1.0.0',
         'arrow>=0.10.0',
     ],
-    setup_requires=['pytest-runner',],
+    setup_requires=['pytest-runner', ],
     tests_require=tests_require,
     extras_require={'testing': tests_require},
     classifiers=[
