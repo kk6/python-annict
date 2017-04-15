@@ -87,8 +87,7 @@ documentation <https://requests-cache.readthedocs.io/en/latest/>`__
 Documentation
 -------------
 
--  `This library's
-   documentation <https://kk6.github.io/python-annict/>`__
+-  `This library's documentation <https://pythonhosted.org/annict/>`__
 -  `Annict Docs(Japanese) <https://docs.annict.com/ja/>`__
 
 .. |CircleCI| image:: https://img.shields.io/circleci/project/kk6/python-annict.svg?style=flat-square

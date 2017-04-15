@@ -75,5 +75,5 @@ For more information: [Requests-cache documentation](https://requests-cache.read
 
 ## Documentation
 
-- [This library's documentation](https://kk6.github.io/python-annict/)
+- [This library's documentation](https://pythonhosted.org/annict/)
 - [Annict Docs(Japanese)](https://docs.annict.com/ja/)
