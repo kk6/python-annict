@@ -154,6 +154,28 @@ class Work(Model):
         """
         return self._api.set_status(self.id, kind)
 
+    def episodes(self, fields=None, filter_ids=None,
+                 page=None, per_page=None,
+                 sort_id=None, sort_sort_number=None):
+        """Get episodes information
+
+        :reference: https://docs.annict.com/ja/api/v1/episodes.html
+        :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
+        :param filter_ids: (optional) Filter results by IDs.
+        :type filter_ids: list of int
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :param str sort_sort_number: (optional) Sort by number for sorting. You can specify `asc` or `desc`.
+        :return: list of :class:`Episode <annict.models.Episode>` objects.
+        :rtype: annict.models.ResultSet
+
+        """
+        return self._api.episodes(fields=fields, filter_ids=filter_ids, filter_work_id=self.id,
+                                  page=page, per_page=per_page,
+                                  sort_id=sort_id, sort_sort_number=sort_sort_number)
+
     def select_episodes(self, *numbers):
         """Select multiple episodes
         
@@ -163,7 +185,7 @@ class Work(Model):
         
         """
         if not self._episodes:
-            self._episodes = self._api.episodes(filter_work_id=self.id, sort_sort_number='asc')
+            self._episodes = self.episodes(sort_sort_number='asc')
         if not numbers:
             return self._episodes
         return [self._episodes[n - 1] for n in numbers]
