@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 import datetime
+from urllib.parse import urlparse, parse_qs
+
+import pytest
+
+import responses
 from arrow import arrow
 
 tzutc = arrow.dateutil_tz.tzutc
@@ -423,3 +428,142 @@ class TestRepr:
         activity = Activity.parse(None, json)
         assert activity.__repr__() == '<Activity:create_status:@kk6>'
         assert activity.status == {'kind': 'watching'}
+
+
+class TestWorkModel:
+
+    @responses.activate
+    def test_set_status(self, api_factory):
+        from annict.models import Work
+        responses.add(responses.POST, 'https://api.annict.com/v1/me/statuses',
+                      body=None, status=204)
+        api = api_factory.create()
+        work = Work.parse(api, {'id': 1})
+        result = work.set_status('watching')
+        assert result
+        r = urlparse(responses.calls[0].request.url)
+        assert r.path == '/v1/me/statuses'
+        assert parse_qs(r.query) == {'work_id': ['1'], 'kind': ['watching'], 'access_token': ['dummy_token']}
+
+    @pytest.mark.parametrize("episodes,numbers,expected", [
+        (['#1', '#2', '#3', '#4', '#5'], (2, 4), ['#2', '#4']),
+        (['#1', '#2', '#3', '#4', '#5'], (-4, -2), ['#1', '#3']),
+        pytest.mark.raises((['#1'], (2,), None), exception=IndexError),
+
+    ])
+    def test_select_episodes(self, api_factory, episodes, numbers, expected):
+        from annict.models import Work
+        api = api_factory.create()
+        work = Work.parse(api, {})
+        work._episodes = episodes
+        result = work.select_episodes(*numbers)
+        assert result == expected
+
+    @pytest.mark.parametrize("episodes,number,expected", [
+        (['#1', '#2', '#3', '#4', '#5'], 2, '#2'),
+        (['#1', '#2', '#3', '#4', '#5'], -2, '#3'),
+        pytest.mark.raises((['#1'], 2, None), exception=IndexError),
+
+    ])
+    def test_get_episode(self, api_factory, episodes, number, expected):
+        from annict.models import Work
+        api = api_factory.create()
+        work = Work.parse(api, {})
+        work._episodes = episodes
+        result = work.get_episode(number)
+        assert result == expected
+
+
+class TestUserModel:
+
+    @responses.activate
+    def test_following(self, api_factory):
+        from annict.models import User
+        json = """
+            {
+              "users": [
+                {
+                  "id": 3,
+                  "username": "builtlast",
+                  "name": "岩永勇輝 (Creasty)",
+                  "description": "Web やってる大学生\\nプログラミングとかデザインとか\\n価値を生み出せるようになりたい\\n\\nアルバイト@FICC\\n\\nC / Obj-C / Ruby / Haskell / PHP / CoffeeScript / VimScript / Photoshop / Illustrator",
+                  "url": null,
+                  "avatar_url": "https://api-assets.annict.com/paperclip/profiles/2/tombo_avatars/master/cc301ca5c5e13399144c79daa4e4727b783676de.jpg?1428129519",
+                  "background_image_url": "https://api-assets.annict.com/paperclip/profiles/2/tombo_avatars/master/cc301ca5c5e13399144c79daa4e4727b783676de.jpg?1428129519",
+                  "records_count": 0,
+                  "created_at": "2014-03-04T09:32:25.000Z"
+                },
+                {
+                  "id": 4,
+                  "username": "pataiji",
+                  "name": "PATAIJI",
+                  "description": "FICC inc.ベースやってます。カブに乗ってます。AWSすごい良い。Railsすごい楽。",
+                  "url": null,
+                  "avatar_url": "https://api-assets.annict.com/paperclip/profiles/3/tombo_avatars/master/33ce537a4cf38f71b509f295f2afa3291c281dcf.jpg?1428129521",
+                  "background_image_url": "https://api-assets.annict.com/paperclip/profiles/3/tombo_avatars/master/33ce537a4cf38f71b509f295f2afa3291c281dcf.jpg?1428129521",
+                  "records_count": 0,
+                  "created_at": "2014-03-04T09:32:28.000Z"
+                }
+              ],
+              "total_count": 274,
+              "next_page": 2,
+              "prev_page": null
+            }
+        """
+        responses.add(responses.GET, 'https://api.annict.com/v1/following',
+                      body=json, status=200,
+                      content_type='application/json')
+        api = api_factory.create()
+        user = User.parse(api, {'id': 1})
+        results = user.following()
+        assert results[0].username == 'builtlast'
+        assert results[1].username == 'pataiji'
+        r = urlparse(responses.calls[0].request.url)
+        assert r.path == '/v1/following'
+        assert parse_qs(r.query) == {'filter_user_id': ['1'], 'access_token': ['dummy_token']}
+
+    @responses.activate
+    def test_followers(self, api_factory):
+        from annict.models import User
+        json = """
+            {
+              "users": [
+                {
+                  "id": 7,
+                  "username": "akirafukuoka",
+                  "name": "akirafukuoka",
+                  "description": "FICC inc. http://www.ficc.jp  クリエイティブディレクター。RAW-Fi http://raw-fi.com  @raw_fi もよろしくお願いします。",
+                  "url": null,
+                  "avatar_url": "https://api-assets.annict.com/paperclip/profiles/6/tombo_avatars/master/480862747fc5f7152a031e24f0c0374dc71c539a.jpg?1431596794",
+                  "background_image_url": "https://api-assets.annict.com/paperclip/profiles/6/tombo_background_images/master/7e258e0189e9ee38f4dc0c57b2c9f6b39dd2cd95.jpg?1431596795",
+                  "records_count": 260,
+                  "created_at": "2014-03-10T04:11:54.000Z"
+                },
+                {
+                  "id": 8,
+                  "username": "310u8",
+                  "name": "Daisuke Nagai",
+                  "description": "歌って踊れるWebデザイナーです",
+                  "url": null,
+                  "avatar_url": "https://api-assets.annict.com/paperclip/profiles/7/tombo_avatars/master/cd7b66919fea1952e63855632665812839e2a394.jpg?1428129527",
+                  "background_image_url": "https://api-assets.annict.com/paperclip/profiles/7/tombo_avatars/master/cd7b66919fea1952e63855632665812839e2a394.jpg?1428129527",
+                  "records_count": 739,
+                  "created_at": "2014-03-10T04:11:55.000Z"
+                }
+              ],
+              "total_count": 191,
+              "next_page": 2,
+              "prev_page": null
+            }
+        """
+        responses.add(responses.GET, 'https://api.annict.com/v1/followers',
+                      body=json, status=200,
+                      content_type='application/json')
+        api = api_factory.create()
+        user = User.parse(api, {'id': 1})
+        results = user.followers()
+        assert results[0].username == 'akirafukuoka'
+        assert results[1].username == '310u8'
+        r = urlparse(responses.calls[0].request.url)
+        assert r.path == '/v1/followers'
+        assert parse_qs(r.query) == {'filter_user_id': ['1'], 'access_token': ['dummy_token']}

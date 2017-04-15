@@ -13,4 +13,4 @@ __version__ = '0.6.0'
 __author__ = 'Hiro Ashiya'
 __license__ = 'MIT'
 
-from .api import API
+from .api import API  # noqa

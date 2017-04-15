@@ -1,7 +1,7 @@
 python-annict
 =============
 
-Annict API wrapper for Python
+`Annict API <https://docs.annict.com/ja/api/>`__ wrapper for Python
 
 |CircleCI| |PyPI|
 
@@ -83,6 +83,13 @@ Install with pip.
 
 For more information: `Requests-cache
 documentation <https://requests-cache.readthedocs.io/en/latest/>`__
+
+Documentation
+-------------
+
+-  `This library's
+   documentation <https://kk6.github.io/python-annict/>`__
+-  `Annict Docs(Japanese) <https://docs.annict.com/ja/>`__
 
 .. |CircleCI| image:: https://img.shields.io/circleci/project/kk6/python-annict.svg?style=flat-square
    :target: https://circleci.com/gh/kk6/python-annict
