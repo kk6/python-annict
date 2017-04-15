@@ -72,3 +72,8 @@ $ pip insall requests_cache
 ```
 
 For more information: [Requests-cache documentation](https://requests-cache.readthedocs.io/en/latest/) 
+
+## Documentation
+
+- [This library's documentation](https://kk6.github.io/python-annict/)
+- [Annict Docs(Japanese)](https://docs.annict.com/ja/)
