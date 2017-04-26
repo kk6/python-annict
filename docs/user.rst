@@ -9,7 +9,7 @@ Installation
 
 From PyPI with the Python package manager::
 
-   pip install Annict
+   pip install annict
 
 
 
