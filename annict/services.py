@@ -69,7 +69,7 @@ class APIMethod(object):
         resp.raise_for_status()
 
         if resp.status_code == 200:
-            return self.api.parser.parse(resp.json(), self.payload_type, self.payload_list)
+            return self.api.parser.parse(resp, self.payload_type, self.payload_list)
         elif resp.status_code == 204:
             return True
         else:
