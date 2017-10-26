@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 
-def pytest_funcarg__api_factory(request):
+@pytest.fixture
+def api_factory():
     class APIFactory:
         def create(self, token='dummy_token'):
             from annict.api import API
