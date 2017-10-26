@@ -10,16 +10,14 @@ jobs:
          name: Setup
          command: python setup.py install
       - run:
+         name: Install pipenv
+         command: pip install pipenv
+      - run:
           name: Install Dependencies
-          command: pip install -r requirements.txt
+          command: pipenv install -d
       - run:
           name: Remove .pyc files
           command: find . -name \*.pyc -delete
       - run:
           name: Run Tests
-          command: pytest tests --cov-report html:test-reports/coverage --cov annict -vv
-      - store_artifacts:
-          path: test-reports/coverage
-          destination: reports
-      - store_test_results:
-          path: "test-reports/"
+          command: pipenv run pytest tests --cov-report html:test-reports/coverage --cov annict -vv
