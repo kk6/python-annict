@@ -1,0 +1,28 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+pytest = "*"
+pytest-cov = "*"
+"pytest-flake8" = "*"
+pytest-raises = "*"
+responses = "*"
+
+
+[packages]
+
+rauth = "*"
+requests = "*"
+requests-cache = "*"
+furl = "*"
+arrow = "*"
+
+
+[requires]
+
+python_version = "3.6"
