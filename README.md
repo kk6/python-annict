@@ -1,4 +1,5 @@
 # python-annict
+
 [Annict API](https://docs.annict.com/ja/api/) wrapper for Python
 
 [![CircleCI](https://img.shields.io/circleci/project/kk6/python-annict.svg?style=flat-square)](https://circleci.com/gh/kk6/python-annict)
@@ -9,7 +10,7 @@
 ## Installation
 
 ```bash
-$ pip install annict
+pip install annict
 ```
 
 ## Quickstart
@@ -57,8 +58,9 @@ So I introduce a cache plugin for *requests* library called [requests_cache](htt
 Install with pip.
 
 ```bash
-$ pip insall requests_cache
+pip insall requests_cache
 ```
+
 *requests_cache* is very easy to use.
 
 ```python
