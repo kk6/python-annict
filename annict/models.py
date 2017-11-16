@@ -178,11 +178,11 @@ class Work(Model):
 
     def select_episodes(self, *numbers):
         """Select multiple episodes
-        
+
         :param numbers: Episode number.
         :return: list of :class:`Episode <Episode>`
         :rtype: list of :class:`Episode <Episode>`
-        
+
         """
         if not self._episodes:
             self._episodes = self.episodes(sort_sort_number='asc')

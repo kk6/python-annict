@@ -41,4 +41,3 @@ setup(
         "Topic :: Software Development :: Libraries"
     ],
 )
-
