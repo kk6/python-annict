@@ -51,7 +51,7 @@ class API(object):
                             'page', 'per_page',
                             'sort_id', 'sort_season', 'sort_watchers_count'),
             payload_type='work',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -82,7 +82,7 @@ class API(object):
             allowed_params=('fields', 'filter_ids', 'filter_work_id',
                             'page', 'per_page', 'sort_id', 'sort_sort_number'),
             payload_type='episode',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -117,7 +117,7 @@ class API(object):
             allowed_params=('fields', 'filter_ids', 'filter_episode_id', 'filter_has_record_comment',
                             'page', 'per_page', 'sort_id', 'sort_likes_count'),
             payload_type='record',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -147,7 +147,7 @@ class API(object):
             method='GET',
             allowed_params=('fields', 'filter_ids', 'filter_usernames', 'page', 'per_page', 'sort_id'),
             payload_type='user',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -175,7 +175,7 @@ class API(object):
             method='GET',
             allowed_params=('fields', 'filter_user_id', 'filter_username', 'page', 'per_page', 'sort_id'),
             payload_type='user',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -203,7 +203,7 @@ class API(object):
             method='GET',
             allowed_params=('fields', 'filter_user_id', 'filter_username', 'page', 'per_page', 'sort_id'),
             payload_type='user',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -231,7 +231,7 @@ class API(object):
             method='GET',
             allowed_params=('fields', 'filter_user_id', 'filter_username', 'page', 'per_page', 'sort_id'),
             payload_type='activity',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -369,7 +369,7 @@ class API(object):
             allowed_params=('fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
                             'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count'),
             payload_type='work',
-            payload_list=True,
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -414,7 +414,7 @@ class API(object):
                             'filter_started_at_lt', 'filter_unwatched', 'filter_rebroadcast',
                             'page', 'per_page', 'sort_id', 'sort_started_at'),
             payload_type='program',
-            payload_list=True
+            payload_is_list=True
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -444,7 +444,7 @@ class API(object):
             method='GET',
             allowed_params=('fields', 'filter_actions', 'filter_muted', 'page', 'per_page', 'sort_id'),
             payload_type='activity',
-            payload_list=True
+            payload_is_list=True
         )
         params = api_method.build_parameters(locals())
         return api_method(params)

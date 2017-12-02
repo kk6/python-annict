@@ -25,5 +25,5 @@ def test_called_parse_list():
     model_mapping = {'model': DummyModel}
     parser = ModelParser('api', model_mapping)
     json = {'total_count': 100}
-    r = parser.parse(json, 'model', payload_list=True)
+    r = parser.parse(json, 'model', payload_is_list=True)
     assert r == 'Model.parse_list is called.'

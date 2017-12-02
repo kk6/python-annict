@@ -17,13 +17,13 @@ class APIMethod(object):
     :param bool payload_list: Specifies whether the payload is a list or not.
 
     """
-    def __init__(self, api, path, method, allowed_params=None, payload_type=None, payload_list=False):
+    def __init__(self, api, path, method, allowed_params=None, payload_type=None, payload_is_list=False):
         self.api = api
         self.path = path
         self.method = method
         self.allowed_params = allowed_params
         self.payload_type = payload_type
-        self.payload_list = payload_list
+        self.payload_is_list = payload_is_list
 
     def build_path(self, id_=None):
         """Build an suitable path
@@ -69,7 +69,7 @@ class APIMethod(object):
         resp.raise_for_status()
 
         if resp.status_code == 200:
-            return self.api.parser.parse(resp.json(), self.payload_type, self.payload_list)
+            return self.api.parser.parse(resp.json(), self.payload_type, self.payload_is_list)
         elif resp.status_code == 204:
             return True
         else:
