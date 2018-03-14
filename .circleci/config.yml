@@ -20,9 +20,9 @@ jobs:
           command: find . -name \*.pyc -delete
       - run:
           name: Run Tests
-          command: pipenv run pytest tests --junit-xml=test-results/pytest.xml --cov-report html:test-reports/coverage --cov annict -vv
+          command: pipenv run pytest tests --junit-xml=test-reports/pytest.xml --cov-report html:test-reports/coverage --cov annict -vv
       - store_test_results:
-          path: test-results
+          path: test-reports
       - store_artifacts:
           path: test-reports
           destination: test-reports
