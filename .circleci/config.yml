@@ -21,3 +21,7 @@ jobs:
       - run:
           name: Run Tests
           command: pipenv run pytest tests --cov-report html:test-reports/coverage --cov annict -vv
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+
