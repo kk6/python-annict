@@ -30,5 +30,6 @@ python_version = "3.6"
 
 
 [scripts]
-test = "pipenv run pytest tests --cov-report html:test-reports/coverage --cov annict -vv"
-
+test = "pipenv run pytest tests"
+cov = "pipenv run test --cov-report html:test-reports/coverage --cov annict -vv"
+ci = "pipenv run cov --junit-xml=test-reports/pytest.xml"
