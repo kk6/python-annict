@@ -27,3 +27,8 @@ arrow = "*"
 [requires]
 
 python_version = "3.6"
+
+
+[scripts]
+test = "pipenv run pytest tests --cov-report html:test-reports/coverage --cov annict -vv"
+
