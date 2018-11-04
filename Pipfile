@@ -1,12 +1,9 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
-
 pytest = "*"
 pytest-cov = "*"
 "pytest-flake8" = "*"
@@ -14,22 +11,18 @@ pytest-raises = "*"
 responses = "*"
 pytest-runner = "*"
 
-
 [packages]
-
 rauth = "*"
 requests = "*"
 requests-cache = "*"
 furl = "*"
 arrow = "*"
-
+pytest = "*"
 
 [requires]
-
-python_version = "3.6"
-
+python_version = "3.7"
 
 [scripts]
-test = "pipenv run pytest tests"
+test = "pytest tests"
 cov = "pipenv run test --cov-report html:test-reports/coverage --cov annict -vv"
 ci = "pipenv run cov --junit-xml=test-reports/pytest.xml"
