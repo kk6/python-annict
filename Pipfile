@@ -18,6 +18,8 @@ requests-cache = "*"
 furl = "*"
 arrow = "*"
 pytest = "*"
+pytest-raises = "*"
+responses = "*"
 
 [requires]
 python_version = "3.7"
