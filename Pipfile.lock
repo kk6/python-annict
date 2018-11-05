@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3d1104f5a4bc70b6df008226984217b03147cbada1030d32466166b79069b522"
+            "sha256": "cf33212e46465d41bb557d2bd8b0c59267d2ec7ebd441cfb885fc4c84fc182f0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -97,18 +97,11 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:a9e5e8d7ab9d5b0747f37740276eb362e6a76275d76cebbb52c6049d93b475db",
-                "sha256:bf47e8ed20d03764f963f0070ff1c8fda6e2671fc5dd562a4d3b7148ad60f5ca"
+                "sha256:630ff1dbe04f469ee78faa5660f712e58b953da7df22ea5d828c9012e134da43",
+                "sha256:a2b5232735dd0b736cbea9c0f09e5070d78fcaba2823a4f6f09d9a81bd19415c"
             ],
             "index": "pypi",
-            "version": "==3.9.3"
-        },
-        "pytest-raises": {
-            "hashes": [
-                "sha256:6844e7b85e44bd383911844ed004b38b9c5a6cb2c56641af8fdc8dad322e4141"
-            ],
-            "index": "pypi",
-            "version": "==0.9"
+            "version": "==3.10.0"
         },
         "python-dateutil": {
             "hashes": [
@@ -290,11 +283,11 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:a9e5e8d7ab9d5b0747f37740276eb362e6a76275d76cebbb52c6049d93b475db",
-                "sha256:bf47e8ed20d03764f963f0070ff1c8fda6e2671fc5dd562a4d3b7148ad60f5ca"
+                "sha256:630ff1dbe04f469ee78faa5660f712e58b953da7df22ea5d828c9012e134da43",
+                "sha256:a2b5232735dd0b736cbea9c0f09e5070d78fcaba2823a4f6f09d9a81bd19415c"
             ],
             "index": "pypi",
-            "version": "==3.9.3"
+            "version": "==3.10.0"
         },
         "pytest-cov": {
             "hashes": [
@@ -311,13 +304,6 @@
             ],
             "index": "pypi",
             "version": "==1.0.2"
-        },
-        "pytest-raises": {
-            "hashes": [
-                "sha256:6844e7b85e44bd383911844ed004b38b9c5a6cb2c56641af8fdc8dad322e4141"
-            ],
-            "index": "pypi",
-            "version": "==0.9"
         },
         "pytest-runner": {
             "hashes": [

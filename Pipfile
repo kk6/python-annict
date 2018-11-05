@@ -7,7 +7,6 @@ name = "pypi"
 pytest = "*"
 pytest-cov = "*"
 "pytest-flake8" = "*"
-pytest-raises = "*"
 responses = "*"
 pytest-runner = "*"
 
@@ -18,7 +17,6 @@ requests-cache = "*"
 furl = "*"
 arrow = "*"
 pytest = "*"
-pytest-raises = "*"
 responses = "*"
 
 [requires]
