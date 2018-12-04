@@ -448,7 +448,7 @@ class TestWorkModel:
     @pytest.mark.parametrize("episodes,numbers,expected", [
         (['#1', '#2', '#3', '#4', '#5'], (2, 4), ['#2', '#4']),
         (['#1', '#2', '#3', '#4', '#5'], (-4, -2), ['#1', '#3']),
-        pytest.mark.raises((['#1'], (2,), None), exception=IndexError),
+        pytest.param(['#1'], (2,), None, marks=pytest.mark.xfail(raises=IndexError)),
 
     ])
     def test_select_episodes(self, api_factory, episodes, numbers, expected):
@@ -462,7 +462,7 @@ class TestWorkModel:
     @pytest.mark.parametrize("episodes,number,expected", [
         (['#1', '#2', '#3', '#4', '#5'], 2, '#2'),
         (['#1', '#2', '#3', '#4', '#5'], -2, '#3'),
-        pytest.mark.raises((['#1'], 2, None), exception=IndexError),
+        pytest.param(['#1'], 2, None, marks=pytest.mark.xfail(raises=IndexError)),
 
     ])
     def test_get_episode(self, api_factory, episodes, number, expected):
