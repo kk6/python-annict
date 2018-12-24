@@ -1,0 +1,83 @@
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry]
+name = "annict"
+version = "0.6.1"
+description = "Annict API for python"
+readme = "README.md"
+authors = ["kk6 <hiro.ashiya@gmail.com>"]
+homepage = "https://annict.jp/userland/projects/7"
+repository = "https://github.com/kk6/python-annict"
+documentation = "https://pythonhosted.org/annict/"
+license = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    'Programming Language :: Python :: 3',
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries"
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+rauth = "^0.7.3"
+requests = "^2.21"
+requests-cache = "^0.4.13"
+furl = "^2.0"
+arrow = "^0.12.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.0"
+pytest-cov = "^2.6"
+pytest-flake8 = "^1.0"
+responses = "^0.10.5"
+pytest-runner = "^4.2"
+towncrier = "^18.6"
+tox = "^3.6"
+
+[tool.towncrier]
+package = "annict"
+filename = "CHANGELOG.rst"
+directory = "news/"
+template = "news/_template.rst"
+
+  [[tool.towncrier.type]]
+  directory = "process"
+  name = "Process"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "removal"
+  name = "Deprecations and Removals"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "feature"
+  name = "Features"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "bugfix"
+  name = "Bug Fixes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "vendor"
+  name = "Vendored Libraries"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "doc"
+  name = "Improved Documentation"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "trivial"
+  name = "Trivial Changes"
+  showcontent = false
