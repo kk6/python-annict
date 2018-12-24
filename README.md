@@ -6,7 +6,7 @@
 [![CircleCI](https://img.shields.io/circleci/project/github/kk6/python-annict.svg?style=flat-square)](https://circleci.com/gh/kk6/python-annict)
 [![PyPI](https://img.shields.io/pypi/v/annict.svg?style=flat-square)](https://pypi.python.org/pypi/annict)
 
-**python-annict** officially supports Python 3.6.
+**python-annict** officially supports Python 3.6 or higher.
 
 ## Installation
 
