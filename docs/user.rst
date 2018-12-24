@@ -76,12 +76,12 @@ Models contain the data and some helper methods which we can then use:
    ...     print(follower.username)
 
 
-Cursor
-~~~~~~
+Cursors
+~~~~~~~
 
 .. code:: python
 
-    >>> from annict.cursor import SimpleCursor
+    >>> from annict.cursors import SimpleCursor
     >>> for work in SimpleCursor(api.works, per_page=50, sort_id='desc').cursor():
     ...     print(work)
     ...

@@ -3,6 +3,7 @@ from functools import wraps
 
 
 class SimpleCursor(object):
+    """Simple cursor class"""
 
     def __init__(self, method, **kwargs):
         if not hasattr(method, 'cursor_support'):
@@ -23,6 +24,13 @@ class SimpleCursor(object):
 
 
 def cursor_support(api_method):
+    """
+    Cursor support decorator
+
+    :param api_method: API method that wan to correspond to the cursor.
+    :return: wrapped method
+
+    """
     api_method.cursor_support = True
 
     @wraps(api_method)

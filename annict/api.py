@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .services import APIMethod
 from .parsers import ModelParser
-from .cursor import cursor_support
+from .cursors import cursor_support
 
 
 class API(object):

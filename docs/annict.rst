@@ -1,7 +1,8 @@
-.. _annict:
+annict package
+==============
 
-API Reference
-=============
+Submodules
+----------
 
 annict\.api module
 ------------------
@@ -10,32 +11,19 @@ annict\.api module
     :members:
     :undoc-members:
     :show-inheritance:
-    :member-order: bysource
-
-    .. autosummary::
-        :toctree: _gen
-
-        API
-        API.works
-        API.episodes
-        API.records
-        API.search_users
-        API.following
-        API.followers
-        API.activities
-        API.me
-        API.set_status
-        API.create_record
-        API.edit_record
-        API.delete_record
-        API.my_works
-        API.my_programs
-        API.following_activities
 
 annict\.auth module
 -------------------
 
 .. automodule:: annict.auth
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+annict\.cursors module
+----------------------
+
+.. automodule:: annict.cursors
     :members:
     :undoc-members:
     :show-inheritance:
