@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from .services import APIMethod
 from .parsers import ModelParser
+from .cursor import cursor_support
 
 
 class API(object):
@@ -20,6 +21,7 @@ class API(object):
         self.api_version = api_version
         self.parser = parser(self)
 
+    @cursor_support
     def works(self, fields=None, filter_ids=None, filter_season=None, filter_title=None,
               page=None, per_page=None,
               sort_id=None, sort_season=None, sort_watchers_count=None):
@@ -56,6 +58,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def episodes(self, fields=None, filter_ids=None, filter_work_id=None,
                  page=None, per_page=None,
                  sort_id=None, sort_sort_number=None):
@@ -87,6 +90,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def records(self, fields=None, filter_ids=None, filter_episode_id=None, filter_has_record_comment=None,
                 page=None, per_page=None,
                 sort_id=None, sort_likes_count=None):
@@ -122,6 +126,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def search_users(self, fields=None, filter_ids=None, filter_usernames=None,
                      page=None, per_page=None,
                      sort_id=None):
@@ -152,6 +157,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def following(self, fields=None, filter_user_id=None, filter_username=None,
                   page=None, per_page=None,
                   sort_id=None):
@@ -180,6 +186,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def followers(self, fields=None, filter_user_id=None, filter_username=None,
                   page=None, per_page=None,
                   sort_id=None):
@@ -208,6 +215,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def activities(self, fields=None, filter_user_id=None, filter_username=None,
                    page=None, per_page=None,
                    sort_id=None):
@@ -337,6 +345,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def my_works(self, fields=None, filter_ids=None, filter_season=None, filter_title=None, filter_status=None,
                  page=None, per_page=None,
                  sort_id=None, sort_season=None, sort_watchers_count=None):
@@ -374,6 +383,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def my_programs(self, fields=None, filter_ids=None, filter_channel_ids=None, filter_work_ids=None,
                     filter_started_at_gt=None, filter_started_at_lt=None,
                     filter_unwatched=None, filter_rebroadcast=None,
@@ -419,6 +429,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
+    @cursor_support
     def following_activities(self, fields=None, filter_actions=None, filter_muted=None,
                              page=None, per_page=None,
                              sort_id=None):

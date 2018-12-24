@@ -4,7 +4,7 @@ build-backend = "poetry.masonry.api"
 
 [tool.poetry]
 name = "annict"
-version = "0.6.1"
+version = "0.7.0"
 description = "Annict API for python"
 readme = "README.md"
 authors = ["kk6 <hiro.ashiya@gmail.com>"]
