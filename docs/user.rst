@@ -74,3 +74,18 @@ Models contain the data and some helper methods which we can then use:
    >>> print(user.records_count)
    >>> for follower in user.followers():
    ...     print(follower.username)
+
+
+Cursor
+~~~~~~
+
+.. code:: python
+
+    >>> from annict.cursor import SimpleCursor
+    >>> for work in SimpleCursor(api.works, per_page=50, sort_id='desc').cursor():
+    ...     print(work)
+    ...
+    <Work:6417:天気の子>
+    <Work:6416:八男って、それはないでしょう！>
+    <Work:6415:うまよん>
+
