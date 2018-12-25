@@ -3,7 +3,7 @@ python-annict
 
 `Annict API <https://docs.annict.com/ja/api/>`__ wrapper for Python
 
-|Codacy Badge| |CircleCI| |PyPI|
+|Codacy Badge| |CircleCI| |PyPI| |License| |Code style: black|
 
 **python-annict** officially supports Python 3.6 or higher.
 
@@ -95,4 +95,8 @@ Documentation
 .. |CircleCI| image:: https://img.shields.io/circleci/project/github/kk6/python-annict.svg?style=flat-square
    :target: https://circleci.com/gh/kk6/python-annict
 .. |PyPI| image:: https://img.shields.io/pypi/v/annict.svg?style=flat-square
-   :target: https://pypi.python.org/pypi/annict
+   :target: https://pypi.org/project/annict/
+.. |License| image:: https://img.shields.io/pypi/l/annict.svg
+   :target: https://pypi.org/project/annict/
+.. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/ambv/black

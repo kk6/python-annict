@@ -4,7 +4,9 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e7936cf6e72a4e14b3bfb07879de1c3d)](https://app.codacy.com/app/hiro.ashiya/python-annict?utm_source=github.com&utm_medium=referral&utm_content=kk6/python-annict&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://img.shields.io/circleci/project/github/kk6/python-annict.svg?style=flat-square)](https://circleci.com/gh/kk6/python-annict)
-[![PyPI](https://img.shields.io/pypi/v/annict.svg?style=flat-square)](https://pypi.python.org/pypi/annict)
+[![PyPI](https://img.shields.io/pypi/v/annict.svg?style=flat-square)](https://pypi.org/project/annict/)
+[![License](https://img.shields.io/pypi/l/annict.svg)](https://pypi.org/project/annict/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 **python-annict** officially supports Python 3.6 or higher.
 
