@@ -1,0 +1,14 @@
+name: annict_docs
+channels:
+  - conda-forge
+dependencies:
+- python>=3.6
+- Sphinx==1.8.2
+- sphinx-rtd-theme==0.4.2
+- pip:
+  - arrow==0.12.1
+  - furl==2.0.0
+  - rauth==0.7.3
+  - requests==2.21.0
+  - requests-cache==0.4.13
+  - annict==0.7.0
