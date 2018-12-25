@@ -20,7 +20,7 @@ class SimpleCursor(object):
                 yield result
             self.kwargs['page'] += 1
             if not results.next_page or not results:
-                raise StopIteration
+                return
 
 
 def cursor_support(api_method):

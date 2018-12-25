@@ -52,6 +52,8 @@ def test_cursor_supported(api_factory):
     gen = SimpleCursor(api.works).cursor()
     result = next(gen)
     assert result.title == 'SHIROBAKO'
+    with pytest.raises(StopIteration):
+        next(gen)
 
 
 @responses.activate
