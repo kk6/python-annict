@@ -50,8 +50,8 @@ directory = "news/"
 template = "news/_template.rst"
 
   [[tool.towncrier.type]]
-  directory = "process"
-  name = "Process"
+  directory = "behavior"
+  name = "Behavior Changes"
   showcontent = true
 
   [[tool.towncrier.type]]
