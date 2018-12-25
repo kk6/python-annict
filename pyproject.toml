@@ -10,7 +10,7 @@ readme = "README.md"
 authors = ["kk6 <hiro.ashiya@gmail.com>"]
 homepage = "https://annict.jp/userland/projects/7"
 repository = "https://github.com/kk6/python-annict"
-documentation = "https://pythonhosted.org/annict/"
+documentation = "https://python-annict.readthedocs.io/en/latest/"
 license = "MIT"
 classifiers = [
     "Development Status :: 3 - Alpha",

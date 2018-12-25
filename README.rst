@@ -87,7 +87,8 @@ documentation <https://requests-cache.readthedocs.io/en/latest/>`__
 Documentation
 -------------
 
--  `This library’s documentation <https://pythonhosted.org/annict/>`__
+-  `This library’s
+   documentation <https://python-annict.readthedocs.io/en/latest/>`__
 -  `Annict Docs(Japanese) <https://docs.annict.com/ja/>`__
 
 .. |Codacy Badge| image:: https://api.codacy.com/project/badge/Grade/e7936cf6e72a4e14b3bfb07879de1c3d

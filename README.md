@@ -80,5 +80,5 @@ For more information: [Requests-cache documentation](https://requests-cache.read
 
 ## Documentation
 
-- [This library's documentation](https://pythonhosted.org/annict/)
+- [This library's documentation](https://python-annict.readthedocs.io/en/latest/)
 - [Annict Docs(Japanese)](https://docs.annict.com/ja/)
