@@ -23,7 +23,7 @@ Annict API wrapper for Python.
     Re:ゼロから始める異世界生活
 
 
-**annict** officially supports Python 3.6.
+**annict** officially supports Python 3.6 or higher.
 
 User Guide
 ----------

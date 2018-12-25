@@ -1,3 +1,17 @@
+Annict 0.7.0 (2018-12-25)
+=========================
+
+Features
+--------
+
+- Added support cursor mode. (#21)
+
+Improved Documentation
+----------------------
+
+- Added examples of using cursor. (#21)
+
+
 Annict 0.6.1 (2018-12-24)
 =========================
 

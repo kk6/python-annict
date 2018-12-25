@@ -4,7 +4,7 @@ build-backend = "poetry.masonry.api"
 
 [tool.poetry]
 name = "annict"
-version = "0.6.1"
+version = "0.7.0"
 description = "Annict API for python"
 readme = "README.md"
 authors = ["kk6 <hiro.ashiya@gmail.com>"]
@@ -40,6 +40,8 @@ responses = "^0.10.5"
 pytest-runner = "^4.2"
 towncrier = "^18.6"
 tox = "^3.6"
+sphinx = "^1.8"
+sphinx_rtd_theme = "^0.4.2"
 
 [tool.towncrier]
 package = "annict"
@@ -48,8 +50,8 @@ directory = "news/"
 template = "news/_template.rst"
 
   [[tool.towncrier.type]]
-  directory = "process"
-  name = "Process"
+  directory = "behavior"
+  name = "Behavior Changes"
   showcontent = true
 
   [[tool.towncrier.type]]
