@@ -1,3 +1,4 @@
+version: 2
 install-poetry: &install-poetry
   name: Install poetry
   command: |
@@ -18,7 +19,6 @@ run-test: &run-test
   name: Run test
   command: poetry run pytest tests --cov-report html:test-reports/coverage --cov annict -vv --junit-xml=test-reports/pytest.xml
 
-version: 2
 jobs:
   build:
     docker:
