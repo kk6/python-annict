@@ -42,6 +42,7 @@ towncrier = "^18.6"
 tox = "^3.6"
 sphinx = "^1.8"
 sphinx_rtd_theme = "^0.4.2"
+pre-commit = "^1.14"
 
 [tool.towncrier]
 package = "annict"

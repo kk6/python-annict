@@ -40,15 +40,15 @@ class Model(metaclass=abc.ABCMeta):
 
         """
         results = ResultSet(
-            total_count=json['total_count'],
-            prev_page=json['prev_page'],
-            next_page=json['next_page'],
+            total_count=json["total_count"],
+            prev_page=json["prev_page"],
+            next_page=json["next_page"],
         )
         results._json = json
-        if payload_type == 'activity':
-            pluralized_payload_name = 'activities'
+        if payload_type == "activity":
+            pluralized_payload_name = "activities"
         else:
-            pluralized_payload_name = '{}s'.format(payload_type)
+            pluralized_payload_name = "{}s".format(payload_type)
         for obj in json[pluralized_payload_name]:
             if obj:
                 results.append(cls.parse(api, obj))
@@ -59,7 +59,7 @@ class User(Model):
     """User information model"""
 
     def __repr__(self):
-        return f'<User:{self.id}:{self.name}:@{self.username}>'
+        return f"<User:{self.id}:{self.name}:@{self.username}>"
 
     @classmethod
     def parse(cls, api, json):
@@ -75,7 +75,7 @@ class User(Model):
         user = cls(api)
         user._json = json
         for k, v in json.items():
-            if k == 'created_at':
+            if k == "created_at":
                 setattr(user, k, arrow.get(v).datetime)
             else:
                 setattr(user, k, v)
@@ -93,7 +93,13 @@ class User(Model):
         :rtype: annict.models.ResultSet
 
         """
-        return self._api.following(fields=fields, filter_user_id=self.id, page=page, per_page=per_page, sort_id=sort_id)
+        return self._api.following(
+            fields=fields,
+            filter_user_id=self.id,
+            page=page,
+            per_page=per_page,
+            sort_id=sort_id,
+        )
 
     def followers(self, fields=None, page=None, per_page=None, sort_id=None):
         """Get following information of this user.
@@ -107,7 +113,13 @@ class User(Model):
         :rtype: annict.models.ResultSet
 
         """
-        return self._api.followers(fields=fields, filter_user_id=self.id, page=page, per_page=per_page, sort_id=sort_id)
+        return self._api.followers(
+            fields=fields,
+            filter_user_id=self.id,
+            page=page,
+            per_page=per_page,
+            sort_id=sort_id,
+        )
 
 
 class Work(Model):
@@ -118,7 +130,7 @@ class Work(Model):
         self._episodes = None
 
     def __repr__(self):
-        return f'<Work:{self.id}:{self.title}>'
+        return f"<Work:{self.id}:{self.title}>"
 
     @classmethod
     def parse(cls, api, json):
@@ -134,7 +146,7 @@ class Work(Model):
         work = cls(api)
         work._json = json
         for k, v in json.items():
-            if k == 'released_on':
+            if k == "released_on":
                 if v:
                     date = arrow.get(v).date()
                 else:
@@ -154,9 +166,15 @@ class Work(Model):
         """
         return self._api.set_status(self.id, kind)
 
-    def episodes(self, fields=None, filter_ids=None,
-                 page=None, per_page=None,
-                 sort_id=None, sort_sort_number=None):
+    def episodes(
+        self,
+        fields=None,
+        filter_ids=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+        sort_sort_number=None,
+    ):
         """Get episodes information
 
         :reference: https://docs.annict.com/ja/api/v1/episodes.html
@@ -172,9 +190,15 @@ class Work(Model):
         :rtype: annict.models.ResultSet
 
         """
-        return self._api.episodes(fields=fields, filter_ids=filter_ids, filter_work_id=self.id,
-                                  page=page, per_page=per_page,
-                                  sort_id=sort_id, sort_sort_number=sort_sort_number)
+        return self._api.episodes(
+            fields=fields,
+            filter_ids=filter_ids,
+            filter_work_id=self.id,
+            page=page,
+            per_page=per_page,
+            sort_id=sort_id,
+            sort_sort_number=sort_sort_number,
+        )
 
     def select_episodes(self, *numbers):
         """Select multiple episodes
@@ -185,7 +209,7 @@ class Work(Model):
 
         """
         if not self._episodes:
-            self._episodes = self.episodes(sort_sort_number='asc')
+            self._episodes = self.episodes(sort_sort_number="asc")
         if not numbers:
             return self._episodes
         return [self._episodes[n - 1] for n in numbers]
@@ -205,7 +229,7 @@ class Episode(Model):
     """Episode information model"""
 
     def __repr__(self):
-        return f'<Episode:{self.id}:{self.number_text}:{self.title}:{self.work.title}>'
+        return f"<Episode:{self.id}:{self.number_text}:{self.title}:{self.work.title}>"
 
     @classmethod
     def parse(cls, api, json):
@@ -221,22 +245,24 @@ class Episode(Model):
         episode = cls(api)
         episode._json = json
         for k, v in json.items():
-            if k == 'episode':
-                setattr(episode, 'episode_id', v)
-            elif k == 'work':
+            if k == "episode":
+                setattr(episode, "episode_id", v)
+            elif k == "work":
                 work = Work.parse(api, v)
                 setattr(episode, k, work)
-            elif k == 'prev_episode' and v:
+            elif k == "prev_episode" and v:
                 prev_episode = cls.parse(api, v)
                 setattr(episode, k, prev_episode)
-            elif k == 'next_episode' and v:
+            elif k == "next_episode" and v:
                 next_episode = cls.parse(api, v)
                 setattr(episode, k, next_episode)
             else:
                 setattr(episode, k, v)
         return episode
 
-    def create_record(self, comment=None, rating=None, share_twitter=False, share_facebook=False):
+    def create_record(
+        self, comment=None, rating=None, share_twitter=False, share_facebook=False
+    ):
         """Create a record for this episode.
 
         :param str comment: (optional) Comment.
@@ -247,14 +273,16 @@ class Episode(Model):
             You can enter `True` or `False`.
         :return: :class:`Record <annict.models.Record>` object.
         """
-        return self._api.create_record(self.id, comment, rating, share_twitter, share_facebook)
+        return self._api.create_record(
+            self.id, comment, rating, share_twitter, share_facebook
+        )
 
 
 class Record(Model):
     """Record information model"""
 
     def __repr__(self):
-        return f'<Record:{self.id}>'
+        return f"<Record:{self.id}>"
 
     @classmethod
     def parse(cls, api, json):
@@ -270,22 +298,24 @@ class Record(Model):
         record = cls(api)
         record._json = json
         for k, v in json.items():
-            if k == 'created_at':
+            if k == "created_at":
                 setattr(record, k, arrow.get(v).datetime)
-            elif k == 'user':
+            elif k == "user":
                 user = User.parse(api, v)
                 setattr(record, k, user)
-            elif k == 'work':
+            elif k == "work":
                 work = Work.parse(api, v)
                 setattr(record, k, work)
-            elif k == 'episode':
+            elif k == "episode":
                 episode = Episode.parse(api, v)
                 setattr(record, k, episode)
             else:
                 setattr(record, k, v)
         return record
 
-    def edit(self, comment=None, rating=None, share_twitter=False, share_facebook=False):
+    def edit(
+        self, comment=None, rating=None, share_twitter=False, share_facebook=False
+    ):
         """Edit the created record.
 
         :param str comment: (optional) Comment.
@@ -297,7 +327,9 @@ class Record(Model):
         :return: :class:`Record <annict.models.Record>` object after edit.
 
         """
-        return self._api.edit_record(self.id, comment, rating, share_twitter, share_facebook)
+        return self._api.edit_record(
+            self.id, comment, rating, share_twitter, share_facebook
+        )
 
     def delete(self):
         """Delete the created record.
@@ -312,7 +344,7 @@ class Program(Model):
     """Program information model"""
 
     def __repr__(self):
-        return f'<Program:{self.id}>'
+        return f"<Program:{self.id}>"
 
     @classmethod
     def parse(cls, api, json):
@@ -328,12 +360,12 @@ class Program(Model):
         program = cls(api)
         program._json = json
         for k, v in json.items():
-            if k == 'started_at':
+            if k == "started_at":
                 setattr(program, k, arrow.get(v).datetime)
-            elif k == 'work':
+            elif k == "work":
                 work = Work.parse(api, v)
                 setattr(program, k, work)
-            elif k == 'episode':
+            elif k == "episode":
                 episode = Episode.parse(api, v)
                 setattr(program, k, episode)
             else:
@@ -345,7 +377,7 @@ class Activity(Model):
     """Activity information model"""
 
     def __repr__(self):
-        return f'<Activity:{self.action}:@{self.user.username}>'
+        return f"<Activity:{self.action}:@{self.user.username}>"
 
     @classmethod
     def parse(cls, api, json):
@@ -361,15 +393,15 @@ class Activity(Model):
         activity = cls(api)
         activity._json = json
         for k, v in json.items():
-            if k == 'created_at':
+            if k == "created_at":
                 setattr(activity, k, arrow.get(v).datetime)
-            elif k == 'user':
+            elif k == "user":
                 user = User.parse(api, v)
                 setattr(activity, k, user)
-            elif k == 'work':
+            elif k == "work":
                 work = Work.parse(api, v)
                 setattr(activity, k, work)
-            elif k == 'episode':
+            elif k == "episode":
                 episode = Episode.parse(api, v)
                 setattr(activity, k, episode)
             else:
@@ -378,10 +410,10 @@ class Activity(Model):
 
 
 MODEL_MAPPING = {
-    'user': User,
-    'work': Work,
-    'episode': Episode,
-    'record': Record,
-    'program': Program,
-    'activity': Activity,
+    "user": User,
+    "work": Work,
+    "episode": Episode,
+    "record": Record,
+    "program": Program,
+    "activity": Activity,
 }

@@ -44,14 +44,19 @@ def test_cursor_supported(api_factory):
       "prev_page": null
     }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/works',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/works",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     from annict.cursors import SimpleCursor
+
     gen = SimpleCursor(api.works).cursor()
     result = next(gen)
-    assert result.title == 'SHIROBAKO'
+    assert result.title == "SHIROBAKO"
     with pytest.raises(StopIteration):
         next(gen)
 
@@ -73,10 +78,15 @@ def test_cursor_unsupported(api_factory):
           "notifications_count": 0
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/me',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/me",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     from annict.cursors import SimpleCursor
+
     with pytest.raises(TypeError):
         SimpleCursor(api.me).cursor()

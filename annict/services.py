@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from furl import furl
 import requests
+from furl import furl
 
 from .utils import stringify
 
@@ -17,7 +17,16 @@ class APIMethod(object):
     :param bool payload_list: Specifies whether the payload is a list or not.
 
     """
-    def __init__(self, api, path, method, allowed_params=None, payload_type=None, payload_is_list=False):
+
+    def __init__(
+        self,
+        api,
+        path,
+        method,
+        allowed_params=None,
+        payload_type=None,
+        payload_is_list=False,
+    ):
         self.api = api
         self.path = path
         self.method = method
@@ -34,7 +43,7 @@ class APIMethod(object):
 
         """
         if id_ is not None:
-            self.path = '/'.join([self.path, str(id_)])
+            self.path = "/".join([self.path, str(id_)])
 
     def build_url(self):
         """Build request url
@@ -58,8 +67,12 @@ class APIMethod(object):
         :rtype: dict
 
         """
-        params = {key: stringify(dic[key]) for key in self.allowed_params if key in dic and dic[key]}
-        params['access_token'] = self.api.token
+        params = {
+            key: stringify(dic[key])
+            for key in self.allowed_params
+            if key in dic and dic[key]
+        }
+        params["access_token"] = self.api.token
         return params
 
     def __call__(self, params):
@@ -69,7 +82,9 @@ class APIMethod(object):
         resp.raise_for_status()
 
         if resp.status_code == 200:
-            return self.api.parser.parse(resp.json(), self.payload_type, self.payload_is_list)
+            return self.api.parser.parse(
+                resp.json(), self.payload_type, self.payload_is_list
+            )
         elif resp.status_code == 204:
             return True
         else:
