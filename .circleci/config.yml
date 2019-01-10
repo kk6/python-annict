@@ -1,29 +1,56 @@
+install-poetry: &install-poetry
+  name: Install poetry
+  command: |
+    curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+    echo 'export PATH=$HOME/.poetry/bin:$PATH' >> $BASH_ENV
+    source $BASH_ENV
+    source $HOME/.poetry/env
+
+remove-pyc-files: &remove-pyc-files
+  name: Remove .pyc files
+  command: find . -name \*.pyc -delete
+
+install-dependencies: &install-dependencies
+  name: Install dependencies
+  command: poetry install
+
+run-test: &run-test
+  name: Run test
+  command: poetry run pytest tests --cov-report html:test-reports/coverage --cov annict -vv --junit-xml=test-reports/pytest.xml
+
 version: 2
 jobs:
   build:
     docker:
-      - image: python:3.7
-    working_directory: /home/ubuntu/python-annict
+      - image: circleci/python:3.7
+    working_directory: ~/python-annict
     steps:
       - checkout
-      - run:
-         name: Setup
-         command: python setup.py install
-      - run:
-         name: Install pipenv
-         command: pip install pipenv
-      - run:
-          name: Install Dependencies
-          command: pipenv install -d
-      - run:
-          name: Remove .pyc files
-          command: find . -name \*.pyc -delete
-      - run:
-          name: Run Tests
-          command: pipenv run ci
-      - store_test_results:
-          path: test-reports
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
+      - run: *install-poetry
+      - run: *remove-pyc-files
+      - run: *install-dependencies
+      - run: *run-test
+     - store_test_results:
+         path: test-reports
+     - store_artifacts:
+         path: test-reports
+         destination: test-reports
+  py36:
+    docker:
+      - image: circleci/python:3.6
+    working_directory: ~/python-annict
+    steps:
+      - checkout
+      - run: *install-poetry
+      - run: *remove-pyc-files
+      - run: *install-dependencies
+      - run: *run-test
 
+workflows:
+  version: 2
+  py37:
+    jobs:
+      - build
+  py36:
+    jobs:
+      - py36
