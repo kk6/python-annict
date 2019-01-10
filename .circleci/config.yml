@@ -1,4 +1,24 @@
-version: 2
+version: 2.1
+commands:
+  install_poetry:
+    description: Install poetry
+    steps:
+      - run: curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+      - run: echo 'export PATH=$HOME/.poetry/bin:$PATH' >> $BASH_ENV
+      - run: source $BASH_ENV
+      - run: source $HOME/.poetry/env
+  remove_pyc:
+    description: Remove .pyc files
+    steps:
+      - run: find . -name \*.pyc -delete
+  install_dependencies:
+    description: Install dependencies
+    steps:
+      - run: poetry install
+  pytest:
+    description: Run pytest
+    steps:
+      - run: poetry run pytest tests --cov-report html:test-reports/coverage --cov annict -vv --junit-xml=test-reports/pytest.xml
 jobs:
   build:
     docker:
@@ -6,21 +26,10 @@ jobs:
     working_directory: ~/python-annict
     steps:
       - checkout
-      - run:
-         name: Install poetry
-         command: curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-      - run: echo 'export PATH=$HOME/.poetry/bin:$PATH' >> $BASH_ENV
-      - run: source $BASH_ENV
-      - run: source $HOME/.poetry/env
-      - run:
-          name: Remove .pyc files
-          command: find . -name \*.pyc -delete
-      - run:
-          name: Install dependencies
-          command: poetry install
-      - run:
-          name: Run Tests
-          command: poetry run pytest tests --cov-report html:test-reports/coverage --cov annict -vv --junit-xml=test-reports/pytest.xml
+      - install_poetry
+      - remove_pyc
+      - install_dependencies
+      - pytest
       - store_test_results:
           path: test-reports
       - store_artifacts:
@@ -32,22 +41,11 @@ jobs:
     working_directory: ~/python-annict
     steps:
       - checkout
-      - run:
-         name: Install poetry
-         command: curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-      - run: echo 'export PATH=$HOME/.poetry/bin:$PATH' >> $BASH_ENV
-      - run: source $BASH_ENV
-      - run: source $HOME/.poetry/env
-      - run:
-          name: Remove .pyc files
-          command: find . -name \*.pyc -delete
-      - run:
-          name: Install dependencies
-          command: poetry install
-      - run:
-          name: Run Tests
-          command: poetry run pytest tests --cov-report html:test-reports/coverage --cov annict -vv --junit-xml=test-reports/pytest.xml
-
+      - checkout
+      - install_poetry
+      - remove_pyc
+      - install_dependencies
+      - pytest
 workflows:
   version: 2
   py37:
