@@ -48,9 +48,9 @@ jobs:
       - pytest
 workflows:
   version: 2
-  py37:
+  test-py37:
     jobs:
       - build
-  py36:
+  test-py36:
     jobs:
       - py36
