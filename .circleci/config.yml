@@ -48,7 +48,7 @@ jobs:
 
 workflows:
   version: 2
-  py37:
+  build:
     jobs:
       - build
   py36:
