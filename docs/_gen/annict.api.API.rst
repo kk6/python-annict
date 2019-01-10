@@ -5,14 +5,14 @@ annict\.api\.API
 
 .. autoclass:: API
 
-   
+
    .. automethod:: __init__
 
-   
+
    .. rubric:: Methods
 
    .. autosummary::
-   
+
       ~API.__init__
       ~API.activities
       ~API.create_record
@@ -29,9 +29,3 @@ annict\.api\.API
       ~API.search_users
       ~API.set_status
       ~API.works
-   
-   
-
-   
-   
-   

@@ -16,7 +16,7 @@ def do_not_stringify(arg):
 @stringify.register(list)
 @stringify.register(set)
 def stringify_list(arg):
-    return ','.join([str(o) for o in arg])
+    return ",".join([str(o) for o in arg])
 
 
 @stringify.register(bool)

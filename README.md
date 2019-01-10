@@ -76,7 +76,7 @@ pip insall requests_cache
 
 ```
 
-For more information: [Requests-cache documentation](https://requests-cache.readthedocs.io/en/latest/) 
+For more information: [Requests-cache documentation](https://requests-cache.readthedocs.io/en/latest/)
 
 ## Documentation
 

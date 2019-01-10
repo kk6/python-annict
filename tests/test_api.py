@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
 
 import responses
 
@@ -50,12 +51,16 @@ def test_works(api_factory):
       "prev_page": null
     }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/works',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/works",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     works = api.works()
-    assert works[0].title == 'SHIROBAKO'
+    assert works[0].title == "SHIROBAKO"
 
 
 @responses.activate
@@ -73,14 +78,21 @@ def test_works_with_fields(api_factory):
       "prev_page": null
     }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/works',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/works",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
-    works = api.works('title')
-    assert works[0].title == 'SHIROBAKO'
-    assert not hasattr(works[0], 'title_kana')
-    assert get_query(responses.calls[0]) == {'fields': ['title'], 'access_token': ['dummy_token']}
+    works = api.works("title")
+    assert works[0].title == "SHIROBAKO"
+    assert not hasattr(works[0], "title_kana")
+    assert get_query(responses.calls[0]) == {
+        "fields": ["title"],
+        "access_token": ["dummy_token"],
+    }
 
 
 @responses.activate
@@ -130,9 +142,13 @@ def test_episodes(api_factory):
       "prev_page": null
     }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/episodes',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/episodes",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     episodes = api.episodes()
     assert episodes[0].title == "殺戮の夢幻迷宮"
@@ -195,13 +211,20 @@ def test_records(api_factory):
       "prev_page": null
     }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/records',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/records",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     records = api.records(filter_episode_id=74669)
     assert records[0].comment.startswith("ゆるふわ田舎アニメかと思ったら")
-    assert get_query(responses.calls[0]) == {'filter_episode_id': ['74669'], 'access_token': ['dummy_token']}
+    assert get_query(responses.calls[0]) == {
+        "filter_episode_id": ["74669"],
+        "access_token": ["dummy_token"],
+    }
 
 
 @responses.activate
@@ -226,13 +249,20 @@ def test_users(api_factory):
           "prev_page": null
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/users',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/users",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
-    users = api.search_users(filter_usernames='shimbaco')
-    assert users[0].name == 'Koji Shimba'
-    assert get_query(responses.calls[0]) == {'filter_usernames': ['shimbaco'], 'access_token': ['dummy_token']}
+    users = api.search_users(filter_usernames="shimbaco")
+    assert users[0].name == "Koji Shimba"
+    assert get_query(responses.calls[0]) == {
+        "filter_usernames": ["shimbaco"],
+        "access_token": ["dummy_token"],
+    }
 
 
 @responses.activate
@@ -268,14 +298,21 @@ def test_following(api_factory):
           "prev_page": null
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/following',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/following",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
-    following = api.following(filter_username='shimbaco', per_page=2)
-    assert following[0].username == 'builtlast'
-    assert get_query(responses.calls[0]) == {'filter_username': ['shimbaco'], 'per_page': ['2'],
-                                             'access_token': ['dummy_token']}
+    following = api.following(filter_username="shimbaco", per_page=2)
+    assert following[0].username == "builtlast"
+    assert get_query(responses.calls[0]) == {
+        "filter_username": ["shimbaco"],
+        "per_page": ["2"],
+        "access_token": ["dummy_token"],
+    }
 
 
 @responses.activate
@@ -311,12 +348,16 @@ def test_followers(api_factory):
           "prev_page": null
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/followers',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/followers",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     followers = api.followers()
-    assert followers[0].username == 'akirafukuoka'
+    assert followers[0].username == "akirafukuoka"
 
 
 @responses.activate
@@ -381,9 +422,13 @@ def test_activities(api_factory):
           "prev_page": null
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/activities',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/activities",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     activities = api.activities()
     assert activities[0].id == 1504708
@@ -406,20 +451,25 @@ def test_me(api_factory):
           "notifications_count": 0
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/me',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/me",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     me = api.me()
-    assert me.username == 'shimbaco'
+    assert me.username == "shimbaco"
 
 
 @responses.activate
 def test_set_status(api_factory):
-    responses.add(responses.POST, 'https://api.annict.com/v1/me/statuses',
-                  body=None, status=204)
+    responses.add(
+        responses.POST, "https://api.annict.com/v1/me/statuses", body=None, status=204
+    )
     api = api_factory.create()
-    result = api.set_status(work_id=438, kind='watching')
+    result = api.set_status(work_id=438, kind="watching")
     assert result
 
 
@@ -473,9 +523,13 @@ def test_create_record(api_factory):
           }
         }
     """
-    responses.add(responses.POST, 'https://api.annict.com/v1/me/records',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.POST,
+        "https://api.annict.com/v1/me/records",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     record = api.create_record(episode_id=5013, comment="あぁ^～心がぴょんぴょんするんじゃぁ^～")
     assert record.comment == "あぁ^～心がぴょんぴょんするんじゃぁ^～"
@@ -531,19 +585,28 @@ def test_edit_record(api_factory):
           }
         }
     """
-    responses.add(responses.PATCH, 'https://api.annict.com/v1/me/records/1016',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.PATCH,
+        "https://api.annict.com/v1/me/records/1016",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
-    record = api.edit_record(1016, comment="あぁ^～心がぴょんぴょんするんじゃぁ^～",
-                             rating=5.0, share_facebook=True)
+    record = api.edit_record(
+        1016, comment="あぁ^～心がぴょんぴょんするんじゃぁ^～", rating=5.0, share_facebook=True
+    )
     assert record.rating == 5.0
 
 
 @responses.activate
 def test_delete_record(api_factory):
-    responses.add(responses.DELETE, 'https://api.annict.com/v1/me/records/1016',
-                  body=None, status=204)
+    responses.add(
+        responses.DELETE,
+        "https://api.annict.com/v1/me/records/1016",
+        body=None,
+        status=204,
+    )
     api = api_factory.create()
     result = api.delete_record(1016)
     assert result
@@ -580,9 +643,13 @@ def test_my_works(api_factory):
           "prev_page": null
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/me/works',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/me/works",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
     works = api.my_works()
     assert works[0].title == "ふらいんぐうぃっち"
@@ -634,14 +701,23 @@ def test_my_programs(api_factory):
           "prev_page": null
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/me/programs',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/me/programs",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
-    programs = api.my_programs(sort_started_at='desc', filter_started_at_gt='2016/05/05 02:00')
+    programs = api.my_programs(
+        sort_started_at="desc", filter_started_at_gt="2016/05/05 02:00"
+    )
     assert programs[0].id == 35387
-    assert get_query(responses.calls[0]) == {'sort_started_at': ['desc'], 'filter_started_at_gt': ['2016/05/05 02:00'],
-                                             'access_token': ['dummy_token']}
+    assert get_query(responses.calls[0]) == {
+        "sort_started_at": ["desc"],
+        "filter_started_at_gt": ["2016/05/05 02:00"],
+        "access_token": ["dummy_token"],
+    }
 
 
 @responses.activate
@@ -706,10 +782,18 @@ def test_following_activities(api_factory):
           "prev_page": null
         }
     """
-    responses.add(responses.GET, 'https://api.annict.com/v1/me/following_activities',
-                  body=json, status=200,
-                  content_type='application/json')
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/me/following_activities",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
     api = api_factory.create()
-    activities = api.following_activities(sort_id='desc', per_page=1)
+    activities = api.following_activities(sort_id="desc", per_page=1)
     assert activities[0].id == 1504708
-    assert get_query(responses.calls[0]) == {'sort_id': ['desc'], 'per_page': ['1'], 'access_token': ['dummy_token']}
+    assert get_query(responses.calls[0]) == {
+        "sort_id": ["desc"],
+        "per_page": ["1"],
+        "access_token": ["dummy_token"],
+    }

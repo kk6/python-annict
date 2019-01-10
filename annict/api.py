@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from .services import APIMethod
-from .parsers import ModelParser
 from .cursors import cursor_support
+from .parsers import ModelParser
+from .services import APIMethod
 
 
 class API(object):
@@ -15,16 +15,32 @@ class API(object):
         <User:1229:あしやひろ:@kk6>
 
     """
-    def __init__(self, token, base_url='https://api.annict.com', api_version='v1', parser=ModelParser):
+
+    def __init__(
+        self,
+        token,
+        base_url="https://api.annict.com",
+        api_version="v1",
+        parser=ModelParser,
+    ):
         self.token = token
         self.base_url = base_url
         self.api_version = api_version
         self.parser = parser(self)
 
     @cursor_support
-    def works(self, fields=None, filter_ids=None, filter_season=None, filter_title=None,
-              page=None, per_page=None,
-              sort_id=None, sort_season=None, sort_watchers_count=None):
+    def works(
+        self,
+        fields=None,
+        filter_ids=None,
+        filter_season=None,
+        filter_title=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+        sort_season=None,
+        sort_watchers_count=None,
+    ):
         """Get works information
 
         :reference: https://docs.annict.com/ja/api/v1/works.html
@@ -47,21 +63,36 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='works',
-            method='GET',
-            allowed_params=('fields', 'filter_ids', 'filter_season', 'filter_title',
-                            'page', 'per_page',
-                            'sort_id', 'sort_season', 'sort_watchers_count'),
-            payload_type='work',
+            path="works",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_ids",
+                "filter_season",
+                "filter_title",
+                "page",
+                "per_page",
+                "sort_id",
+                "sort_season",
+                "sort_watchers_count",
+            ),
+            payload_type="work",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def episodes(self, fields=None, filter_ids=None, filter_work_id=None,
-                 page=None, per_page=None,
-                 sort_id=None, sort_sort_number=None):
+    def episodes(
+        self,
+        fields=None,
+        filter_ids=None,
+        filter_work_id=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+        sort_sort_number=None,
+    ):
         """Get episodes information
 
         :reference: https://docs.annict.com/ja/api/v1/episodes.html
@@ -80,20 +111,35 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='episodes',
-            method='GET',
-            allowed_params=('fields', 'filter_ids', 'filter_work_id',
-                            'page', 'per_page', 'sort_id', 'sort_sort_number'),
-            payload_type='episode',
+            path="episodes",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_ids",
+                "filter_work_id",
+                "page",
+                "per_page",
+                "sort_id",
+                "sort_sort_number",
+            ),
+            payload_type="episode",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def records(self, fields=None, filter_ids=None, filter_episode_id=None, filter_has_record_comment=None,
-                page=None, per_page=None,
-                sort_id=None, sort_likes_count=None):
+    def records(
+        self,
+        fields=None,
+        filter_ids=None,
+        filter_episode_id=None,
+        filter_has_record_comment=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+        sort_likes_count=None,
+    ):
         """Get records to episodes
 
         :reference: https://docs.annict.com/ja/api/v1/records.html
@@ -116,20 +162,34 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='records',
-            method='GET',
-            allowed_params=('fields', 'filter_ids', 'filter_episode_id', 'filter_has_record_comment',
-                            'page', 'per_page', 'sort_id', 'sort_likes_count'),
-            payload_type='record',
+            path="records",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_ids",
+                "filter_episode_id",
+                "filter_has_record_comment",
+                "page",
+                "per_page",
+                "sort_id",
+                "sort_likes_count",
+            ),
+            payload_type="record",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def search_users(self, fields=None, filter_ids=None, filter_usernames=None,
-                     page=None, per_page=None,
-                     sort_id=None):
+    def search_users(
+        self,
+        fields=None,
+        filter_ids=None,
+        filter_usernames=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+    ):
         """Get users information
 
         :reference: https://docs.annict.com/ja/api/v1/users.html
@@ -148,19 +208,32 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='users',
-            method='GET',
-            allowed_params=('fields', 'filter_ids', 'filter_usernames', 'page', 'per_page', 'sort_id'),
-            payload_type='user',
+            path="users",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_ids",
+                "filter_usernames",
+                "page",
+                "per_page",
+                "sort_id",
+            ),
+            payload_type="user",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def following(self, fields=None, filter_user_id=None, filter_username=None,
-                  page=None, per_page=None,
-                  sort_id=None):
+    def following(
+        self,
+        fields=None,
+        filter_user_id=None,
+        filter_username=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+    ):
         """Get following information
 
         :reference: https://docs.annict.com/ja/api/v1/following.html
@@ -177,19 +250,32 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='following',
-            method='GET',
-            allowed_params=('fields', 'filter_user_id', 'filter_username', 'page', 'per_page', 'sort_id'),
-            payload_type='user',
+            path="following",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_user_id",
+                "filter_username",
+                "page",
+                "per_page",
+                "sort_id",
+            ),
+            payload_type="user",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def followers(self, fields=None, filter_user_id=None, filter_username=None,
-                  page=None, per_page=None,
-                  sort_id=None):
+    def followers(
+        self,
+        fields=None,
+        filter_user_id=None,
+        filter_username=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+    ):
         """Get followers information
 
         :reference: https://docs.annict.com/ja/api/v1/followers.html
@@ -206,19 +292,32 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='followers',
-            method='GET',
-            allowed_params=('fields', 'filter_user_id', 'filter_username', 'page', 'per_page', 'sort_id'),
-            payload_type='user',
+            path="followers",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_user_id",
+                "filter_username",
+                "page",
+                "per_page",
+                "sort_id",
+            ),
+            payload_type="user",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def activities(self, fields=None, filter_user_id=None, filter_username=None,
-                   page=None, per_page=None,
-                   sort_id=None):
+    def activities(
+        self,
+        fields=None,
+        filter_user_id=None,
+        filter_username=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+    ):
         """Get activities
 
         :reference: https://docs.annict.com/ja/api/v1/activities.html
@@ -235,10 +334,17 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='activities',
-            method='GET',
-            allowed_params=('fields', 'filter_user_id', 'filter_username', 'page', 'per_page', 'sort_id'),
-            payload_type='activity',
+            path="activities",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_user_id",
+                "filter_username",
+                "page",
+                "per_page",
+                "sort_id",
+            ),
+            payload_type="activity",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
@@ -255,10 +361,10 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='me',
-            method='GET',
-            allowed_params=('fields',),
-            payload_type='user',
+            path="me",
+            method="GET",
+            allowed_params=("fields",),
+            payload_type="user",
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
@@ -275,14 +381,21 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='me/statuses',
-            method='POST',
-            allowed_params=('work_id', 'kind'),
+            path="me/statuses",
+            method="POST",
+            allowed_params=("work_id", "kind"),
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
-    def create_record(self, episode_id, comment=None, rating=None, share_twitter=False, share_facebook=False):
+    def create_record(
+        self,
+        episode_id,
+        comment=None,
+        rating=None,
+        share_twitter=False,
+        share_facebook=False,
+    ):
         """Create a record to the episode.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
@@ -296,15 +409,23 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='me/records',
-            method='POST',
-            allowed_params=('episode_id', 'comment', 'rating', 'share_twitter', 'share_facebook'),
-            payload_type='record',
+            path="me/records",
+            method="POST",
+            allowed_params=(
+                "episode_id",
+                "comment",
+                "rating",
+                "share_twitter",
+                "share_facebook",
+            ),
+            payload_type="record",
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
-    def edit_record(self, id_, comment=None, rating=None, share_twitter=False, share_facebook=False):
+    def edit_record(
+        self, id_, comment=None, rating=None, share_twitter=False, share_facebook=False
+    ):
         """Edit the created record.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
@@ -318,10 +439,10 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='me/records',
-            method='PATCH',
-            allowed_params=('comment', 'rating', 'share_twitter', 'share_facebook'),
-            payload_type='record',
+            path="me/records",
+            method="PATCH",
+            allowed_params=("comment", "rating", "share_twitter", "share_facebook"),
+            payload_type="record",
         )
         api_method.build_path(id_)
         params = api_method.build_parameters(locals())
@@ -336,19 +457,26 @@ class API(object):
 
         """
         api_method = APIMethod(
-            api=self,
-            path='me/records',
-            method='DELETE',
-            allowed_params=(),
+            api=self, path="me/records", method="DELETE", allowed_params=()
         )
         api_method.build_path(id_)
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def my_works(self, fields=None, filter_ids=None, filter_season=None, filter_title=None, filter_status=None,
-                 page=None, per_page=None,
-                 sort_id=None, sort_season=None, sort_watchers_count=None):
+    def my_works(
+        self,
+        fields=None,
+        filter_ids=None,
+        filter_season=None,
+        filter_title=None,
+        filter_status=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+        sort_season=None,
+        sort_watchers_count=None,
+    ):
         """Get the information of the work you are setting status.
 
         :reference: https://docs.annict.com/ja/api/v1/me-works.html
@@ -373,22 +501,42 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='me/works',
-            method='GET',
-            allowed_params=('fields', 'filter_ids', 'filter_season', 'filter_title', 'filter_status',
-                            'page', 'per_page', 'sort_id', 'sort_season', 'sort_watchers_count'),
-            payload_type='work',
+            path="me/works",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_ids",
+                "filter_season",
+                "filter_title",
+                "filter_status",
+                "page",
+                "per_page",
+                "sort_id",
+                "sort_season",
+                "sort_watchers_count",
+            ),
+            payload_type="work",
             payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def my_programs(self, fields=None, filter_ids=None, filter_channel_ids=None, filter_work_ids=None,
-                    filter_started_at_gt=None, filter_started_at_lt=None,
-                    filter_unwatched=None, filter_rebroadcast=None,
-                    page=None, per_page=None,
-                    sort_id=None, sort_started_at=None):
+    def my_programs(
+        self,
+        fields=None,
+        filter_ids=None,
+        filter_channel_ids=None,
+        filter_work_ids=None,
+        filter_started_at_gt=None,
+        filter_started_at_lt=None,
+        filter_unwatched=None,
+        filter_rebroadcast=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+        sort_started_at=None,
+    ):
         """Get the broadcast schedule.
 
         :reference: https://docs.annict.com/ja/api/v1/me-programs.html
@@ -418,21 +566,38 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='me/programs',
-            method='GET',
-            allowed_params=('fields', 'filter_ids', 'filter_channel_ids', 'filter_work_ids', 'filter_started_at_gt',
-                            'filter_started_at_lt', 'filter_unwatched', 'filter_rebroadcast',
-                            'page', 'per_page', 'sort_id', 'sort_started_at'),
-            payload_type='program',
-            payload_is_list=True
+            path="me/programs",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_ids",
+                "filter_channel_ids",
+                "filter_work_ids",
+                "filter_started_at_gt",
+                "filter_started_at_lt",
+                "filter_unwatched",
+                "filter_rebroadcast",
+                "page",
+                "per_page",
+                "sort_id",
+                "sort_started_at",
+            ),
+            payload_type="program",
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
 
     @cursor_support
-    def following_activities(self, fields=None, filter_actions=None, filter_muted=None,
-                             page=None, per_page=None,
-                             sort_id=None):
+    def following_activities(
+        self,
+        fields=None,
+        filter_actions=None,
+        filter_muted=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+    ):
         """Get the activity of the user you are following.
 
         :reference: https://docs.annict.com/ja/api/v1/me-following-activities.html
@@ -451,11 +616,18 @@ class API(object):
         """
         api_method = APIMethod(
             api=self,
-            path='me/following_activities',
-            method='GET',
-            allowed_params=('fields', 'filter_actions', 'filter_muted', 'page', 'per_page', 'sort_id'),
-            payload_type='activity',
-            payload_is_list=True
+            path="me/following_activities",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_actions",
+                "filter_muted",
+                "page",
+                "per_page",
+                "sort_id",
+            ),
+            payload_type="activity",
+            payload_is_list=True,
         )
         params = api_method.build_parameters(locals())
         return api_method(params)
