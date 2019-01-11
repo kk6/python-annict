@@ -15,10 +15,14 @@ commands:
     description: Install dependencies
     steps:
       - run: poetry install
-  pytest:
+  pytest_cov:
+    description: Run pytest-cov
+    steps:
+      - run: poetry run pytest tests  --cov annict -vv
+  pytest_cov_with_reports:
     description: Run pytest
     steps:
-      - run: poetry run pytest tests --cov-report html:test-reports/coverage --cov annict -vv --junit-xml=test-reports/pytest.xml
+      - run: poetry run pytest tests --cov-report html:test-reports/coverage --cov-report xml --cov annict -vv --junit-xml=test-reports/pytest.xml
   codecov:
     steps:
       - run: pip install --user codecov && $HOME/.local/bin/codecov
@@ -32,7 +36,7 @@ jobs:
       - install_poetry
       - remove_pyc
       - install_dependencies
-      - pytest
+      - pytest_cov_with_reports
       - codecov
       - store_test_results:
           path: test-reports
@@ -49,7 +53,7 @@ jobs:
       - install_poetry
       - remove_pyc
       - install_dependencies
-      - pytest
+      - pytest_cov
 workflows:
   version: 2
   test-py37:
