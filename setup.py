@@ -9,7 +9,7 @@ with open("annict/__init__.py", "r") as f:
         r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE
     ).group(1)
 
-with open("README.rst", "r", encoding="utf-8") as f:
+with open("README.md", "r", encoding="utf-8") as f:
     readme = f.read()
 
 tests_require = ["pytest", "pytest-raises", "responses"]
