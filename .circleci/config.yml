@@ -33,6 +33,7 @@ jobs:
       - remove_pyc
       - install_dependencies
       - pytest
+      - codecov
       - store_test_results:
           path: test-reports
       - store_artifacts:
