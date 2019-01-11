@@ -19,6 +19,9 @@ commands:
     description: Run pytest
     steps:
       - run: poetry run pytest tests --cov-report html:test-reports/coverage --cov annict -vv --junit-xml=test-reports/pytest.xml
+  codecov:
+    steps:
+      - run: pip install codecov && codecov
 jobs:
   build:
     docker:
