@@ -129,6 +129,46 @@ class API(object):
         return api_method(params)
 
     @cursor_support
+    def people(
+        self,
+        fields=None,
+        filter_ids=None,
+        filter_name=None,
+        page=None,
+        per_page=None,
+        sort_id=None,
+    ):
+        """
+
+        :param fields: (optional) Narrow down the fields of data contained in the response body.
+        :type fields: list of str
+        :param filter_ids: (optional) Filter results by IDs.
+        :type filter_ids: list of int
+        :param str filter_name: Filter results by name.
+        :param int page: (optional) Specify the number of pages.
+        :param int per_page: (optional) Specify how many items to acquire per page.
+        :param str sort_id: (optional) Sort the results by their ID. You can specify `asc` or `desc`.
+        :return:
+        """
+        api_method = APIMethod(
+            api=self,
+            path="people",
+            method="GET",
+            allowed_params=(
+                "fields",
+                "filter_ids",
+                "filter_name",
+                "page",
+                "per_page",
+                "sort_id",
+            ),
+            payload_type="person",
+            payload_is_list=True,
+        )
+        params = api_method.build_parameters(locals())
+        return api_method(params)
+
+    @cursor_support
     def records(
         self,
         fields=None,
