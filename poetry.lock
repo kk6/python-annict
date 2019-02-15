@@ -21,7 +21,7 @@ python-dateutil = "*"
 category = "dev"
 description = "A few extensions to pyyaml."
 name = "aspy.yaml"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.1.1"
 
@@ -67,7 +67,7 @@ version = "2018.11.29"
 category = "dev"
 description = "Validate configuration and produce human readable error messages."
 name = "cfgv"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.4.0"
 
@@ -153,7 +153,7 @@ six = ">=1.8.0"
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.1.8"
 
@@ -177,7 +177,7 @@ version = "1.1.0"
 category = "dev"
 description = "Read metadata from Python packages"
 name = "importlib-metadata"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "0.8"
 
@@ -189,7 +189,7 @@ category = "dev"
 description = "Read resources from Python packages"
 marker = "python_version < \"3.7\""
 name = "importlib-resources"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "1.0.2"
 
@@ -243,7 +243,7 @@ six = ">=1.0.0,<2.0.0"
 category = "dev"
 description = "Node.js virtual environment builder"
 name = "nodeenv"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.3.3"
 
@@ -282,7 +282,7 @@ version = "0.8.1"
 category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.14.3"
 
@@ -389,7 +389,7 @@ description = "Invoke py.test as distutils command with dependency resolution"
 name = "pytest-runner"
 optional = false
 python-versions = ">=2.7,!=3.0,!=3.1"
-version = "4.2"
+version = "4.4"
 
 [[package]]
 category = "main"
@@ -414,7 +414,7 @@ version = "2018.9"
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
-optional = true
+optional = false
 python-versions = "*"
 version = "3.13"
 
@@ -586,7 +586,7 @@ setuptools = ">=18.0.0"
 category = "dev"
 description = "Pathlib-compatible object wrapper for zip files"
 name = "zipp"
-optional = true
+optional = false
 python-versions = ">=2.7"
 version = "0.3.3"
 
@@ -597,7 +597,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "fe499c048f06231be49af82fc493b09470cd266eaafdc5224a3410d56eabdfec"
+content-hash = "d00399cfa526fb784d8784ef805316cd3ab53aeb383e359cea1707749d869840"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -640,7 +640,7 @@ pyparsing = ["66c9268862641abcac4a96ba74506e594c884e3f57690a696d21ad8210ed667a",
 pytest = ["65aeaa77ae87c7fc95de56285282546cfa9c886dc8e5dc78313db1c25e21bc07", "6ac6d467d9f053e95aaacd79f831dbecfe730f419c6c7022cb316b365cd9199d"]
 pytest-cov = ["0ab664b25c6aa9716cbf203b17ddb301932383046082c081b9848a0edf5add33", "230ef817450ab0699c6cc3c9c8f7a829c34674456f2ed8df1fe1d39780f7c87f"]
 pytest-flake8 = ["4d225c13e787471502ff94409dcf6f7927049b2ec251c63b764a4b17447b60c0", "d7e2b6b274a255b7ae35e9224c85294b471a83b76ecb6bd53c337ae977a499af"]
-pytest-runner = ["d23f117be39919f00dd91bffeb4f15e031ec797501b717a245e377aee0f577be", "d987fec1e31287592ffe1cb823a8c613c533db4c6aaca0ee1191dbc91e2fcc61"]
+pytest-runner = ["00ad6cd754ce55b01b868a6d00b77161e4d2006b3918bde882376a0a884d0df4", "e946c7dbdc8c0c2ffa44e7b45450f68e7f08cb133983134fa63a1d1486c2b36b"]
 python-dateutil = ["063df5763652e21de43de7d9e00ccf239f953a832941e37be541614732cdfc93", "88f9287c0174266bb0d8cedd395cfba9c58e87e5ad86b2ce58859bc11be3cf02"]
 pytz = ["32b0891edff07e28efe91284ed9c31e123d84bea3fd98e1f72be2508f43ef8d9", "d5f05e487007e29e03409f9398d074e158d920d36eb82eaf66fb1136b0c5374c"]
 pyyaml = ["3d7da3009c0f3e783b2c873687652d83b1bbfd5c88e9813fb7e5b03c0dd3108b", "3ef3092145e9b70e3ddd2c7ad59bdd0252a94dfe3949721633e41344de00a6bf", "40c71b8e076d0550b2e6380bada1f1cd1017b882f7e16f09a65be98e017f211a", "558dd60b890ba8fd982e05941927a3911dc409a63dcb8b634feaa0cda69330d3", "a7c28b45d9f99102fa092bb213aa12e0aaf9a6a1f5e395d36166639c1f96c3a1", "aa7dd4a6a427aed7df6fb7f08a580d68d9b118d90310374716ae90b710280af1", "bc558586e6045763782014934bfaf39d48b8ae85a2713117d16c39864085c613", "d46d7982b62e0729ad0175a9bc7e10a566fc07b224d2c79fafb5e032727eaa04", "d5eef459e30b09f5a098b9cea68bebfeb268697f78d647bd255a085371ac7f3f", "e01d3203230e1786cd91ccfdc8f8454c8069c91bee3962ad93b87a4b2860f537", "e170a9e6fcfd19021dd29845af83bb79236068bf5fd4df3327c1be18182b2531"]
