@@ -513,9 +513,9 @@ sphinxcontrib-websupport = "*"
 category = "dev"
 description = "Read the Docs theme for Sphinx"
 name = "sphinx-rtd-theme"
-optional = false
+optional = true
 python-versions = "*"
-version = "0.4.2"
+version = "0.4.3"
 
 [package.dependencies]
 sphinx = "*"
@@ -601,7 +601,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "c4884f312a27ba6ddfa978127f4ae6c43ba0f546bda3e5948ed4c63f70687441"
+content-hash = "dad26bec6e0372fdd62cb1b1dab7af57128f5422ba76c041c6c546d22fe3d93a"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -655,7 +655,7 @@ responses = ["502d9c0c8008439cfcdef7e251f507fcfdd503b56e8c0c87c3c3e3393953f790",
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 snowballstemmer = ["919f26a68b2c17a7634da993d91339e288964f93c274f1343e3bbbe2096e1128", "9f3bcd3c401c3e862ec0ebe6d2c069ebc012ce142cce209c098ccb5b09136e89"]
 sphinx = ["b53904fa7cb4b06a39409a492b949193a1b68cc7241a1a8ce9974f86f0d24287", "c1c00fc4f6e8b101a0d037065043460dffc2d507257f2f11acaed71fd2b0c83c"]
-sphinx-rtd-theme = ["02f02a676d6baabb758a20c7a479d58648e0f64f13e07d1b388e9bb2afe86a09", "d0f6bc70f98961145c5b0e26a992829363a197321ba571b31b24ea91879e0c96"]
+sphinx-rtd-theme = ["00cf895504a7895ee433807c62094cf1e95f065843bf3acd17037c3e9a2becd4", "728607e34d60456d736cc7991fd236afb828b21b82f956c5ea75f94c8414040a"]
 sphinxcontrib-websupport = ["68ca7ff70785cbe1e7bccc71a48b5b6d965d79ca50629606c7861a21b206d9dd", "9de47f375baf1ea07cdb3436ff39d7a9c76042c10a769c52353ec46e4e8fc3b9"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
 towncrier = ["3c0da1de042861df9030c0608d346d55cabe14cfa7cf04045f22b0af63eb8aa7", "cfde66ada782db9269407eaefb38562d3d2a4bc4d7647c0b2197ed184b869aae"]
