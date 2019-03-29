@@ -86,7 +86,7 @@ version = "3.0.4"
 category = "dev"
 description = "Composable command line interface toolkit"
 name = "click"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "7.0"
 
@@ -197,7 +197,7 @@ version = "1.0.2"
 category = "dev"
 description = ""
 name = "incremental"
-optional = true
+optional = false
 python-versions = "*"
 version = "17.5.0"
 
@@ -540,7 +540,7 @@ version = "0.10.0"
 category = "dev"
 description = "Building newsfiles for your project."
 name = "towncrier"
-optional = true
+optional = false
 python-versions = "*"
 version = "19.2.0"
 
@@ -556,7 +556,7 @@ description = "tox is a generic virtualenv management and test command line tool
 name = "tox"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "3.8.0"
+version = "3.8.1"
 
 [package.dependencies]
 filelock = ">=3.0.0,<4"
@@ -659,7 +659,7 @@ sphinx-rtd-theme = ["00cf895504a7895ee433807c62094cf1e95f065843bf3acd17037c3e9a2
 sphinxcontrib-websupport = ["68ca7ff70785cbe1e7bccc71a48b5b6d965d79ca50629606c7861a21b206d9dd", "9de47f375baf1ea07cdb3436ff39d7a9c76042c10a769c52353ec46e4e8fc3b9"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
 towncrier = ["48251a1ae66d2cf7e6fa5552016386831b3e12bb3b2d08eb70374508c17a8196", "de19da8b8cb44f18ea7ed3a3823087d2af8fcf497151bb9fd1e1b092ff56ed8d"]
-tox = ["17f7b60ba824741c5affd458948193a680b0dc57f362ec19208030056caa7b76", "db6b674569911fa3f7272842fbb24de0fffa3e87470bc0f8cdd1e2c4db16be52"]
+tox = ["1f00c26073d11805357c0f5a3423320cd277fdd317c28309fff1b3903be7d2e3", "74716bfc7681a6787d3c8612c5c534f04e4112b34fad8949752359d8b9bed3b6"]
 urllib3 = ["61bf29cada3fc2fbefad4fdf059ea4bd1b4a86d2b6d15e1c7c0b582b9752fe39", "de9529817c93f27c8ccbfead6985011db27bd0ddfcdb2d86f3f663385c6a9c22"]
 virtualenv = ["34b9ae3742abed2f95d3970acf4d80533261d6061b51160b197f84e5b4c98b4c", "fa736831a7b18bd2bfeef746beb622a92509e9733d645952da136b0639cd40cd"]
 zipp = ["55ca87266c38af6658b84db8cfb7343cdb0bf275f93c7afaea0d8e7a209c7478", "682b3e1c62b7026afe24eadf6be579fb45fec54c07ea218bded8092af07a68c4"]
