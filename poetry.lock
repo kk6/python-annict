@@ -21,7 +21,7 @@ python-dateutil = "*"
 category = "dev"
 description = "A few extensions to pyyaml."
 name = "aspy.yaml"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.1"
 
@@ -67,7 +67,7 @@ version = "2018.11.29"
 category = "dev"
 description = "Validate configuration and produce human readable error messages."
 name = "cfgv"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.4.0"
 
@@ -86,7 +86,7 @@ version = "3.0.4"
 category = "dev"
 description = "Composable command line interface toolkit"
 name = "click"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "7.0"
 
@@ -153,7 +153,7 @@ six = ">=1.8.0"
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.8"
 
@@ -177,7 +177,7 @@ version = "1.1.0"
 category = "dev"
 description = "Read metadata from Python packages"
 name = "importlib-metadata"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "0.8"
 
@@ -189,7 +189,7 @@ category = "dev"
 description = "Read resources from Python packages"
 marker = "python_version < \"3.7\""
 name = "importlib-resources"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "1.0.2"
 
@@ -197,7 +197,7 @@ version = "1.0.2"
 category = "dev"
 description = ""
 name = "incremental"
-optional = true
+optional = false
 python-versions = "*"
 version = "17.5.0"
 
@@ -244,7 +244,7 @@ six = ">=1.0.0,<2.0.0"
 category = "dev"
 description = "Node.js virtual environment builder"
 name = "nodeenv"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.3.3"
 
@@ -283,9 +283,9 @@ version = "0.8.1"
 category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
-optional = false
-python-versions = "*"
-version = "1.14.4"
+optional = true
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.15.0"
 
 [package.dependencies]
 "aspy.yaml" = "*"
@@ -418,7 +418,7 @@ version = "2018.9"
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
-optional = false
+optional = true
 python-versions = "*"
 version = "5.1"
 
@@ -540,7 +540,7 @@ version = "0.10.0"
 category = "dev"
 description = "Building newsfiles for your project."
 name = "towncrier"
-optional = true
+optional = false
 python-versions = "*"
 version = "19.2.0"
 
@@ -590,7 +590,7 @@ setuptools = ">=18.0.0"
 category = "dev"
 description = "Pathlib-compatible object wrapper for zip files"
 name = "zipp"
-optional = false
+optional = true
 python-versions = ">=2.7"
 version = "0.3.3"
 
@@ -601,7 +601,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "4c206fcbeef001a50bb6cb80df252294e4b8700dde7ab56c8f28514aa7266326"
+content-hash = "1b893e522fa435573a346c1109b4ad5e935bc2b2f83ef8990752904298ef3d3c"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -635,7 +635,7 @@ nodeenv = ["ad8259494cf1c9034539f6cced78a1da4840a4b157e23640bc4a0c0546b0cb7a"]
 orderedmultidict = ["24e3b730cf84e4a6a68be5cc760864905cf66abc89851e724bd5b4e849eaa96b", "b89895ba6438038d0bdf88020ceff876cf3eae0d5c66a69b526fab31125db2c5"]
 packaging = ["0886227f54515e592aaa2e5a553332c73962917f2831f1b0f9b9f4380a4b9807", "f95a1e147590f204328170981833854229bb2912ac3d5f89e2a8ccd2834800c9"]
 pluggy = ["8ddc32f03971bfdf900a81961a48ccf2fb677cf7715108f85295c67405798616", "980710797ff6a041e9a73a5787804f848996ecaa6f8a1b1e08224a5894f2074a"]
-pre-commit = ["d3d69c63ae7b7584c4b51446b0b583d454548f9df92575b2fe93a68ec800c4d3", "fc512f129b9526e35e80d656a16a31c198f584c4fce3a5c739045b5140584917"]
+pre-commit = ["385efb73a05f98d528639aa09b5be0c43bb428dd7d1f2e0ed7612e5765bb8c21", "75ad52dbfbf0396b7753d238b6ff571db5e4355c765ad83723dd371528df63d7"]
 py = ["bf92637198836372b520efcba9e020c330123be8ce527e535d185ed4b6f45694", "e76826342cefe3c3d5f7e8ee4316b80d1dd8a300781612ddbc765c17ba25a6c6"]
 pycodestyle = ["74abc4e221d393ea5ce1f129ea6903209940c1ecd29e002e8c6933c2b21026e0", "cbc619d09254895b0d12c2c691e237b2e91e9b2ecf5e84c26b35400f93dcfb83", "cbfca99bd594a10f674d0cd97a3d802a1fdef635d4361e1a2658de47ed261e3a"]
 pyflakes = ["9a7662ec724d0120012f6e29d6248ae3727d821bba522a0e6b356eff19126a49", "f661252913bc1dbe7fcfcbf0af0db3f42ab65aabd1a6ca68fe5d466bace94dae"]
