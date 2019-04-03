@@ -21,7 +21,7 @@ python-dateutil = "*"
 category = "dev"
 description = "A few extensions to pyyaml."
 name = "aspy.yaml"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.1.1"
 
@@ -67,7 +67,7 @@ version = "2018.11.29"
 category = "dev"
 description = "Validate configuration and produce human readable error messages."
 name = "cfgv"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.4.0"
 
@@ -153,7 +153,7 @@ six = ">=1.8.0"
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.1.8"
 
@@ -177,7 +177,7 @@ version = "1.1.0"
 category = "dev"
 description = "Read metadata from Python packages"
 name = "importlib-metadata"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "0.8"
 
@@ -189,7 +189,7 @@ category = "dev"
 description = "Read resources from Python packages"
 marker = "python_version < \"3.7\""
 name = "importlib-resources"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "1.0.2"
 
@@ -244,7 +244,7 @@ six = ">=1.0.0,<2.0.0"
 category = "dev"
 description = "Node.js virtual environment builder"
 name = "nodeenv"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.3.3"
 
@@ -283,7 +283,7 @@ version = "0.8.1"
 category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.15.1"
 
@@ -418,7 +418,7 @@ version = "2018.9"
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
-optional = true
+optional = false
 python-versions = "*"
 version = "5.1"
 
@@ -491,8 +491,8 @@ category = "dev"
 description = "Python documentation generator"
 name = "sphinx"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.8.5"
+python-versions = ">=3.5"
+version = "2.0.0"
 
 [package.dependencies]
 Jinja2 = ">=2.3"
@@ -500,14 +500,18 @@ Pygments = ">=2.0"
 alabaster = ">=0.7,<0.8"
 babel = ">=1.3,<2.0 || >2.0"
 colorama = ">=0.3.5"
-docutils = ">=0.11"
+docutils = ">=0.12"
 imagesize = "*"
 packaging = "*"
-requests = ">=2.0.0"
+requests = ">=2.5.0"
 setuptools = "*"
-six = ">=1.5"
 snowballstemmer = ">=1.1"
-sphinxcontrib-websupport = "*"
+sphinxcontrib-applehelp = "*"
+sphinxcontrib-devhelp = "*"
+sphinxcontrib-htmlhelp = "*"
+sphinxcontrib-jsmath = "*"
+sphinxcontrib-qthelp = "*"
+sphinxcontrib-serializinghtml = "*"
 
 [[package]]
 category = "dev"
@@ -522,11 +526,51 @@ sphinx = "*"
 
 [[package]]
 category = "dev"
-description = "Sphinx API for Web Apps"
-name = "sphinxcontrib-websupport"
+description = ""
+name = "sphinxcontrib-applehelp"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.1.0"
+python-versions = "*"
+version = "1.0.1"
+
+[[package]]
+category = "dev"
+description = ""
+name = "sphinxcontrib-devhelp"
+optional = false
+python-versions = "*"
+version = "1.0.1"
+
+[[package]]
+category = "dev"
+description = ""
+name = "sphinxcontrib-htmlhelp"
+optional = false
+python-versions = "*"
+version = "1.0.1"
+
+[[package]]
+category = "dev"
+description = "A sphinx extension which renders display math in HTML via JavaScript"
+name = "sphinxcontrib-jsmath"
+optional = false
+python-versions = ">=3.5"
+version = "1.0.1"
+
+[[package]]
+category = "dev"
+description = ""
+name = "sphinxcontrib-qthelp"
+optional = false
+python-versions = "*"
+version = "1.0.2"
+
+[[package]]
+category = "dev"
+description = ""
+name = "sphinxcontrib-serializinghtml"
+optional = false
+python-versions = "*"
+version = "1.1.1"
 
 [[package]]
 category = "dev"
@@ -590,7 +634,7 @@ setuptools = ">=18.0.0"
 category = "dev"
 description = "Pathlib-compatible object wrapper for zip files"
 name = "zipp"
-optional = true
+optional = false
 python-versions = ">=2.7"
 version = "0.3.3"
 
@@ -601,7 +645,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "1b893e522fa435573a346c1109b4ad5e935bc2b2f83ef8990752904298ef3d3c"
+content-hash = "5f477348027de45936df76043c6b6405a559965813933f0e38494b34db9e0c1d"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -654,9 +698,14 @@ requests-cache = ["e9270030becc739b0a7f7f834234c73a878b2d794122bf76f40055a22419e
 responses = ["502d9c0c8008439cfcdef7e251f507fcfdd503b56e8c0c87c3c3e3393953f790", "97193c0183d63fba8cd3a041c75464e4b09ea0aff6328800d1546598567dde0b"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 snowballstemmer = ["919f26a68b2c17a7634da993d91339e288964f93c274f1343e3bbbe2096e1128", "9f3bcd3c401c3e862ec0ebe6d2c069ebc012ce142cce209c098ccb5b09136e89"]
-sphinx = ["9f3e17c64b34afc653d7c5ec95766e03043cc6d80b0de224f59b6b6e19d37c3c", "c7658aab75c920288a8cf6f09f244c6cfdae30d82d803ac1634d9f223a80ca08"]
+sphinx = ["5a54f9132766c8ffdd4021de4d0ef8afeb93235569d64b617612e60070332583", "91b29c8e98d18ed474bb92777e7af31931fae96e625b8f1bc595c67fb641c46d"]
 sphinx-rtd-theme = ["00cf895504a7895ee433807c62094cf1e95f065843bf3acd17037c3e9a2becd4", "728607e34d60456d736cc7991fd236afb828b21b82f956c5ea75f94c8414040a"]
-sphinxcontrib-websupport = ["68ca7ff70785cbe1e7bccc71a48b5b6d965d79ca50629606c7861a21b206d9dd", "9de47f375baf1ea07cdb3436ff39d7a9c76042c10a769c52353ec46e4e8fc3b9"]
+sphinxcontrib-applehelp = ["edaa0ab2b2bc74403149cb0209d6775c96de797dfd5b5e2a71981309efab3897", "fb8dee85af95e5c30c91f10e7eb3c8967308518e0f7488a2828ef7bc191d0d5d"]
+sphinxcontrib-devhelp = ["6c64b077937330a9128a4da74586e8c2130262f014689b4b89e2d08ee7294a34", "9512ecb00a2b0821a146736b39f7aeb90759834b07e81e8cc23a9c70bacb9981"]
+sphinxcontrib-htmlhelp = ["0d691ca8edf5995fbacfe69b191914256071a94cbad03c3688dca47385c9206c", "e31c8271f5a8f04b620a500c0442a7d5cfc1a732fa5c10ec363f90fe72af0cb8"]
+sphinxcontrib-jsmath = ["2ec2eaebfb78f3f2078e73666b1415417a116cc848b72e5172e596c871103178", "a9925e4a4587247ed2191a22df5f6970656cb8ca2bd6284309578f2153e0c4b8"]
+sphinxcontrib-qthelp = ["513049b93031beb1f57d4daea74068a4feb77aa5630f856fcff2e50de14e9a20", "79465ce11ae5694ff165becda529a600c754f4bc459778778c7017374d4d406f"]
+sphinxcontrib-serializinghtml = ["01d9b2617d7e8ddf7a00cae091f08f9fa4db587cc160b493141ee56710810932", "392187ac558863b8aff0d76dc78e0731fed58f3b06e2b00e22995dcdb630f213"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
 towncrier = ["48251a1ae66d2cf7e6fa5552016386831b3e12bb3b2d08eb70374508c17a8196", "de19da8b8cb44f18ea7ed3a3823087d2af8fcf497151bb9fd1e1b092ff56ed8d"]
 tox = ["17f7b60ba824741c5affd458948193a680b0dc57f362ec19208030056caa7b76", "db6b674569911fa3f7272842fbb24de0fffa3e87470bc0f8cdd1e2c4db16be52"]
