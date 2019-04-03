@@ -42,7 +42,7 @@ towncrier = {version = "^19.2", optional = true}
 tox = "^3.8"
 sphinx = {version = "^1.8", optional = true}
 sphinx_rtd_theme = {version = "^0.4.3", optional = true}
-pre-commit = {version = "^1.14", optional = true}
+pre-commit = {version = "^1.15", optional = true}
 
 [tool.poetry.extras]
 travis-ci = ["codecov"]
