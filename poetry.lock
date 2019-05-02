@@ -21,7 +21,7 @@ python-dateutil = "*"
 category = "dev"
 description = "A few extensions to pyyaml."
 name = "aspy.yaml"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.1.1"
 
@@ -67,7 +67,7 @@ version = "2018.11.29"
 category = "dev"
 description = "Validate configuration and produce human readable error messages."
 name = "cfgv"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.4.0"
 
@@ -153,7 +153,7 @@ six = ">=1.8.0"
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.1.8"
 
@@ -177,7 +177,7 @@ version = "1.1.0"
 category = "dev"
 description = "Read metadata from Python packages"
 name = "importlib-metadata"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "0.8"
 
@@ -189,7 +189,7 @@ category = "dev"
 description = "Read resources from Python packages"
 marker = "python_version < \"3.7\""
 name = "importlib-resources"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "1.0.2"
 
@@ -244,7 +244,7 @@ six = ">=1.0.0,<2.0.0"
 category = "dev"
 description = "Node.js virtual environment builder"
 name = "nodeenv"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.3.3"
 
@@ -283,7 +283,7 @@ version = "0.9.0"
 category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.15.2"
 
@@ -418,7 +418,7 @@ version = "2018.9"
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "5.1"
 
@@ -453,7 +453,7 @@ description = "Persistent cache for requests library"
 name = "requests-cache"
 optional = false
 python-versions = "*"
-version = "0.4.13"
+version = "0.5.0"
 
 [package.dependencies]
 requests = ">=1.1.0"
@@ -634,7 +634,7 @@ setuptools = ">=18.0.0"
 category = "dev"
 description = "Pathlib-compatible object wrapper for zip files"
 name = "zipp"
-optional = true
+optional = false
 python-versions = ">=2.7"
 version = "0.3.3"
 
@@ -645,7 +645,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "1f703527583231196f708b17e1fd29f4d5c8c0107b8c9b6957eba863ad754e73"
+content-hash = "da9e3312b1a972f8c979abfce195629942c410ef0b7812dba4bd236e989c3e39"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -694,7 +694,7 @@ pytz = ["32b0891edff07e28efe91284ed9c31e123d84bea3fd98e1f72be2508f43ef8d9", "d5f
 pyyaml = ["1adecc22f88d38052fb787d959f003811ca858b799590a5eaa70e63dca50308c", "436bc774ecf7c103814098159fbb84c2715d25980175292c648f2da143909f95", "460a5a4248763f6f37ea225d19d5c205677d8d525f6a83357ca622ed541830c2", "5a22a9c84653debfbf198d02fe592c176ea548cccce47553f35f466e15cf2fd4", "7a5d3f26b89d688db27822343dfa25c599627bc92093e788956372285c6298ad", "9372b04a02080752d9e6f990179a4ab840227c6e2ce15b95e1278456664cf2ba", "a5dcbebee834eaddf3fa7366316b880ff4062e4bcc9787b78c7fbb4a26ff2dd1", "aee5bab92a176e7cd034e57f46e9df9a9862a71f8f37cad167c6fc74c65f5b4e", "c51f642898c0bacd335fc119da60baae0824f2cde95b0330b56c0553439f0673", "c68ea4d3ba1705da1e0d85da6684ac657912679a649e8868bd850d2c299cce13", "e23d0cc5299223dcc37885dae624f382297717e459ea24053709675a976a3e19"]
 rauth = ["524cdbc1c28560eacfc9a9d40c59525eb8d00fdf07fbad86107ea24411477b0a", "b18590fbd77bc3d871936bbdb851377d1b0c08e337b219c303f8fc2b5a42ef2d"]
 requests = ["502a824f31acdacb3a35b6690b5fbf0bc41d63a24a45c4004352b0242707598e", "7bf2a778576d825600030a110f3c0e3e8edc51dfaafe1c146e39a2027784957b"]
-requests-cache = ["e9270030becc739b0a7f7f834234c73a878b2d794122bf76f40055a22419eb67", "fe561ca119879bbcfb51f03a35e35b425e18f338248e59fd5cf2166c77f457a2"]
+requests-cache = ["6822f788c5ee248995c4bfbd725de2002ad710182ba26a666e85b64981866060", "73a7211870f7d67af5fd81cad2f67cfe1cd3eb4ee6a85155e07613968cc72dfc"]
 responses = ["502d9c0c8008439cfcdef7e251f507fcfdd503b56e8c0c87c3c3e3393953f790", "97193c0183d63fba8cd3a041c75464e4b09ea0aff6328800d1546598567dde0b"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 snowballstemmer = ["919f26a68b2c17a7634da993d91339e288964f93c274f1343e3bbbe2096e1128", "9f3bcd3c401c3e862ec0ebe6d2c069ebc012ce142cce209c098ccb5b09136e89"]
