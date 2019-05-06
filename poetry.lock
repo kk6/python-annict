@@ -21,7 +21,7 @@ python-dateutil = "*"
 category = "dev"
 description = "A few extensions to pyyaml."
 name = "aspy.yaml"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.1"
 
@@ -67,7 +67,7 @@ version = "2018.11.29"
 category = "dev"
 description = "Validate configuration and produce human readable error messages."
 name = "cfgv"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.4.0"
 
@@ -153,7 +153,7 @@ six = ">=1.8.0"
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.8"
 
@@ -177,7 +177,7 @@ version = "1.1.0"
 category = "dev"
 description = "Read metadata from Python packages"
 name = "importlib-metadata"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "0.8"
 
@@ -189,7 +189,7 @@ category = "dev"
 description = "Read resources from Python packages"
 marker = "python_version < \"3.7\""
 name = "importlib-resources"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "1.0.2"
 
@@ -244,7 +244,7 @@ six = ">=1.0.0,<2.0.0"
 category = "dev"
 description = "Node.js virtual environment builder"
 name = "nodeenv"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.3.3"
 
@@ -283,9 +283,9 @@ version = "0.9.0"
 category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.15.2"
+version = "1.16.0"
 
 [package.dependencies]
 "aspy.yaml" = "*"
@@ -418,7 +418,7 @@ version = "2018.9"
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "5.1"
 
@@ -634,7 +634,7 @@ setuptools = ">=18.0.0"
 category = "dev"
 description = "Pathlib-compatible object wrapper for zip files"
 name = "zipp"
-optional = false
+optional = true
 python-versions = ">=2.7"
 version = "0.3.3"
 
@@ -645,7 +645,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "3b512bc05e286ee75a8f94fc1fa5139f8da38db8b91f5a294c25fb7fe05227b4"
+content-hash = "97c343679fab5c252d8e36ff1efabfdcf31506a2b1d123a7defc982d43dd042c"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -679,7 +679,7 @@ nodeenv = ["ad8259494cf1c9034539f6cced78a1da4840a4b157e23640bc4a0c0546b0cb7a"]
 orderedmultidict = ["24e3b730cf84e4a6a68be5cc760864905cf66abc89851e724bd5b4e849eaa96b", "b89895ba6438038d0bdf88020ceff876cf3eae0d5c66a69b526fab31125db2c5"]
 packaging = ["0886227f54515e592aaa2e5a553332c73962917f2831f1b0f9b9f4380a4b9807", "f95a1e147590f204328170981833854229bb2912ac3d5f89e2a8ccd2834800c9"]
 pluggy = ["19ecf9ce9db2fce065a7a0586e07cfb4ac8614fe96edf628a264b1c70116cf8f", "84d306a647cc805219916e62aab89caa97a33a1dd8c342e87a37f91073cd4746"]
-pre-commit = ["2576a2776098f3902ef9540a84696e8e06bf18a337ce43a6a889e7fa5d26c4c5", "82f2f2d657d7f9280de9f927ae56886d60b9ef7f3714eae92d12713cd9cb9e11"]
+pre-commit = ["3fac7032a23c37d3dd9ec15f4c7b8342145e1ae943532c01cf1497277157aa59", "b05c26279a6c36d2043ded6f9f7a1a0af8d4d71ed0bf1274afc5fbd3ca3e0ec7"]
 py = ["bf92637198836372b520efcba9e020c330123be8ce527e535d185ed4b6f45694", "e76826342cefe3c3d5f7e8ee4316b80d1dd8a300781612ddbc765c17ba25a6c6"]
 pycodestyle = ["74abc4e221d393ea5ce1f129ea6903209940c1ecd29e002e8c6933c2b21026e0", "cbc619d09254895b0d12c2c691e237b2e91e9b2ecf5e84c26b35400f93dcfb83", "cbfca99bd594a10f674d0cd97a3d802a1fdef635d4361e1a2658de47ed261e3a"]
 pyflakes = ["9a7662ec724d0120012f6e29d6248ae3727d821bba522a0e6b356eff19126a49", "f661252913bc1dbe7fcfcbf0af0db3f42ab65aabd1a6ca68fe5d466bace94dae"]
