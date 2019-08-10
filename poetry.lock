@@ -2,7 +2,7 @@
 category = "dev"
 description = "A configurable sidebar-enabled Sphinx theme"
 name = "alabaster"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.7.12"
 
@@ -21,7 +21,7 @@ python-dateutil = "*"
 category = "dev"
 description = "A few extensions to pyyaml."
 name = "aspy.yaml"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.1"
 
@@ -48,7 +48,7 @@ version = "18.2.0"
 category = "dev"
 description = "Internationalization utilities"
 name = "babel"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.6.0"
 
@@ -67,7 +67,7 @@ version = "2018.11.29"
 category = "dev"
 description = "Validate configuration and produce human readable error messages."
 name = "cfgv"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.0.0"
 
@@ -86,7 +86,7 @@ version = "3.0.4"
 category = "dev"
 description = "Composable command line interface toolkit"
 name = "click"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "7.0"
 
@@ -111,7 +111,7 @@ version = "4.5.2"
 category = "dev"
 description = "Docutils -- Python Documentation Utilities"
 name = "docutils"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.14"
 
@@ -153,7 +153,7 @@ six = ">=1.8.0"
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.8"
 
@@ -169,7 +169,7 @@ version = "2.8"
 category = "dev"
 description = "Getting image size from png/jpeg/jpeg2000/gif file"
 name = "imagesize"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.1.0"
 
@@ -189,7 +189,7 @@ category = "dev"
 description = "Read resources from Python packages"
 marker = "python_version < \"3.7\""
 name = "importlib-resources"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "1.0.2"
 
@@ -197,7 +197,7 @@ version = "1.0.2"
 category = "dev"
 description = ""
 name = "incremental"
-optional = false
+optional = true
 python-versions = "*"
 version = "17.5.0"
 
@@ -205,7 +205,7 @@ version = "17.5.0"
 category = "dev"
 description = "A small but fast and easy to use stand-alone template engine written in pure python."
 name = "jinja2"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.10.1"
 
@@ -216,7 +216,7 @@ MarkupSafe = ">=0.23"
 category = "dev"
 description = "Safely add untrusted strings to HTML/XML markup."
 name = "markupsafe"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
 version = "1.1.0"
 
@@ -244,7 +244,7 @@ six = ">=1.0.0,<2.0.0"
 category = "dev"
 description = "Node.js virtual environment builder"
 name = "nodeenv"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.3.3"
 
@@ -286,7 +286,7 @@ importlib-metadata = ">=0.12"
 category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.17.0"
 
@@ -333,7 +333,7 @@ version = "2.0.0"
 category = "dev"
 description = "Pygments is a syntax highlighting package written in Python."
 name = "pygments"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.3.1"
 
@@ -413,7 +413,7 @@ six = ">=1.5"
 category = "dev"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
-optional = false
+optional = true
 python-versions = "*"
 version = "2018.9"
 
@@ -421,7 +421,7 @@ version = "2018.9"
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "5.1"
 
@@ -485,7 +485,7 @@ version = "1.12.0"
 category = "dev"
 description = "This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms."
 name = "snowballstemmer"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.2.1"
 
@@ -493,9 +493,9 @@ version = "1.2.1"
 category = "dev"
 description = "Python documentation generator"
 name = "sphinx"
-optional = false
+optional = true
 python-versions = ">=3.5"
-version = "2.0.1"
+version = "2.1.2"
 
 [package.dependencies]
 Jinja2 = ">=2.3"
@@ -520,7 +520,7 @@ sphinxcontrib-serializinghtml = "*"
 category = "dev"
 description = "Read the Docs theme for Sphinx"
 name = "sphinx-rtd-theme"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.4.3"
 
@@ -531,7 +531,7 @@ sphinx = "*"
 category = "dev"
 description = ""
 name = "sphinxcontrib-applehelp"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.0.1"
 
@@ -539,7 +539,7 @@ version = "1.0.1"
 category = "dev"
 description = ""
 name = "sphinxcontrib-devhelp"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.0.1"
 
@@ -547,7 +547,7 @@ version = "1.0.1"
 category = "dev"
 description = ""
 name = "sphinxcontrib-htmlhelp"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.0.1"
 
@@ -555,7 +555,7 @@ version = "1.0.1"
 category = "dev"
 description = "A sphinx extension which renders display math in HTML via JavaScript"
 name = "sphinxcontrib-jsmath"
-optional = false
+optional = true
 python-versions = ">=3.5"
 version = "1.0.1"
 
@@ -563,7 +563,7 @@ version = "1.0.1"
 category = "dev"
 description = ""
 name = "sphinxcontrib-qthelp"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.0.2"
 
@@ -571,7 +571,7 @@ version = "1.0.2"
 category = "dev"
 description = ""
 name = "sphinxcontrib-serializinghtml"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.1"
 
@@ -587,7 +587,7 @@ version = "0.10.0"
 category = "dev"
 description = "Building newsfiles for your project."
 name = "towncrier"
-optional = false
+optional = true
 python-versions = "*"
 version = "19.2.0"
 
@@ -649,7 +649,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "573bcbd1045dbeed3f3eb07cea14a15c39e588e4943cef2188b56c0183e49634"
+content-hash = "e37d7325d3a9214cf2526ad2d5bdf708d6452b3463a76b27228f804ddc918020"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -702,7 +702,7 @@ requests-cache = ["6822f788c5ee248995c4bfbd725de2002ad710182ba26a666e85b64981866
 responses = ["502d9c0c8008439cfcdef7e251f507fcfdd503b56e8c0c87c3c3e3393953f790", "97193c0183d63fba8cd3a041c75464e4b09ea0aff6328800d1546598567dde0b"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 snowballstemmer = ["919f26a68b2c17a7634da993d91339e288964f93c274f1343e3bbbe2096e1128", "9f3bcd3c401c3e862ec0ebe6d2c069ebc012ce142cce209c098ccb5b09136e89"]
-sphinx = ["423280646fb37944dd3c85c58fb92a20d745793a9f6c511f59da82fa97cd404b", "de930f42600a4fef993587633984cc5027dedba2464bcf00ddace26b40f8d9ce"]
+sphinx = ["22538e1bbe62b407cf5a8aabe1bb15848aa66bb79559f42f5202bbce6b757a69", "f9a79e746b87921cabc3baa375199c6076d1270cee53915dbd24fdbeaaacc427"]
 sphinx-rtd-theme = ["00cf895504a7895ee433807c62094cf1e95f065843bf3acd17037c3e9a2becd4", "728607e34d60456d736cc7991fd236afb828b21b82f956c5ea75f94c8414040a"]
 sphinxcontrib-applehelp = ["edaa0ab2b2bc74403149cb0209d6775c96de797dfd5b5e2a71981309efab3897", "fb8dee85af95e5c30c91f10e7eb3c8967308518e0f7488a2828ef7bc191d0d5d"]
 sphinxcontrib-devhelp = ["6c64b077937330a9128a4da74586e8c2130262f014689b4b89e2d08ee7294a34", "9512ecb00a2b0821a146736b39f7aeb90759834b07e81e8cc23a9c70bacb9981"]
