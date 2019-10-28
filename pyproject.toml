@@ -37,7 +37,7 @@ pytest = "^4.4"
 pytest-cov = "^2.7"
 pytest-flake8 = "^1.0"
 responses = "^0.10.6"
-pytest-runner = "^4.4"
+pytest-runner = "^5.2"
 towncrier = {version = "^19.2", optional = true}
 tox = "^3.13"
 sphinx = {version = "^2.1", optional = true}
