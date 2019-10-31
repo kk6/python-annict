@@ -21,9 +21,9 @@ python-dateutil = "*"
 category = "dev"
 description = "A few extensions to pyyaml."
 name = "aspy.yaml"
-optional = true
+optional = false
 python-versions = "*"
-version = "1.1.1"
+version = "1.1.2"
 
 [package.dependencies]
 pyyaml = "*"
@@ -153,9 +153,9 @@ six = ">=1.8.0"
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
-optional = true
+optional = false
 python-versions = "*"
-version = "1.1.8"
+version = "1.2.1"
 
 [[package]]
 category = "main"
@@ -189,7 +189,7 @@ category = "dev"
 description = "Read resources from Python packages"
 marker = "python_version < \"3.7\""
 name = "importlib-resources"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
 version = "1.0.2"
 
@@ -243,7 +243,7 @@ six = ">=1.0.0,<2.0.0"
 category = "dev"
 description = "Node.js virtual environment builder"
 name = "nodeenv"
-optional = true
+optional = false
 python-versions = "*"
 version = "1.3.3"
 
@@ -262,7 +262,7 @@ six = ">=1.8.0"
 category = "dev"
 description = "Core utilities for Python packages"
 name = "packaging"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "18.0"
 
@@ -343,7 +343,7 @@ version = "2.3.1"
 category = "dev"
 description = "Python parsing module"
 name = "pyparsing"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.3.1"
 

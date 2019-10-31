@@ -155,6 +155,54 @@ def test_episodes(api_factory):
 
 
 @responses.activate
+def test_people(api_factory):
+    json = """
+    {
+      "people": [
+        {
+          "id": 7118,
+          "name": "水瀬いのり",
+          "name_kana": "みなせいのり",
+          "name_en": "Minase, Inori",
+          "nickname": "いのりん、いのすけ",
+          "nickname_en": "",
+          "gender_text": "女性",
+          "url": "http://axl-one.com/talent/minase.html",
+          "url_en": "",
+          "wikipedia_url": "https://ja.wikipedia.org/wiki/%E6%B0%B4%E7%80%AC%E3%81%84%E3%81%AE%E3%82%8A",
+          "wikipedia_url_en": "",
+          "twitter_username": "inoriminase",
+          "twitter_username_en": "",
+          "birthday": "1995-12-02",
+          "blood_type": "b",
+          "height": 154,
+          "favorite_people_count": 74,
+          "casts_count": 58,
+          "staffs_count": 0,
+          "prefecture": {
+            "id": 13,
+            "name": "東京都"
+          }
+        }
+      ],
+      "total_count": 1,
+      "next_page": null,
+      "prev_page": null
+    }
+    """
+    responses.add(
+        responses.GET,
+        "https://api.annict.com/v1/people",
+        body=json,
+        status=200,
+        content_type="application/json",
+    )
+    api = api_factory.create()
+    people = api.people(filter_ids=7118)
+    assert people[0].name == "水瀬いのり"
+
+
+@responses.activate
 def test_records(api_factory):
     json = """
     {

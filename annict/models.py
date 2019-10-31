@@ -47,6 +47,8 @@ class Model(metaclass=abc.ABCMeta):
         results._json = json
         if payload_type == "activity":
             pluralized_payload_name = "activities"
+        elif payload_type == "person":
+            pluralized_payload_name = "people"
         else:
             pluralized_payload_name = "{}s".format(payload_type)
         for obj in json[pluralized_payload_name]:
@@ -409,6 +411,37 @@ class Activity(Model):
         return activity
 
 
+class Person(Model):
+    """Person information model such as cast and staff"""
+
+    def __repr__(self):
+        return f"<Person:{self.id}:{self.name}>"
+
+    @classmethod
+    def parse(cls, api, json):
+        """Parse a JSON object into a model instance.
+
+        :param api: instance of :class:`API <annict.api.API>` .
+        :type api: annict.api.API
+        :param dict json: JSON from Annict API.
+        :return: :class:`Person <Person>` object
+        :rtype: Person
+
+        """
+        person = cls(api)
+        person._json = json
+        for k, v in json.items():
+            if k == "birthday":
+                if v:
+                    date = arrow.get(v).date()
+                else:
+                    date = None
+                setattr(person, k, date)
+            else:
+                setattr(person, k, v)
+        return person
+
+
 MODEL_MAPPING = {
     "user": User,
     "work": Work,
@@ -416,4 +449,5 @@ MODEL_MAPPING = {
     "record": Record,
     "program": Program,
     "activity": Activity,
+    "person": Person,
 }
