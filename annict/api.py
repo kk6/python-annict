@@ -1,7 +1,17 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+from typing import List
+from typing import Optional
+from typing import Type
+from typing import TYPE_CHECKING
+
 from .cursors import cursor_support
+from .models import ResultSet
 from .parsers import ModelParser
 from .services import APIMethod
+
+if TYPE_CHECKING:
+    from .models import Record, User
 
 
 class API(object):
@@ -18,11 +28,11 @@ class API(object):
 
     def __init__(
         self,
-        token,
-        base_url="https://api.annict.com",
-        api_version="v1",
-        parser=ModelParser,
-    ):
+        token: str,
+        base_url: str = "https://api.annict.com",
+        api_version: str = "v1",
+        parser: Type[ModelParser] = ModelParser,
+    ) -> None:
         self.token = token
         self.base_url = base_url
         self.api_version = api_version
@@ -31,16 +41,16 @@ class API(object):
     @cursor_support
     def works(
         self,
-        fields=None,
-        filter_ids=None,
-        filter_season=None,
-        filter_title=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-        sort_season=None,
-        sort_watchers_count=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_ids: Optional[List[int]] = None,
+        filter_season: Optional[str] = None,
+        filter_title: Optional[str] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+        sort_season: Optional[str] = None,
+        sort_watchers_count: Optional[str] = None,
+    ) -> ResultSet:
         """Get works information
 
         :reference: https://docs.annict.com/ja/api/v1/works.html
@@ -85,14 +95,14 @@ class API(object):
     @cursor_support
     def episodes(
         self,
-        fields=None,
-        filter_ids=None,
-        filter_work_id=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-        sort_sort_number=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_ids: Optional[List[int]] = None,
+        filter_work_id: Optional[int] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+        sort_sort_number: Optional[str] = None,
+    ) -> ResultSet:
         """Get episodes information
 
         :reference: https://docs.annict.com/ja/api/v1/episodes.html
@@ -131,12 +141,12 @@ class API(object):
     @cursor_support
     def people(
         self,
-        fields=None,
-        filter_ids=None,
-        filter_name=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
+        fields: Optional[List[str]] = None,
+        filter_ids: Optional[List[int]] = None,
+        filter_name: Optional[str] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
     ):
         """
 
@@ -171,15 +181,15 @@ class API(object):
     @cursor_support
     def records(
         self,
-        fields=None,
-        filter_ids=None,
-        filter_episode_id=None,
-        filter_has_record_comment=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-        sort_likes_count=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_ids: Optional[List[int]] = None,
+        filter_episode_id: Optional[int] = None,
+        filter_has_record_comment: Optional[bool] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+        sort_likes_count: Optional[str] = None,
+    ) -> ResultSet:
         """Get records to episodes
 
         :reference: https://docs.annict.com/ja/api/v1/records.html
@@ -223,13 +233,13 @@ class API(object):
     @cursor_support
     def search_users(
         self,
-        fields=None,
-        filter_ids=None,
-        filter_usernames=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_ids: Optional[List[int]] = None,
+        filter_usernames: Optional[List[str]] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+    ) -> ResultSet:
         """Get users information
 
         :reference: https://docs.annict.com/ja/api/v1/users.html
@@ -267,13 +277,13 @@ class API(object):
     @cursor_support
     def following(
         self,
-        fields=None,
-        filter_user_id=None,
-        filter_username=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_user_id: Optional[int] = None,
+        filter_username: Optional[str] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+    ) -> ResultSet:
         """Get following information
 
         :reference: https://docs.annict.com/ja/api/v1/following.html
@@ -309,13 +319,13 @@ class API(object):
     @cursor_support
     def followers(
         self,
-        fields=None,
-        filter_user_id=None,
-        filter_username=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_user_id: Optional[int] = None,
+        filter_username: Optional[str] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+    ) -> ResultSet:
         """Get followers information
 
         :reference: https://docs.annict.com/ja/api/v1/followers.html
@@ -351,13 +361,13 @@ class API(object):
     @cursor_support
     def activities(
         self,
-        fields=None,
-        filter_user_id=None,
-        filter_username=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_user_id: Optional[int] = None,
+        filter_username: Optional[str] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+    ) -> ResultSet:
         """Get activities
 
         :reference: https://docs.annict.com/ja/api/v1/activities.html
@@ -390,7 +400,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
-    def me(self, fields=None):
+    def me(self, fields: Optional[List[str]] = None) -> "User":
         """Get your profile information
 
         :reference: https://docs.annict.com/ja/api/v1/me.html
@@ -409,7 +419,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
-    def set_status(self, work_id, kind):
+    def set_status(self, work_id: int, kind: str) -> Optional[bool]:
         """Set the status of the work.
 
         :reference: https://docs.annict.com/ja/api/v1/me-statuses.html
@@ -430,12 +440,12 @@ class API(object):
 
     def create_record(
         self,
-        episode_id,
-        comment=None,
-        rating=None,
-        share_twitter=False,
-        share_facebook=False,
-    ):
+        episode_id: int,
+        comment: Optional[str] = None,
+        rating: Optional[float] = None,
+        share_twitter: Optional[bool] = False,
+        share_facebook: Optional[bool] = False,
+    ) -> "Record":
         """Create a record to the episode.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
@@ -464,8 +474,13 @@ class API(object):
         return api_method(params)
 
     def edit_record(
-        self, id_, comment=None, rating=None, share_twitter=False, share_facebook=False
-    ):
+        self,
+        id_: int,
+        comment: Optional[str] = None,
+        rating: Optional[float] = None,
+        share_twitter: Optional[bool] = False,
+        share_facebook: Optional[bool] = False,
+    ) -> "Record":
         """Edit the created record.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
@@ -488,7 +503,7 @@ class API(object):
         params = api_method.build_parameters(locals())
         return api_method(params)
 
-    def delete_record(self, id_):
+    def delete_record(self, id_: int) -> Optional[bool]:
         """Delete the created record.
 
         :reference: https://docs.annict.com/ja/api/v1/me-records.html
@@ -506,17 +521,17 @@ class API(object):
     @cursor_support
     def my_works(
         self,
-        fields=None,
-        filter_ids=None,
-        filter_season=None,
-        filter_title=None,
-        filter_status=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-        sort_season=None,
-        sort_watchers_count=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_ids: Optional[List[int]] = None,
+        filter_season: Optional[str] = None,
+        filter_title: Optional[str] = None,
+        filter_status: Optional[str] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+        sort_season: Optional[str] = None,
+        sort_watchers_count: Optional[str] = None,
+    ) -> ResultSet:
         """Get the information of the work you are setting status.
 
         :reference: https://docs.annict.com/ja/api/v1/me-works.html
@@ -564,19 +579,19 @@ class API(object):
     @cursor_support
     def my_programs(
         self,
-        fields=None,
-        filter_ids=None,
-        filter_channel_ids=None,
-        filter_work_ids=None,
-        filter_started_at_gt=None,
-        filter_started_at_lt=None,
-        filter_unwatched=None,
-        filter_rebroadcast=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-        sort_started_at=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_ids: Optional[List[int]] = None,
+        filter_channel_ids: Optional[List[int]] = None,
+        filter_work_ids: Optional[List[int]] = None,
+        filter_started_at_gt: Optional[datetime] = None,
+        filter_started_at_lt: Optional[datetime] = None,
+        filter_unwatched: Optional[bool] = None,
+        filter_rebroadcast: Optional[bool] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+        sort_started_at: Optional[str] = None,
+    ) -> ResultSet:
         """Get the broadcast schedule.
 
         :reference: https://docs.annict.com/ja/api/v1/me-programs.html
@@ -631,13 +646,13 @@ class API(object):
     @cursor_support
     def following_activities(
         self,
-        fields=None,
-        filter_actions=None,
-        filter_muted=None,
-        page=None,
-        per_page=None,
-        sort_id=None,
-    ):
+        fields: Optional[List[str]] = None,
+        filter_actions: Optional[str] = None,
+        filter_muted: Optional[bool] = None,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+        sort_id: Optional[str] = None,
+    ) -> ResultSet:
         """Get the activity of the user you are following.
 
         :reference: https://docs.annict.com/ja/api/v1/me-following-activities.html

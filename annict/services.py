@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
+import typing
+from typing import Any
+from typing import Optional
+from typing import Tuple
+
 import requests
 from furl import furl
 
 from .utils import stringify
+
+if typing.TYPE_CHECKING:
+    from .api import API
 
 
 class APIMethod(object):
@@ -26,15 +34,15 @@ class APIMethod(object):
         allowed_params=None,
         payload_type=None,
         payload_is_list=False,
-    ):
-        self.api = api
-        self.path = path
-        self.method = method
-        self.allowed_params = allowed_params
-        self.payload_type = payload_type
-        self.payload_is_list = payload_is_list
+    ) -> None:
+        self.api: API = api
+        self.path: str = path
+        self.method: str = method
+        self.allowed_params: Tuple[Optional[str]] = allowed_params
+        self.payload_type: str = payload_type
+        self.payload_is_list: bool = payload_is_list
 
-    def build_path(self, id_=None):
+    def build_path(self, id_: int = None) -> None:
         """Build an suitable path
 
         If `id_` is given, it is embedded into path.
@@ -45,7 +53,7 @@ class APIMethod(object):
         if id_ is not None:
             self.path = "/".join([self.path, str(id_)])
 
-    def build_url(self):
+    def build_url(self) -> str:
         """Build request url
 
         :return: request url
@@ -56,7 +64,7 @@ class APIMethod(object):
         url.path.add(self.api.api_version).add(self.path)
         return url.url
 
-    def build_parameters(self, dic):
+    def build_parameters(self, dic: dict) -> dict:
         """Build a suitable parameters for request.
 
         It filters the given dictionary based on `self.allowed_params` and returns a dictionary with
@@ -75,7 +83,7 @@ class APIMethod(object):
         params["access_token"] = self.api.token
         return params
 
-    def __call__(self, params):
+    def __call__(self, params) -> Any:
         url = self.build_url()
         resp = requests.request(self.method, url, params=params)
 
