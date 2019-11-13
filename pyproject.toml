@@ -39,7 +39,7 @@ pytest-flake8 = "^1.0"
 responses = "^0.10.6"
 pytest-runner = "^5.2"
 towncrier = {version = "^19.2", optional = true}
-tox = "^3.13"
+tox = "^3.14"
 sphinx = {version = "^2.2", optional = true}
 sphinx_rtd_theme = {version = "^0.4.3", optional = true}
 pre-commit = {version = "^1.20", optional = true}
