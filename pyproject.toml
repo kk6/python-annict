@@ -33,7 +33,7 @@ furl = "^2.0"
 arrow = ">=0.12.1,<0.16.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^5.3"
 pytest-cov = "^2.8"
 pytest-flake8 = "^1.0"
 responses = "^0.10.6"
