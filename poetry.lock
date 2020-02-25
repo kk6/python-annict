@@ -471,7 +471,7 @@ description = "A utility library for mocking out the `requests` Python library."
 name = "responses"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "0.10.9"
+version = "0.10.11"
 
 [package.dependencies]
 requests = ">=2.0"
@@ -665,7 +665,7 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "bd730581b4ce06526ccd2f0aa893f2f65fa12779c311bff2c2dc8b79b741a350"
+content-hash = "67dcfa346f80913cb0bd86d4d90636a7ef160f13d021a76af55e26072be49f76"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -715,7 +715,7 @@ pyyaml = ["1adecc22f88d38052fb787d959f003811ca858b799590a5eaa70e63dca50308c", "4
 rauth = ["524cdbc1c28560eacfc9a9d40c59525eb8d00fdf07fbad86107ea24411477b0a", "b18590fbd77bc3d871936bbdb851377d1b0c08e337b219c303f8fc2b5a42ef2d"]
 requests = ["11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4", "9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31"]
 requests-cache = ["813023269686045f8e01e2289cc1e7e9ae5ab22ddd1e2849a9093ab3ab7270eb", "81e13559baee64677a7d73b85498a5a8f0639e204517b5d05ff378e44a57831a"]
-responses = ["515fd7c024097e5da76e9c4cf719083d181f1c3ddc09c2e0e49284ce863dd263", "8ce8cb4e7e1ad89336f8865af152e0563d2e7f0e0b86d2cf75f015f819409243"]
+responses = ["33d8994990de31a9fbb8c889c3a378dac296b821f37330c845608ae565e7fca3", "859a7f8495a069ce835620bb4bb111688f593a6f8873a3335a99c31a5aef9a9a"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 snowballstemmer = ["919f26a68b2c17a7634da993d91339e288964f93c274f1343e3bbbe2096e1128", "9f3bcd3c401c3e862ec0ebe6d2c069ebc012ce142cce209c098ccb5b09136e89"]
 sphinx = ["298537cb3234578b2d954ff18c5608468229e116a9757af3b831c2b2b4819159", "e6e766b74f85f37a5f3e0773a1e1be8db3fcb799deb58ca6d18b70b0b44542a5"]
