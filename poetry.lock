@@ -498,15 +498,16 @@ category = "dev"
 description = "A utility library for mocking out the `requests` Python library."
 name = "responses"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "0.10.15"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "0.12.0"
 
 [package.dependencies]
 requests = ">=2.0"
 six = "*"
+urllib3 = ">=1.25.10"
 
 [package.extras]
-tests = ["coverage (>=3.7.1,<5.0.0)", "pytest-cov", "pytest-localserver", "flake8", "pytest (>=4.6,<5.0)", "pytest"]
+tests = ["coverage (>=3.7.1,<6.0.0)", "pytest-cov", "pytest-localserver", "flake8", "pytest (>=4.6,<5.0)", "pytest (>=4.6)"]
 
 [[package]]
 category = "main"
@@ -689,11 +690,12 @@ category = "main"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4"
-version = "1.24.2"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
+version = "1.25.10"
 
 [package.extras]
-secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "certifi", "ipaddress"]
+brotli = ["brotlipy (>=0.6.0)"]
+secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "pyOpenSSL (>=0.14)", "ipaddress"]
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [[package]]
@@ -730,7 +732,8 @@ pre-commit = []
 travis-ci = []
 
 [metadata]
-content-hash = "671fad780d36ac7dc6dd10cd30638e640854b88b001b0adff8f0d5b4d3f73d1c"
+content-hash = "2a261ac6b7f9dfc9ca9c68f8b7345013128da976e3a85c87b62c9a03046de89c"
+lock-version = "1.0"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -994,8 +997,8 @@ requests-cache = [
     {file = "requests_cache-0.5.2-py2.py3-none-any.whl", hash = "sha256:81e13559baee64677a7d73b85498a5a8f0639e204517b5d05ff378e44a57831a"},
 ]
 responses = [
-    {file = "responses-0.10.15-py2.py3-none-any.whl", hash = "sha256:af94d28cdfb48ded0ad82a5216616631543650f440334a693479b8991a6594a2"},
-    {file = "responses-0.10.15.tar.gz", hash = "sha256:7bb697a5fedeb41d81e8b87f152d453d5cab42dcd1691b6a7d6097e94d33f373"},
+    {file = "responses-0.12.0-py2.py3-none-any.whl", hash = "sha256:0de50fbf600adf5ef9f0821b85cc537acca98d66bc7776755924476775c1989c"},
+    {file = "responses-0.12.0.tar.gz", hash = "sha256:e80d5276011a4b79ecb62c5f82ba07aa23fb31ecbc95ee7cad6de250a3c97444"},
 ]
 six = [
     {file = "six-1.14.0-py2.py3-none-any.whl", hash = "sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c"},
@@ -1051,8 +1054,8 @@ tox = [
     {file = "tox-3.19.0.tar.gz", hash = "sha256:17e61a93afe5c49281fb969ab71f7a3f22d7586d1c56f9a74219910f356fe7d3"},
 ]
 urllib3 = [
-    {file = "urllib3-1.24.2-py2.py3-none-any.whl", hash = "sha256:4c291ca23bbb55c76518905869ef34bdd5f0e46af7afe6861e8375643ffee1a0"},
-    {file = "urllib3-1.24.2.tar.gz", hash = "sha256:9a247273df709c4fedb38c711e44292304f73f39ab01beda9f6b9fc375669ac3"},
+    {file = "urllib3-1.25.10-py2.py3-none-any.whl", hash = "sha256:e7983572181f5e1522d9c98453462384ee92a0be7fac5f1413a1e35c56cc0461"},
+    {file = "urllib3-1.25.10.tar.gz", hash = "sha256:91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"},
 ]
 virtualenv = [
     {file = "virtualenv-16.2.0-py2.py3-none-any.whl", hash = "sha256:34b9ae3742abed2f95d3970acf4d80533261d6061b51160b197f84e5b4c98b4c"},
