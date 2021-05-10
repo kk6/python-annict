@@ -30,7 +30,7 @@ rauth = "^0.7.3"
 requests = "^2.21"
 requests-cache = ">=0.4.13,<0.6.0"
 furl = "^2.0"
-arrow = ">=0.12.1,<0.17.0"
+arrow = ">=0.12.1,<1.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
