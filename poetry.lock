@@ -86,6 +86,17 @@ optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
+name = "click-default-group"
+version = "1.2.2"
+description = "Extends click.Group to invoke a command without explicit subcommand name"
+category = "dev"
+optional = true
+python-versions = "*"
+
+[package.dependencies]
+click = "*"
+
+[[package]]
 name = "colorama"
 version = "0.4.1"
 description = "Cross-platform colored terminal text."
@@ -623,17 +634,21 @@ python-versions = "*"
 
 [[package]]
 name = "towncrier"
-version = "19.2.0"
+version = "21.3.0"
 description = "Building newsfiles for your project."
 category = "dev"
 optional = true
 python-versions = "*"
 
 [package.dependencies]
-Click = "*"
+click = "*"
+click-default-group = "*"
 incremental = "*"
 jinja2 = "*"
 toml = "*"
+
+[package.extras]
+dev = ["packaging"]
 
 [[package]]
 name = "tox"
@@ -703,7 +718,7 @@ travis-ci = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "a18078e1b4a0363f1c0171e88d27f24b80e5a9e8d460836525b282702be6458f"
+content-hash = "324c72f7dd7871ba1e5f7dbab2681529bb1147973f800826e8ef57483c461cca"
 
 [metadata.files]
 alabaster = [
@@ -741,6 +756,9 @@ chardet = [
 click = [
     {file = "Click-7.0-py2.py3-none-any.whl", hash = "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13"},
     {file = "Click-7.0.tar.gz", hash = "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"},
+]
+click-default-group = [
+    {file = "click-default-group-1.2.2.tar.gz", hash = "sha256:d9560e8e8dfa44b3562fbc9425042a0fd6d21956fcc2db0077f63f34253ab904"},
 ]
 colorama = [
     {file = "colorama-0.4.1-py2.py3-none-any.whl", hash = "sha256:f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"},
@@ -1023,8 +1041,8 @@ toml = [
     {file = "toml-0.10.0.tar.gz", hash = "sha256:229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c"},
 ]
 towncrier = [
-    {file = "towncrier-19.2.0-py2.py3-none-any.whl", hash = "sha256:de19da8b8cb44f18ea7ed3a3823087d2af8fcf497151bb9fd1e1b092ff56ed8d"},
-    {file = "towncrier-19.2.0.tar.gz", hash = "sha256:48251a1ae66d2cf7e6fa5552016386831b3e12bb3b2d08eb70374508c17a8196"},
+    {file = "towncrier-21.3.0-py2.py3-none-any.whl", hash = "sha256:e6ccec65418bbcb8de5c908003e130e37fe0e9d6396cb77c1338241071edc082"},
+    {file = "towncrier-21.3.0.tar.gz", hash = "sha256:6eed0bc924d72c98c000cb8a64de3bd566e5cb0d11032b73fcccf8a8f956ddfe"},
 ]
 tox = [
     {file = "tox-3.19.0-py2.py3-none-any.whl", hash = "sha256:3d94b6921a0b6dc90fd8128df83741f30bb41ccd6cd52d131a6a6944ca8f16e6"},
