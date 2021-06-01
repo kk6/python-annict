@@ -34,7 +34,7 @@ arrow = ">=0.12.1,<0.17.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
-pytest-cov = "^2.11"
+pytest-cov = "^2.12"
 pytest-flake8 = "^1.0"
 responses = "^0.10.15"
 pytest-runner = "^5.3"
