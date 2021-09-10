@@ -36,7 +36,7 @@ arrow = ">=0.12.1,<0.17.0"
 pytest = "^6.2"
 pytest-cov = "^2.11"
 pytest-flake8 = "^1.0"
-responses = "^0.10.15"
+responses = "^0.14.0"
 pytest-runner = "^5.3"
 towncrier = {version = "^19.2", optional = true}
 tox = "^3.19"
